@@ -41,7 +41,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="assets/img/logo.png" alt="AgriCulture">
+                <img src="{% static 'core/img/logo.png' %}" alt="AgriCulture">
                 <!-- <h1 class="sitename">AgriCulture</h1>  -->
             </a>
 
@@ -362,7 +362,7 @@
       </div>
     </section><!-- /About Section -->
 
-    <!-- About 3 Section -->
+    {% comment %} <!-- About 3 Section -->
     <section id="about-3" class="about-3 section">
 
       <div class="container">
@@ -391,7 +391,7 @@
           </div>
         </div>
       </div>
-    </section><!-- /About 3 Section -->
+    </section><!-- /About 3 Section --> {% endcomment %}
 
     <!-- Services 2 Section -->
     <section id="services-2" class="services-2 section dark-background">
@@ -448,7 +448,7 @@
                       <h2 class="service-item-title">Planting</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_1.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_1.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -459,7 +459,7 @@
                       <h2 class="service-item-title">Mulching</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_3.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_3.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -470,7 +470,7 @@
                       <h2 class="service-item-title">Watering</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_8.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_8.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
 
@@ -482,7 +482,7 @@
                       <h2 class="service-item-title">Fertilizing</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_4.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_4.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -493,7 +493,7 @@
                       <h2 class="service-item-title">Harvesting</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_5.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_5.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -504,7 +504,7 @@
                       <h2 class="service-item-title">Mowing</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_6.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_6.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -515,7 +515,7 @@
                       <h2 class="service-item-title">Seeding Plants</h2>
                     </a>
                   </div>
-                  <img src="assets/img/img_sq_8.jpg" alt="Image" class="img-fluid">
+                  <img src="{% static 'core/img/img_sq_8.jpg' %}" alt="Image" class="img-fluid">
                 </div>
               </div>
             </div>
@@ -641,7 +641,7 @@
             <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="200">
 
               <div class="post-img position-relative overflow-hidden">
-                <img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt="">
+                <img src="{% static 'core/img/blog/blog-2.jpg' %}" class="img-fluid" alt="">
                 <span class="post-date">July 17</span>
               </div>
 
@@ -672,7 +672,7 @@
             <div class="post-item position-relative h-100">
 
               <div class="post-img position-relative overflow-hidden">
-                <img src="assets/img/blog/blog-3.jpg" class="img-fluid" alt="">
+                <img src="{% static 'core/img/blog/blog-3.jpg' %}" class="img-fluid" alt="">
                 <span class="post-date">September 05</span>
               </div>
 
