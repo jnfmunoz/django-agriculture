@@ -23,10 +23,9 @@ urlpatterns = [
     path('', HomePageView.as_view(), name="index"),
     path('about/', AboutUsPageView.as_view(), name="about"),
     path('services/', ServicesPageView.as_view(), name="services"),
-    path('testimonials/', TestimonialsPageView.as_view(), name="services"),
-    path('blog/', BlogPageView.as_view(), name="services"),
-    path('contact/', ContactPageView.as_view(), name="services"),
-
+    path('testimonials/', TestimonialsPageView.as_view(), name="testimonials"),
+    path('blog/', BlogPageView.as_view(), name="blog"),
+    path('contact/', ContactPageView.as_view(), name="contact"),
 
     path('admin/', admin.site.urls),
 ]
