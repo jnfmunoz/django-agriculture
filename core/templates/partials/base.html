@@ -47,13 +47,22 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-            <li><a href="{% url 'index' %}" class="active">Home</a></li>
-            <li><a href="{% url 'about' %}">About Us</a></li>
-            <li><a href="{% url 'services' %}">Our Services</a></li>
-            <li><a href="{% url 'testimonials' %}">Testimonials</a></li>
-            <li><a href="{% url 'blog' %}">Blog</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
+              <li><a href="{% url 'index' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+              <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About Us</a></li>
+              <li><a href="{% url 'services' %}" class="{% if request.path == '/services/' %}active{% endif %}">Our Services</a></li>
+              <li><a href="{% url 'testimonials' %}" class="{% if request.path == '/testimonials/' %}active{% endif %}">Testimonials</a></li>
+              <li><a href="{% url 'blog' %}" class="{% if request.path == '/blog/' %}active{% endif %}">Blog</a></li>
+              <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact</a></li>
+              {% if not request.user.is_authenticated %}
+                <li><a href="{% url 'login' %}" class="{% if request.path == '/accounts/login/' %}active{% endif %}">Login</a></li>
+              {% else %}
+                <li><a href="{% url 'logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                <form id="logout-form" method="POST" action="{% url 'logout' %}" style="display: none;">                  
+                  {% csrf_token %}
+                </form>
+              {% endif %}
             </ul>
+
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
     </div>

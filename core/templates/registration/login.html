@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url({% static 'core/img/page-title-bg.webp' %});">
+        <div class="container position-relative">
+            <h1>Login</h1>
+            <p>
+            Home
+            /
+            Login
+            </p>
+            <nav class="breadcrumbs">
+            <ol>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li class="current">Login</li>
+            </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+    <style>.errorlist{color:red;}</style>
+
+    <section id="login" class="login section"> 
+        <div class="container">
+            <div class="row mt-3">
+            <div class="col-md-9 mx-auto mb-5">
+                {% if 'register' in request.GET %}
+                    <p style="color:green">Usuario registrado correctamente, ya puedes identificarte</p>
+                {% endif %}
+                <form action="" method="post">{% csrf_token %}
+                <h3 class="mb-4">Iniciar sesión</h3>
+                {% if form.non_field_errors %}
+                    <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+                {% endif %}
+                <p>
+                    <input type="text" name="username" autofocus maxlength="254" required
+                    id="id_username" class="form-control" placeholder="Username"/>
+                </p>
+                <p>
+                    <input type="password" name="password" required
+                    id="id_password" class="form-control" placeholder="Password"/>
+                </p>
+                <p><input type="submit" class="btn btn-primary btn-block" style="background: #059652; border-color: #059652" value="Login"></p>
+                </form>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'sections/services-info.html' %}
+
+{% endblock %}

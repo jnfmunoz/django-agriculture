@@ -1,0 +1,35 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url({% static 'core/img/page-title-bg.webp' %});">
+        <div class="container position-relative">
+            <h1>Sign Up</h1>
+            <nav class="breadcrumbs">
+            <ol>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li class="current">Sign Up</li>
+            </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+    <style>.errorlist{color:red;} label{display:none;}</style>
+
+    <section id="login" class="login section"> 
+        <div class="container">
+            <div class="row mt-3">
+            <div class="col-md-9 mx-auto mb-5">
+                <form action="" method="post">{% csrf_token %}
+                    <h3 class="mb-4">Register</h3>
+                    {{form.as_p}}
+                    <p><input type="submit" class="btn btn-primary btn-block" style="background: #059652; border-color: #059652" value="Confirm"></p>
+                </form>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'sections/services-info.html' %}
+
+{% endblock %}
