@@ -1,24 +1,9 @@
 {% extends 'partials/base.html' %}
+{% block title %}Blog{% endblock title %}
 {% load static %}
 
 {% block content %}
-    <!-- Page Title -->
-    <div class="page-title dark-background" data-aos="fade" style="background-image: url({% static 'core/img/page-title-bg.webp' %});">
-        <div class="container position-relative">
-            <h1>Blog</h1>
-            <p>
-            Home
-            /
-            Blog</p>
-            <nav class="breadcrumbs">
-            <ol>
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <li class="current">Blog</li>
-            </ol>
-            </nav>
-        </div>
-    </div><!-- End Page Title -->
-
+    {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Blog" %}
     {% include 'sections/posts-2.html' %}
 
 {% endblock content %}

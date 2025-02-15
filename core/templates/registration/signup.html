@@ -1,19 +1,10 @@
 {% extends 'partials/base.html' %}
+{% block title %}Sign Up{% endblock title %}
 {% load static %}
 
 {% block content %}
-    <!-- Page Title -->
-    <div class="page-title dark-background" data-aos="fade" style="background-image: url({% static 'core/img/page-title-bg.webp' %});">
-        <div class="container position-relative">
-            <h1>Sign Up</h1>
-            <nav class="breadcrumbs">
-            <ol>
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <li class="current">Sign Up</li>
-            </ol>
-            </nav>
-        </div>
-    </div><!-- End Page Title -->
+    {% include 'sections/page-title.html' with page_title="Sign Up" page_subtitle="Sign Up" %}
+
     <style>.errorlist{color:red;} label{display:none;}</style>
 
     <section id="login" class="login section"> 
@@ -25,6 +16,7 @@
                     {{form.as_p}}
                     <p><input type="submit" class="btn btn-primary btn-block" style="background: #059652; border-color: #059652" value="Confirm"></p>
                 </form>
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
             </div>
             </div>
         </div>

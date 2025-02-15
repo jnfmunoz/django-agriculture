@@ -1,0 +1,13 @@
+{% load static %}
+<!-- Page Title -->
+<div class="page-title dark-background" data-aos="fade" style="background-image: url({% static 'core/img/page-title-bg.webp' %});">
+    <div class="container position-relative">
+        <h1>{{ page_title }}</h1>
+        <nav class="breadcrumbs">
+        <ol>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="current">{{ page_subtitle }}</li>
+        </ol>
+        </nav>
+    </div>
+</div><!-- End Page Title -->
