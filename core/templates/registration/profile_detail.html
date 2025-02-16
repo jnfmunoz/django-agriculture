@@ -1,0 +1,78 @@
+{% extends 'partials/base.html' %}
+{% block title %}Profile{% endblock title %}
+{% load static %}
+
+{% block content %}
+    {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
+    
+    <section id="profile" class="profile section">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-9 mx-auto mb-5">
+                    <!-- Contenedor principal del perfil -->
+                    <div class="row align-items-center">
+                        <!-- Columna para la imagen -->
+                        <div class="col-md-3 text-center">
+                            {% if profile.profile_photo %}
+                                <img src="{{ profile.profile_photo.url }}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
+                            {% else %}
+                                <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="No Avatar">
+                            {% endif %}
+                        </div>
+                        <!-- Columna para la información del perfil -->
+                        <div class="col-md-9">
+                            <h4>{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
+                            {% if profile.occupation %}
+                                <h6>{{ profile.occupation }}</h6>
+                            {% endif %}
+                            {% comment %} <h6>{{ profile.bio }}</h6> {% endcomment %}
+                            <h6>{{ profile.user.email }}</h6>
+
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <!-- Redes sociales -->
+                                <div class="social-links">
+                                    {% if profile.facebook %}
+                                        <a href="{{profile.facebook}}" class="btn btn-sm me-2" style="background-color: #1877F2; color: white;">
+                                            <i class="bi bi-facebook"></i>
+                                        </a>
+                                    {% endif %}
+
+                                    {% if profile.instagram %}
+                                        <a href="{{profile.instagram}}" class="btn btn-sm me-2" style="background-color: #E4405F; color: white;">
+                                            <i class="bi bi-instagram"></i>
+                                        </a>
+                                    {% endif %}
+
+                                    {% if profile.linkedin %}                                
+                                        <a href="{{profile.linkedin}}" class="btn btn-outline-info btn-sm me-2">
+                                            <i class="bi bi-linkedin"></i>
+                                        </a>
+                                    {% endif %}
+                                    
+                                    {% if profile.twitter %}                                
+                                        <a href="{{profile.twitter}}" class="btn btn-outline-primary btn-sm me-2">
+                                            <i class="bi bi-twitter-x"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <!-- Botón de actualización de perfil -->
+                                <a href="{% url 'profile' %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652">
+                                    Update Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Espacio adicional para más información -->
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h5>Biography</h5>
+                            <p>{{profile.bio}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'sections/services-info.html' %}
+{% endblock %}

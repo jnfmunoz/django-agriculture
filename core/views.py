@@ -6,8 +6,19 @@ class HomePageView(TemplateView):
     
     template_name = "pages/index.html"
 
+    # def get(self, request, *args, **kwargs):
+    #     return render(request, self.template_name)
+
+    
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        context = {}
+        
+        if request.user.is_authenticated:
+            context['username'] = request.user.username
+        else:
+            context['username'] = ''
+
+        return render(request, self.template_name, context)
     
 
 class AboutUsPageView(TemplateView):

@@ -1,0 +1,3 @@
+                {% if request.user.profile %}
+                  <li><a href="{% url 'profile_detail' profile.user.username %}" class="{% if request.path == '/accounts/profile/' %}active{% endif %}">Profile</a></li>
+                {% endif %}

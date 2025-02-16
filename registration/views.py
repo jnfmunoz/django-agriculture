@@ -1,11 +1,14 @@
 from .forms import UserCreationFormWithEmail, ProfileForm
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.views.generic.edit import UpdateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django import forms
 from .models import Profile
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 # Create your views here.
 class SignUpView(CreateView):
@@ -28,7 +31,7 @@ class SignUpView(CreateView):
         return form
 
 @method_decorator(login_required, name='dispatch')
-class ProfileUpdate(UpdateView):
+class ProfileUpdateView(UpdateView):
     
     form_class = ProfileForm
     success_url = reverse_lazy('profile')
@@ -37,3 +40,18 @@ class ProfileUpdate(UpdateView):
     def get_object(self):
         profile, created = Profile.objects.get_or_create(user=self.request.user)
         return profile
+
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    
+    model = Profile
+    template_name ='registration/profile_detail.html'
+    context_object_name = 'profile'
+
+    def get_object(self):
+        username = self.kwargs.get('username')
+        return get_object_or_404(Profile, user__username=username)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_owner'] = self.request.user == self.object.user
+        return context

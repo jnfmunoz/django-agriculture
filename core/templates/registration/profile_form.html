@@ -22,20 +22,20 @@
                         </div>
                         <!-- Formulario -->
                         <div class="col-md-10">
-                        <h3>Update Profile</h3>
-                        <input type="file" name="profile" class="form-control-file mt-3" id="id_profile">
-                        {{ form.bio }}
-                        {{ form.facebook }}
-                        {{ form.instagram }}
-                        {{ form.linkedin }}
-                        {{ form.twitter }}
-                        <input type="email" value="{{request.user.email}}" class="form-control-file mt-3" readonly>
-                        {% comment %} <p class="mt-3">
-                            Si deseas editar tu email haz click <a href="{% url 'profile_email' %}">aquí</a>.<br>
-                            y si quieres editar tu contraseña haz click <a href="{% url 'password_change' %}">aquí</a>.
-                        </p> {% endcomment %}
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Update">
+                            <h3>Update Profile</h3>
+                            <input type="file" name="profile" class="form-control-file mt-3" id="id_profile">
+                            {{ form.bio }}
+                            {{ form.facebook }}
+                            {{ form.instagram }}
+                            {{ form.linkedin }}
+                            {{ form.twitter }}
+                            <input type="email" value="{{request.user.email}}" class="form-control-file mt-3" readonly>
+                            {% comment %} <p class="mt-3">
+                                Si deseas editar tu email haz click <a href="{% url 'profile_email' %}">aquí</a>.<br>
+                                y si quieres editar tu contraseña haz click <a href="{% url 'password_change' %}">aquí</a>.
+                            </p> {% endcomment %}
+                        </div>
+                        <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Update">
                     </div>
                 </form>
             </div>
