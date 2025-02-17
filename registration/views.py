@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django import forms
 from .models import Profile
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 class SignUpView(CreateView):
@@ -30,16 +30,34 @@ class SignUpView(CreateView):
 
         return form
 
-@method_decorator(login_required, name='dispatch')
-class ProfileUpdateView(UpdateView):
+# @method_decorator(login_required, name='dispatch')
+# class ProfileUpdateView(UpdateView):
     
+#     form_class = ProfileForm
+#     success_url = reverse_lazy('profile')
+#     template_name = 'registration/profile_form.html'
+
+#     def get_object(self):
+#         profile, created = Profile.objects.get_or_create(user=self.request.user)
+#         return profile
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProfileForm
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_detail')
     template_name = 'registration/profile_form.html'
 
-    def get_object(self):
-        profile, created = Profile.objects.get_or_create(user=self.request.user)
-        return profile
+    def get_object(self, *args, **kwargs):
+        
+        username = self.kwargs.get('username')
+
+        if username == self.request.user.username:
+            profile, created = Profile.objects.get_or_create(user=self.request.user)
+            return profile
+        else:
+            raise PermissionDenied("You do not have permission to edit this profile.")
+    
+    def get_success_url(self):
+        return reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     

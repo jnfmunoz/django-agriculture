@@ -21,10 +21,11 @@ class ProfileForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['profile_photo', 'bio', 'facebook', 'instagram', 'linkedin', 'twitter']
+        fields = ['profile_photo', 'occupation', 'bio', 'facebook', 'instagram', 'linkedin', 'twitter']
         widgets = {
             'profile_photo': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3'}),
-            'bio': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 3, 'placeholder': 'Biography'}),
+            'occupation': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 1, 'placeholder': 'Occupation'}),
+            'bio': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 6, 'placeholder': 'Biography'}),
             'facebook': forms.URLInput(attrs={'class': 'form-control mt-3', 'rows':3, 'placeholder':'Facebook'}),
             'instagram': forms.URLInput(attrs={'class': 'form-control mt-3', 'rows':3, 'placeholder':'Instagram'}),
             'linkedin': forms.URLInput(attrs={'class': 'form-control mt-3', 'rows':3, 'placeholder':'Linkedin'}),

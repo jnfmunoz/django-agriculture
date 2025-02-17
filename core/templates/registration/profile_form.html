@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %}Profile{% endblock title %}
+{% block title %}Update Profile | {{ request.user.first_name }} {{ request.user.last_name }}{% endblock title %}
 {% load static %}
 
 {% block content %}
@@ -8,37 +8,79 @@
     <section id="profile" class="profile section">
         <div class="container">
             <div class="row mt-3">
-            <div class="col-md-9 mx-auto mb-5">
-                <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="row">
-                        <!-- Previa del profile -->
-                        <div class="col-md-2">
-                        {% if request.user.profile.profile_photo %}
-                            <img src="{{request.user.profile.profile_photo.url}}" class="img-fluid">
-                            <p class="mt-1">¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear" /></p>
-                        {% else %}
-                            <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
-                        {% endif %}
+                <div class="col-md-9 mx-auto mb-5">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <!-- Previa del profile -->
+                            <div class="col-md-2">
+                                {% if request.user.profile.profile_photo %}
+                                    {% comment %} <img src="{{ request.user.profile.profile_photo.url }}" class="img-fluid" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;">                                     {% endcomment %}
+                                    <img src="{{ request.user.profile.profile_photo.url }}" class="img-fluid d-block mx-auto" style="max-width: 150px; height: 150px; object-fit: cover;">
+                                {% else %}
+                                    {% comment %} <img src="{% static 'core/img/registration/no-avatar.jpg' %}" class="img-fluid" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;"> {% endcomment %}
+                                    <img src="{% static 'core/img/registration/no-avatar.jpg' %}" class="img-fluid d-block mx-auto" style="max-width: 150px; height: 150px; object-fit: cover;">
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Formulario -->
+                            <div class="col-md-10">                            
+                                <br>
+                                <h3>Update Profile</h3>
+
+                                <!-- Campo de foto de perfil -->
+                                <div class="form-group">
+                                    <label for="id_profile_photo" class="mt-3">Profile Photo</label>
+                                    {{ form.profile_photo }}
+                                </div>
+
+                                <!-- Campos ocupación y biografía -->
+                                <div class="form-group">
+                                    <label for="id_occupation" class="mt-3">Occupation</label>
+                                    {{ form.occupation }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_bio" class="mt-3">Biography</label>
+                                    {{ form.bio }}
+                                </div>
+
+                                <!-- Redes sociales -->
+                                <div class="form-group">
+                                    <label for="id_facebook" class="mt-3">Facebook</label>
+                                    {{ form.facebook }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_instagram" class="mt-3">Instagram</label>
+                                    {{ form.instagram }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_linkedin" class="mt-3">LinkedIn</label>
+                                    {{ form.linkedin }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_twitter" class="mt-3">Twitter</label>
+                                    {{ form.twitter }}
+                                </div>
+
+                                <!-- Email solo de lectura -->
+                                <div class="form-group">
+                                    <label for="id_email" class="mt-3">Email</label>
+                                    <input type="email" value="{{ request.user.email }}" class="form-control mt-3" readonly>
+                                </div>
+
+                                <!-- Botón de envío -->
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Update">
+                                </div>
+                            </div>
                         </div>
-                        <!-- Formulario -->
-                        <div class="col-md-10">
-                            <h3>Update Profile</h3>
-                            <input type="file" name="profile" class="form-control-file mt-3" id="id_profile">
-                            {{ form.bio }}
-                            {{ form.facebook }}
-                            {{ form.instagram }}
-                            {{ form.linkedin }}
-                            {{ form.twitter }}
-                            <input type="email" value="{{request.user.email}}" class="form-control-file mt-3" readonly>
-                            {% comment %} <p class="mt-3">
-                                Si deseas editar tu email haz click <a href="{% url 'profile_email' %}">aquí</a>.<br>
-                                y si quieres editar tu contraseña haz click <a href="{% url 'password_change' %}">aquí</a>.
-                            </p> {% endcomment %}
-                        </div>
-                        <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Update">
-                    </div>
-                </form>
-            </div>
+                    </form>
+
+                </div>
             </div>
         </div>
     </section>
