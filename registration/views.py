@@ -30,16 +30,20 @@ class SignUpView(CreateView):
 
         return form
 
-# @method_decorator(login_required, name='dispatch')
-# class ProfileUpdateView(UpdateView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     
-#     form_class = ProfileForm
-#     success_url = reverse_lazy('profile')
-#     template_name = 'registration/profile_form.html'
+    model = Profile
+    template_name ='registration/profile_detail.html'
+    context_object_name = 'profile'
 
-#     def get_object(self):
-#         profile, created = Profile.objects.get_or_create(user=self.request.user)
-#         return profile
+    def get_object(self):
+        username = self.kwargs.get('username')
+        return get_object_or_404(Profile, user__username=username)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_owner'] = self.request.user == self.object.user
+        return context
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProfileForm
@@ -58,18 +62,3 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
-
-class ProfileDetailView(LoginRequiredMixin, DetailView):
-    
-    model = Profile
-    template_name ='registration/profile_detail.html'
-    context_object_name = 'profile'
-
-    def get_object(self):
-        username = self.kwargs.get('username')
-        return get_object_or_404(Profile, user__username=username)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['is_owner'] = self.request.user == self.object.user
-        return context

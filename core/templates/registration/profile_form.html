@@ -1,19 +1,21 @@
 {% extends 'partials/base.html' %}
-{% block title %}Update Profile | {{ request.user.first_name }} {{ request.user.last_name }}{% endblock title %}
 {% load static %}
+{% load form_tags %}
+{% block title %}Update Profile - {{ request.user.first_name }} {{ request.user.last_name }}{% endblock title %}
 
 {% block content %}
-    {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
-    
+    {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Update" %}
+
     <section id="profile" class="profile section">
         <div class="container">
             <div class="row mt-3">
                 <div class="col-md-9 mx-auto mb-5">
+                {% comment %} <div class="container"> {% endcomment %}
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row">
                             <!-- Previa del profile -->
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 {% if request.user.profile.profile_photo %}
                                     {% comment %} <img src="{{ request.user.profile.profile_photo.url }}" class="img-fluid" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;">                                     {% endcomment %}
                                     <img src="{{ request.user.profile.profile_photo.url }}" class="img-fluid d-block mx-auto" style="max-width: 150px; height: 150px; object-fit: cover;">
@@ -24,15 +26,14 @@
                             </div>
                             
                             <!-- Formulario -->
-                            <div class="col-md-10">                            
-                                <br>
-                                <h3>Update Profile</h3>
-
+                            <div class="col-md-9">                                                            
                                 <!-- Campo de foto de perfil -->
                                 <div class="form-group">
-                                    <label for="id_profile_photo" class="mt-3">Profile Photo</label>
-                                    {{ form.profile_photo }}
-                                </div>
+                                    {{ form.profile_photo|hide_label }}
+                                    <label for="id_profile_photo" class="btn btn-primary" style="background: #059652; border-color: #059652;">
+                                        Select file
+                                    </label>    
+                                </div>                
 
                                 <!-- Campos ocupación y biografía -->
                                 <div class="form-group">
@@ -69,7 +70,7 @@
                                 <!-- Email solo de lectura -->
                                 <div class="form-group">
                                     <label for="id_email" class="mt-3">Email</label>
-                                    <input type="email" value="{{ request.user.email }}" class="form-control mt-3" readonly>
+                                    <input type="email" value="{{ request.user.email }}" class="form-control mt-3" >
                                 </div>
 
                                 <!-- Botón de envío -->

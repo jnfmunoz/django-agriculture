@@ -32,3 +32,15 @@ class ProfileForm(forms.ModelForm):
             'twitter': forms.URLInput(attrs={'class': 'form-control mt-3', 'rows':3, 'placeholder':'Twitter'}),
 
         }
+
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email'] #, 'password1', 'password2']
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email address is already registered.")
+        return email
