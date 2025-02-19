@@ -1,8 +1,6 @@
-from .forms import UserCreationFormWithEmail, ProfileForm
+from .forms import UserCreationFormWithEmail, ProfileForm, UserForm
 from django.views.generic import CreateView, DetailView
 from django.views.generic.edit import UpdateView
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django import forms
@@ -46,6 +44,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         return context
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+
     form_class = ProfileForm
     success_url = reverse_lazy('profile_detail')
     template_name = 'registration/profile_form.html'
@@ -62,3 +61,21 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+
+    form_class = UserForm
+    success_url = reverse_lazy('profile_detail')
+    template_name = 'registration/user_form.html'
+
+    def get_object(self, *args, **kwargs):
+        username = self.kwargs.get('username')
+        
+        if username == self.request.user.username:
+            return self.request.user
+        else:
+            raise PermissionDenied("You do not have permission to edit this user.")
+        
+    def get_success_url(self):
+        return reverse_lazy('user_detail', kwargs={'username': self.request.user.username})
+    
