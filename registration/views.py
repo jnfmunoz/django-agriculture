@@ -35,8 +35,16 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'profile'
 
     def get_object(self):
-        username = self.kwargs.get('username')
-        return get_object_or_404(Profile, user__username=username)
+        # username = self.kwargs.get('username')
+        # return get_object_or_404(Profile, user__username=username)
+        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        
+        # Si el perfil fue creado, puedes redirigir o hacer algo adicional si lo deseas.
+        # if created:
+        #     # Opcional: redirigir a una vista de edición o hacer algo más
+        #     pass
+        
+        return profile
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -69,6 +77,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'registration/user_form.html'
 
     def get_object(self, *args, **kwargs):
+        
         username = self.kwargs.get('username')
         
         if username == self.request.user.username:
@@ -77,5 +86,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
             raise PermissionDenied("You do not have permission to edit this user.")
         
     def get_success_url(self):
-        return reverse_lazy('user_detail', kwargs={'username': self.request.user.username})
+        success_url = reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
+        print("Redirigiendo a:", success_url)  # Esto te ayudará a depurar si la URL se genera correctamente
+        return success_url
+
     
