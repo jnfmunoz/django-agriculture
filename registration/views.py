@@ -73,21 +73,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None,*args, **kwargs):
         return self.request.user
-    
-    def form_valid(self, form, *args, **kwargs):    
-
-        password1 = form.cleaned_data.get('password1')
-        if password1:
-            self.object.set_password(password1)
-
-        self.object.first_name = form.cleaned_data['first_name']
-        self.object.last_name = form.cleaned_data['last_name']
-        self.object.email = form.cleaned_data['email']
-
-        self.object.save()
         
-        return super().form_valid(form, *args, **kwargs)
-    
     def form_invalid(self, form):
         print("❌ Formulario inválido. Errores:", form.errors)
         return self.render_to_response(self.get_context_data(form=form))

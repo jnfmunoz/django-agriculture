@@ -37,24 +37,6 @@ class ProfileForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
 
-    password1 = forms.CharField(
-        label = 'Password',
-        widget = forms.PasswordInput(attrs={
-            'class': 'form-control mt-3',
-            'placeholder': 'New Password'
-        }),
-        required=False
-    )
-
-    password2 = forms.CharField(
-        label = 'Repeat Password',
-        widget = forms.PasswordInput(attrs={
-            'class': 'form-control mt-3',
-            'placeholder': 'Repeat New Password'
-        }),
-        required=False
-    )
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
@@ -69,12 +51,3 @@ class UserForm(forms.ModelForm):
         if email and User.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
             raise forms.ValidationError("This email address is already registered.")
         return email
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-
-        if password1 and password2:
-            if password1 != password2:
-                raise forms.ValidationError("Passwords must match.")
-        return password2
