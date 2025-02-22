@@ -55,10 +55,10 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email'] #, 'password']
+        fields = ['email'] #['first_name', 'last_name', 'email'] #, 'password']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder':'First name'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder':'Last name'}),
+            # 'first_name': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder':'First name'}),
+            # 'last_name': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder':'Last name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control mt-3', 'placeholder':'Email address'}),
             # 'password': forms.PasswordInput(attrs={'class': 'form-control mt-3', 'placeholder':'Password'}),
         }
@@ -69,21 +69,21 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("This email address is already registered.")
         return email
 
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
+    # def clean_password2(self):
+    #     password1 = self.cleaned_data.get('password1')
+    #     password2 = self.cleaned_data.get('password2')
 
-        if password1 and password2:
-            if password1 != password2:
-                raise forms.ValidationError("Passwords must match.")
-            return password2
+    #     if password1 and password2:
+    #         if password1 != password2:
+    #             raise forms.ValidationError("Passwords must match.")
+    #         return password2
     
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        password1 = self.cleaned_data.get('password1')
+    # def save(self, commit=True):
+    #     user = super().save(commit=False)
+    #     password1 = self.cleaned_data.get('password1')
 
-        if password1:
-            user.set_password(password1)
+    #     if password1:
+    #         user.set_password(password1)
         
-        if commit:
-            user.save()
+    #     if commit:
+    #         user.save()

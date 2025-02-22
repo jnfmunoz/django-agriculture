@@ -7,6 +7,7 @@ from django import forms
 from .models import Profile
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 class SignUpView(CreateView):
@@ -76,18 +77,43 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('profile_detail')
     template_name = 'registration/user_form.html'
 
-    def get_object(self, *args, **kwargs):
-        
-        username = self.kwargs.get('username')
-        
-        if username == self.request.user.username:
-            return self.request.user
-        else:
-            raise PermissionDenied("You do not have permission to edit this user.")
-        
+    def get_object(self, queryset=None,*args, **kwargs):
+        return self.request.user
+    
     def get_success_url(self):
-        success_url = reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
-        print("Redirigiendo a:", success_url)  # Esto te ayudará a depurar si la URL se genera correctamente
-        return success_url
+        return reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
+        # username = self.kwargs.get('username')
+
+        # if username == self.request.user.username:            
+        #     user, created = User.objects.get_or_create(username=self.request.user.username)
+        #     return user
+        # else:
+        #     raise PermissionDenied("You do not have permission to edit this user.")
+        
+    # def form_valid(self, form):
+    #     self.request.user.refresh_from_db()
+    #     return super().form_valid(form)
+    
+    # def get_success_url(self):
+    #     return reverse_lazy('profile_detail', kwargs={'username':self.request.user.username})
+
+
+    # form_class = UserForm
+    # success_url = reverse_lazy('profile_detail')
+    # template_name = 'registration/user_form.html'
+
+    # def get_object(self, *args, **kwargs):
+        
+    #     username = self.kwargs.get('username')
+        
+    #     if username == self.request.user.username:
+    #         return self.request.user
+    #     else:
+    #         raise PermissionDenied("You do not have permission to edit this user.")
+        
+    # def get_success_url(self):
+    #     success_url = reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
+    #     print("Redirigiendo a:", success_url)  # Esto te ayudará a depurar si la URL se genera correctamente
+    #     return success_url
 
     
