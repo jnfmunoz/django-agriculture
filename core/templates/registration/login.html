@@ -5,40 +5,44 @@
 {% block content %}
     {% include 'sections/page-title.html' with page_title="Login" page_subtitle="Login" %}
 
-    <style>.errorlist{color:red;}</style>
+    <style>
+        .errorlist{color:red}
+    </style>
 
-    <section id="login" class="login section"> 
+    <section id="login" class="login section">
         <div class="container">
-            <div class="row mt-3">
-            <div class="col-md-9 mx-auto mb-5">
+            <div class="row justify-content-center mt-3">
                 {% if 'register' in request.GET %}
-                    <p style="color:green">Usuario registrado correctamente, ya puedes identificarte</p>
+                    <p style="color:green">User registered correctly, you can now log in</p>
                 {% endif %}
-                <form action="" method="post">{% csrf_token %}
-                    <h3 class="mb-4">Login</h3>
-                    {% if form.non_field_errors %}
-                        <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
-                    {% endif %}
-                    <p>
-                        <input type="text" name="username" autofocus maxlength="254" required
-                        id="id_username" class="form-control" placeholder="Username"/>
-                    </p>
-                    <p>
-                        <input type="password" name="password" required
-                        id="id_password" class="form-control" placeholder="Password"/>
-                    </p>
-                    <p><input type="submit" class="btn btn-primary btn-block" style="background: #059652; border-color: #059652" value="Login"></p>
-                </form>
-                <p>
-                    Forgot Password? <a href="{% url 'password_reset' %}">Click here</a>.
-                </p>
-                <p>
-                    Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>.
-                </p>
-            </div>
+                <div class="col-md-6 mb-5">
+                    <form action="" method="post" enctype="multipart/form-data" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        {% csrf_token %}
+                        <h3 class="mb-4">Login</h3>
+                        {% if form.non_field_errors %}
+                            <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+                        {% endif %}                    
+                        <p>
+                        <div class="form-group">
+                            <label for="id_username" class="mt-3">Username</label>                            
+                            <input type="text" name="username" autofocus maxlength="254" required id="id_username" class="form-control" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                        <p>
+                            Forgot Password? <a href="{% url 'password_reset' %}">Click here</a>.
+                        </p>
+                        <p>
+                            Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>.
+                        </p>
+                    </form>
+                </div>
             </div>
         </div>
+
     </section>
+
 
     {% include 'sections/services-info.html' %}
 
