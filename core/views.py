@@ -30,13 +30,6 @@ class TestimonialsPageView(TemplateView):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
     
-class BlogPageView(TemplateView):
-
-    template_name = "pages/blog.html"
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
-    
 class ContactPageView(TemplateView):
 
     template_name = "pages/contact.html"

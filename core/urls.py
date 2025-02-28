@@ -18,16 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from .views import (HomePageView, AboutUsPageView, ServicesPageView,
-                    TestimonialsPageView, BlogPageView, ContactPageView)
+                    TestimonialsPageView, ContactPageView)
 
 urlpatterns = [
     path('', HomePageView.as_view(), name="index"),
     path('about/', AboutUsPageView.as_view(), name="about"),
     path('services/', ServicesPageView.as_view(), name="services"),
     path('testimonials/', TestimonialsPageView.as_view(), name="testimonials"),
-    path('blog/', BlogPageView.as_view(), name="blog"),
     path('contact/', ContactPageView.as_view(), name="contact"),
-
+    
+    # path('blog/', BlogPageView.as_view(), name="blog"),
+    path('blog/', include('blog.urls'), name="blog"),     
+    
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('registration.urls')),
