@@ -15,7 +15,7 @@ class PublicPostListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        print(queryset)  
+        # print(queryset)  
         return queryset
     
     def get_context_data(self, **kwargs):
@@ -25,7 +25,7 @@ class PublicPostListView(ListView):
 class PublicPostDetailView(DetailView):
     
     model = Post
-    template_name = 'blog/post_detail.html'
+    template_name = "blog/post_detail.html"
     context_object_name = 'post'
 
     def get_queryset(self):
@@ -36,5 +36,6 @@ class PublicPostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
         return context
+
 
 
