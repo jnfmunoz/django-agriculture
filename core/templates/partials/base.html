@@ -51,7 +51,7 @@
               <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About Us</a></li>
               <li><a href="{% url 'services' %}" class="{% if request.path == '/services/' %}active{% endif %}">Our Services</a></li>
               <li><a href="{% url 'testimonials' %}" class="{% if request.path == '/testimonials/' %}active{% endif %}">Testimonials</a></li>
-              <li><a href="{% url 'blog' %}" class="{% if request.path == '/blog/' %}active{% endif %}">Blog</a></li>
+              <li><a href="{% url 'post-list' %}" class="{% if request.path == '/blog/' %}active{% endif %}">Blog</a></li>
               <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact</a></li>
               {% if not request.user.is_authenticated %}
                 <li><a href="{% url 'login' %}" class="{% if request.path == '/accounts/login/' %}active{% endif %}">Login</a></li>
