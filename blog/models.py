@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+import re
 
 # Create your models here.
 class Post(models.Model):
@@ -22,3 +23,17 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    def formatted_content(self):
+        paragraphs = re.split(r'\n+', self.content.strip())  # Divide el contenido en párrafos
+        
+        if not paragraphs:  
+            return ""  # Si no hay contenido, retorna vacío
+        
+        first_two = "".join(f"<p>{p}</p>" for p in paragraphs[:2])  # Primeros 2 párrafos
+        blockquote = f"<blockquote><p>{self.subtitle}</p></blockquote>"  # Blockquote con el subtítulo
+        remaining = "".join(f"<p>{p}</p>" for p in paragraphs[2:])  # Resto de los párrafos
+
+        return first_two + blockquote + remaining  # Concatenar todo
+    
+    def count_paragraphs(self):
+        return len(re.split(r'\n+', self.content.strip()))

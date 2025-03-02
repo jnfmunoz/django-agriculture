@@ -30,7 +30,7 @@ class PublicPostDetailView(DetailView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # print(queryset)
+        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
