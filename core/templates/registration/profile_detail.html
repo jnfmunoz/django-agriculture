@@ -57,15 +57,17 @@
 
                                 <!-- Contenedor para los botones "Update User" y "Update Profile" -->
                                 <div class="d-flex flex-column">
-                                    <!-- Botón de actualización de usuario -->
-                                    <a href="{% url 'user_update' request.user.username %}" class="btn btn-info btn-sm mb-2" style="background-color: #6c757d; border-color: #6c757d; color:white;">
-                                        Update User
-                                    </a>
-                                    
-                                    <!-- Botón de actualización de perfil -->
-                                    <a href="{% url 'profile_update' request.user.username %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652;">
-                                        Update Profile
-                                    </a>
+                                    {% if is_owner %}
+                                        <!-- Botón de actualización de usuario -->
+                                        <a href="{% url 'user_update' request.user.username %}" class="btn btn-info btn-sm mb-2" style="background-color: #6c757d; border-color: #6c757d; color:white;">
+                                            Update User
+                                        </a>
+                                        
+                                        <!-- Botón de actualización de perfil -->
+                                        <a href="{% url 'profile_update' request.user.username %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652;">
+                                            Update Profile
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -82,5 +84,16 @@
             </div>
         </div>
     </section>
+
+    <section class="user posts section" id="user posts">
+        {% if user_posts %}
+            {% for post in user_posts %}
+                
+            {% endfor %}
+        {% else %}
+            <p>No Posts.</p>
+        {% endif %}
+    </section>
+
     {% include 'sections/services-info.html' %}
 {% endblock %}
