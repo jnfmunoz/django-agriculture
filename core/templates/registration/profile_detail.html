@@ -85,7 +85,7 @@
         </div>
     </section>
 
-    <section class="user posts section" id="user posts">
+    {% comment %} <section class="user posts section" id="user posts">
         {% if user_posts %}
             {% for post in user_posts %}
                 
@@ -93,7 +93,46 @@
         {% else %}
             <p>No Posts.</p>
         {% endif %}
+    </section> {% endcomment %}
+
+    <!-- Sección de posts del usuario -->
+    <section class="user posts section" id="user-posts">
+        <div class="container">
+            <h5>User Posts</h5>
+            {% if user_posts %}
+                <div class="row gy-4">
+                    {% for post in user_posts %}
+                        <div class="col-lg-4">  <!-- Cada post ocupa un tercio de la fila -->
+                            <article class="position-relative h-100">
+                                <div class="post-img position-relative overflow-hidden">
+                                    {% if post.image %}
+                                        <img src="{{ post.image.url }}" class="img-fluid" alt="Post Image">
+                                    {% else %}
+                                        <img src="{% static 'core/img/default-post-image.jpg' %}" class="img-fluid" alt="Post Image">
+                                    {% endif %}
+                                </div>
+
+                                <div class="meta d-flex align-items-end">
+                                    <span class="post-date"><span>{{ post.published_at|date:"d" }}</span>{{ post.published_at|date:"F" }}</span>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-person"></i> <span class="ps-2">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="post-content d-flex flex-column">
+                                    <h3 class="post-title">{{ post.title }}</h3>
+                                    <a href="{% url 'post-detail' post.id %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+                    {% endfor %}
+                </div> <!-- Cierra la fila de los posts -->
+            {% else %}
+                <p>No Posts.</p>
+            {% endif %}
+        </div>
     </section>
+
 
     {% include 'sections/services-info.html' %}
 {% endblock %}
