@@ -12,3 +12,6 @@ class Profile(models.Model):
     instagram = models.URLField(max_length=200, null=True, blank=True)
     linkedin = models.URLField(max_length=200, null=True, blank=True)
     twitter = models.URLField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return f'Perfil de {self.user.first_name} {self.user.last_name}'

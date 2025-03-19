@@ -39,3 +39,4 @@ class Post(models.Model):
     
     def count_paragraphs(self):
         return len(re.split(r'\n+', self.content.strip()))
+    

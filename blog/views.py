@@ -5,7 +5,7 @@ from django.shortcuts import render
 from .models import Post
 
 # Create your views here.
-class PublicPostListView(ListView):
+class PostListView(ListView):
 
     model = Post
     template_name = "blog/post_list.html"
@@ -19,10 +19,11 @@ class PublicPostListView(ListView):
         return queryset
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
+        context = super().get_context_data(**kwargs)
+
         return context
 
-class PublicPostDetailView(DetailView):
+class PostDetailView(DetailView):
     
     model = Post
     template_name = "blog/post_detail.html"
@@ -34,7 +35,10 @@ class PublicPostDetailView(DetailView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
+        context = super().get_context_data(**kwargs)   
+        post = self.get_object()
+        context["comments"] = post.comments.all()
+        context["comments_count"] = post.comments.count()     
         return context
 
 

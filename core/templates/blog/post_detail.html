@@ -46,7 +46,32 @@
 
             </article>
           </div>            
-        </section>
+        </section><!-- /Blog Details Section -->
+
+        <!-- Blog Comments Section -->
+        <section id="blog-comments" class="blog-comments section">
+          <div class="container">
+
+            <h4 class="comments-count">{{comments_count}} Comments</h4>
+
+            {% for comment in  comments %}
+              <div id="comment-{{comment.id}}" class="comment">
+                <div class="d-flex">
+                  <div class="comment-img"><img src="{{ comment.author.profile.profile_photo.url }}" alt=""></div>
+                  <div>
+                    <h5><a href="">{{ comment.author.first_name }} {{ comment.author.last_name  }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                    <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:'d M, Y' }}</time>
+                    <p>
+                      {{comment.content}}                      
+                    </p>
+                  </div>
+                </div>
+              </div><!-- End comment #1 -->
+            {% endfor %}
+            
+          </div>
+        </section><!-- /Blog Comments Section -->
+
       </div>
 
       <div class="col-lg-4 sidebar">
@@ -59,35 +84,29 @@
               <div class="d-flex align-items-center w-100">
                 <img src="{{ post.author.profile.profile_photo.url }}" class="rounded-circle flex-shrink-0" alt="">
                 <div>
-                  <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-
+                  <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>                  
                   <div class="social-links">
-
+                    <h6>{{ post.author.profile.occupation }}</h6>              
+                    <h6>{{ post.author.email }}</h6>                                
                     {% if post.author.profile.facebook %}                    
                       <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
                     {% endif %}
-
                     {% if post.author.profile.instagram %}                    
                       <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
                     {% endif %}
-
                     {% if post.author.profile.linkedin %}                                                  
                       <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
                     {% endif %}
-
                     {% if post.author.profile.twitter %}                                
                       <a href="https://instagram.com/#"><i class="biu bi-linkedin"></i></a>
                     {% endif %}
-
                   </div>
 
                 </div>
               </div>
-
               <p>
                 {{ post.author.profile.bio }}
               </p>
-
             </div>
 
           </div><!--/Blog Author Widget -->
