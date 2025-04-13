@@ -84,34 +84,40 @@
             </div>
         </div>
     </section>
-    
-    <section id="blog-posts-2" class="blog-posts-2 section">
+        
+    <section id="blog-posts-3" class="blog-posts-3 section">
         <div class="container">
-            <div class="row gy-4">  <!-- Aquí empieza la fila de Bootstrap -->
-                {% for post in user_posts %}
-                    <div class="col-lg-4">  <!-- Cada post ocupa un tercio de la fila -->
-                        <article class="position-relative h-100">
-            
-                            <div class="post-img position-relative overflow-hidden">                                
-                                <img src="{{ post.image.url }}" class="img-fluid" alt="">                            
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="row gy-4">
+                        <h5>Lasts Posts</h5>
+                        {% for post in user_posts %}
+                            <div class="col-12 mb-4">
+                                <article class="d-flex border rounded shadow-sm overflow-hidden">
+                                    <!-- Imagen pequeña a la izquierda -->
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ post.image.url }}" alt="" class="img-fluid" style="width: 180px; height: 120px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Contenido del post a la derecha -->
+                                    <div class="p-3 d-flex flex-column justify-content-between w-100">
+                                        <div>
+                                            <h5 class="mb-1">{{ post.title }}</h5>
+                                            <div class="text-muted small mb-2">
+                                                <i class="bi bi-calendar-event me-1"></i>                                                
+                                                {{ post.created_at|date:"d F Y" }} &nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="text-end">
+                                            <a href="{% url 'post-detail' post.id %}" class="btn btn-sm btn-primary" style="background: #059652; border-color: #059652;">Read More <i class="bi bi-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
-            
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>{{ post.published_at|date:"d" }}</span>{{ post.published_at|date:"F" }}</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">{{ post.author.first_name }} {{ post.author.last_name }}</span>
-                                </div>
-                            </div>
-            
-                            <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">{{ post.title }}</h3>
-                                <a href="{% url 'post-detail' post.id %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-                            </div>
-            
-                        </article>
-                    </div><!-- End post list item --> 
-                {% endfor %}
-            </div>  <!-- Cierra la fila de los posts -->
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
