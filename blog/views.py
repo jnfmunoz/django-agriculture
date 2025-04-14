@@ -1,7 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.shortcuts import render
-
+from django.views.generic.edit import CreateView
 from .models import Post
 
 # Create your views here.
@@ -41,5 +40,14 @@ class PostDetailView(DetailView):
         context["comments_count"] = post.comments.count()     
         return context
 
+class PostCreateView(CreateView):
 
+    model = Post
+    template_name = "blog/post_create.html"
+    fields = ['title', 'subtitle', 'relevant_text', 'content', 'image'] #, 'author']
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    
