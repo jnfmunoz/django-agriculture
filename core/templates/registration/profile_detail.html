@@ -59,12 +59,12 @@
                                 <div class="d-flex flex-column">
                                     {% if is_owner %}
                                         <!-- Botón de actualización de usuario -->
-                                        <a href="{% url 'user_update' request.user.username %}" class="btn btn-info btn-sm mb-2" style="background-color: #6c757d; border-color: #6c757d; color:white;">
+                                        <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-info btn-sm mb-2" style="background-color: #6c757d; border-color: #6c757d; color:white;">
                                             Update User
                                         </a>
                                         
                                         <!-- Botón de actualización de perfil -->
-                                        <a href="{% url 'profile_update' request.user.username %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652;">
+                                        <a href="{% url 'registration:profile_update' request.user.username %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652;">
                                             Update Profile
                                         </a>
                                     {% endif %}
@@ -93,7 +93,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h5 class="mb-0">Last Posts</h5>
                             {% if is_owner %}
-                                <a href="{% url 'post_create' %}" class="btn btn-sm" style="background-color: #0d6efd; border-color: #0d6efd; color: white;">
+                                <a href="{% url 'blog:post_create' %}" class="btn btn-sm" style="background-color: #0d6efd; border-color: #0d6efd; color: white;">
                                     New Post
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
@@ -116,8 +116,12 @@
                                                 {{ post.created_at|date:"d F Y" }} &nbsp;
                                             </div>
                                         </div>
+                                        <form method="POST" action="{% url 'blog:post_delete' post.pk %}" style="display: inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
                                         <div class="text-end">
-                                            <a href="{% url 'post-detail' post.id %}" class="btn btn-sm btn-primary" style="background: #059652; border-color: #059652;">Read More <i class="bi bi-arrow-right"></i></a>
+                                            <a href="{% url 'blog:post-detail' post.id %}" class="btn btn-sm btn-primary" style="background: #059652; border-color: #059652;">Read More <i class="bi bi-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </article>

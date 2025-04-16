@@ -63,7 +63,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             raise PermissionDenied("You do not have permission to edit this profile.")
     
     def get_success_url(self):
-        return reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
+        return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
 
@@ -79,4 +79,4 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
     
     def get_success_url(self):
-        return reverse_lazy('profile_detail', kwargs={'username': self.request.user.username})
+        return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})

@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from .views import (HomePageView, AboutUsPageView, ServicesPageView,
                     TestimonialsPageView, ContactPageView)
+from blog.urls import blog_patterns
+from registration.urls import registration_patterns
 
 urlpatterns = [
     path('', HomePageView.as_view(), name="index"),
@@ -26,13 +28,14 @@ urlpatterns = [
     path('services/', ServicesPageView.as_view(), name="services"),
     path('testimonials/', TestimonialsPageView.as_view(), name="testimonials"),
     path('contact/', ContactPageView.as_view(), name="contact"),
-    
-    # path('blog/', BlogPageView.as_view(), name="blog"),
-    path('blog/', include('blog.urls'), name="blog"),     
+       
+    path('blog/', include(blog_patterns)),     
     
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/', include('registration.urls')),
+    # path('accounts/', include('registration.urls')),
+    path('accounts/', include(registration_patterns)),     
+
 ]
 
 if settings.DEBUG:

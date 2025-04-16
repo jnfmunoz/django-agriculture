@@ -29,7 +29,7 @@
                         </p>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Update">
-                            <a href="{% url 'profile_detail' request.user.username %}" class="btn btn-secondary btn-block mt-3" style="text-align: center;">Cancel</a>
+                            <a href="{% url 'registration:profile_detail' request.user.username %}" class="btn btn-secondary btn-block mt-3" style="text-align: center;">Cancel</a>
                         </div>
                     </form>
                 </div>

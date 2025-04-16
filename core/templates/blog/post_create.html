@@ -1,4 +1,29 @@
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Blog - New Post{% endblock title %}
+
+{% block content %}
+    {% include 'sections/page-title.html' with page_tite="Blog" page_subtitle="New Post" %}
+
+    <section id="new post" class="new post section"> 
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-9 mx-auto mb-5">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        {% if form.errors %}
+                            <div style="color: red;">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    {% include 'sections/services-info.html' %}
+
+{% endblock content %}
