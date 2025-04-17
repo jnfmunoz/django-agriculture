@@ -8,6 +8,8 @@ from .models import Profile
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class SignUpView(CreateView):
@@ -80,3 +82,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})
+    
+@login_required
+def redirect_to_profile(request):
+    return redirect('registration:profile_detail', username=request.user.username)

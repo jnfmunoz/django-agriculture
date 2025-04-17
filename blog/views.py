@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .models import Post
-
+from .forms import PostForm
 
 # Create your views here.
 class PostListView(ListView):
@@ -47,7 +47,7 @@ class PostCreateView(CreateView):
 
     model = Post
     template_name = "blog/post_create.html"
-    fields = ['title', 'subtitle', 'relevant_text', 'content', 'image']
+    form_class = PostForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -58,7 +58,7 @@ class PostCreateView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
     
     def get_success_url(self):
-        return reverse_lazy('post-list')
+        return reverse_lazy('blog:post-list')
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
