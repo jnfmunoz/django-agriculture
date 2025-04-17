@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .models import Post
@@ -12,7 +12,7 @@ class PostListView(ListView):
     model = Post
     template_name = "blog/post_list.html"
     context_object_name = "posts"
-    ordering = ["published_at"]
+    ordering = ["created_at"]
     paginate_by = 6
 
     def get_queryset(self):
@@ -46,7 +46,7 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
 
     model = Post
-    template_name = "blog/post_create.html"
+    template_name = "blog/post_create_form.html"
     form_class = PostForm
 
     def form_valid(self, form):
@@ -58,7 +58,7 @@ class PostCreateView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
     
     def get_success_url(self):
-        return reverse_lazy('blog:post-list')
+        return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
@@ -78,3 +78,11 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return redirect('post-list')
     '''
 
+class PostUpdateView(UpdateView):
+    
+    model = Post
+    # fields = ['title', 'subtitle', 'content', 'relevant_text', 'image']
+    form_class = PostForm
+    template_name = 'blog/post_update_form.html'
+    def get_success_url(self):
+        return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 

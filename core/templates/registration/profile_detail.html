@@ -116,13 +116,21 @@
                                                 {{ post.created_at|date:"d F Y" }} &nbsp;
                                             </div>
                                         </div>
-                                        <form method="POST" action="{% url 'blog:post_delete' post.pk %}" style="display: inline;">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                        <div class="text-end">
-                                            <a href="{% url 'blog:post-detail' post.id %}" class="btn btn-sm btn-primary" style="background: #059652; border-color: #059652;">Read More <i class="bi bi-arrow-right"></i></a>
+                                        <div class="d-flex justify-content-end gap-2">
+                                            <a href="{% url 'blog:post_update' post.pk %}" class="btn btn-sm" style="background-color: #ffc107; border-color: #ffc107; color: black;">
+                                                Update <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <form method="POST" action="{% url 'blog:post_delete' post.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-sm" style="background-color: #dc3545; border-color: #dc3545; color: white;">
+                                                    Delete <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                            <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-sm" style="background: #059652; border-color: #059652; color: white;">
+                                                Read More <i class="bi bi-arrow-right"></i>
+                                            </a>
                                         </div>
+                                        
                                     </div>
                                 </article>
                             </div>
