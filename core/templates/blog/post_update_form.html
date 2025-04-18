@@ -1,49 +1,96 @@
-
 {% extends 'partials/base.html' %}
+{% block title %}{{ post.title }}{% endblock title %}
 {% load static %}
-{% block title %}Blog - Update Post{% endblock title %}
 
 {% block content %}
-    {% include 'sections/page-title.html' with page_tite="Blog" page_subtitle="New Post" %}
+  {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Update Post" %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">        
+        <section id="blog-details" class="blog-details section">
+          <div class="container">
+            <article class="article">
 
-    <section id="update post" class="update post section"> 
-        <div class="container">
-            <div class="row justify-content-center mt-3">
-                <div class="col-md-6 mb-5">             
-                    <form action="" method="post" enctype="multipart/form-data" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                        {% csrf_token %}                        
-                        <h3>Update Post</h3>
-                        <div class="form-group"> 
-                            <label for="id_title" class="mt-3">Title</label>
-                            {{ form.title }}
-                        </div>
-                        <div class="form-group"> 
-                            <label for="id_subtitle" class="mt-3">Subtitle</label>
-                            {{ form.subtitle }}
-                        </div>
-                        <div class="form-group"> 
-                            <label for="id_relevant_text" class="mt-3">Relevant Text</label>
-                            {{ form.relevant_text }}
-                        </div>
-                        <div class="form-group"> 
-                            <label for="id_content" class="mt-3">Content</label>
-                            {{ form.content }}
-                        </div>
-                        <div class="form-group">
-                            <label for="id_image" class="mt-3">Image</label>
-                            {{ form.image }}
-                        </div>
-                        <br>
-                        <div>
-                            <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Save">
-                            <a href="{% url 'registration:profile_detail' request.user.username %}" class="btn btn-secondary btn-block mt-3" style="text-align: center;">Cancel</a>
-                        </div>
-                    </form>
-                </div>
+              <div class="post-img">
+                <img src="{{ post.image.url }}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="title" contenteditable="true">{{ post.title }}</h2>
+
+              {% comment %} <div class="meta-top">
+                <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a>{{ user.first_name }} {{ user.last_name }}</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a><time datetime="2020-01-01">{{  post.published_at|date:"M j, Y" }}</time></a></li>
+                </ul>
+              </div><!-- End meta top --> {% endcomment %}
+              
+              <div class="content" contenteditable="true">
+                {% comment %} {{ post.formatted_content|safe }}     {% endcomment %}
+              </div><!-- End post content -->
+
+              <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a href="#">Business</a></li>
+                </ul>
+
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li><a href="#">Creative</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li>
+                </ul>
+              </div><!-- End meta bottom -->
+
+            </article>
+          </div>            
+        </section><!-- /Blog Details Section -->
+      </div>
+
+    <div class="col-lg-4 sidebar">
+        <div class="widgets-container">
+            <div>
+                <input type="submit" class="btn btn-primary btn-block mt-3" style="background: #059652; border-color: #059652" value="Save Changes" >
+                <a href="{% url 'registration:profile_detail' request.user.username %}" class="btn btn-danger btn-block mt-3" style="text-align: center;">Cancel</a>
             </div>
-        </div>
-    </section> 
+          {% comment %} <!-- Blog Author Widget -->
+          <div class="blog-author-widget widget-item">
 
-    {% include 'sections/services-info.html' %}
+            <div class="d-flex flex-column align-items-center">
+              <div class="d-flex align-items-center w-100">
+                <img src="{{ post.author.profile.profile_photo.url }}" class="rounded-circle flex-shrink-0" alt="">
+                <div>
+                  <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>                  
+                  <div class="social-links">
+                    <h6>{{ post.author.profile.occupation }}</h6>              
+                    <h6>{{ post.author.email }}</h6>                                
+                    {% if post.author.profile.facebook %}                    
+                      <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.instagram %}                    
+                      <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.linkedin %}                                                  
+                      <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.twitter %}                                
+                      <a href="https://instagram.com/#"><i class="biu bi-linkedin"></i></a>
+                    {% endif %}
+                  </div>
 
-{% endblock content %}
+                </div>
+              </div>
+              <p>
+                {{ post.author.profile.bio }}
+              </p>
+            </div>
+
+          </div><!--/Blog Author Widget --> {% endcomment %}
+
+        </div> 
+      </div>
+      
+    </div>
+  </div>
+  
+{% endblock %}
