@@ -5,7 +5,7 @@
 {% block content %}
     {% include 'sections/page-title.html' with page_tite="Blog" page_subtitle="New Post" %}
 
-    <section id="new post" class="new post section"> 
+    {% comment %} <section id="new post" class="new post section"> 
         <div class="container">
             <div class="row justify-content-center mt-3">
                 <div class="col-md-6 mb-5">             
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>  {% endcomment %}
 
     {% include 'sections/services-info.html' %}
 
