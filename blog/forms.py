@@ -16,3 +16,5 @@ class PostForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3'}),            
 
         }
+
+
