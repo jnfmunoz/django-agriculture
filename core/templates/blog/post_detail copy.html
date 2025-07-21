@@ -52,9 +52,29 @@
         </section><!-- /Blog Details Section -->
 
         <!-- Blog Comments Section -->
+        <section id="blog-comments" class="blog-comments section">
+          <div class="container">
 
+            <h4 class="comments-count">{{comments_count}} Comments</h4>
 
+            {% for comment in comments %}
+            <div id="comment-{{comment.id}}" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="{{ comment.author.profile.profile_photo.url }}" alt=""></div>
+                <div>
+                  <h5><a href="">{{ comment.author.first_name }} {{ comment.author.last_name }}</a> <a href="#"
+                      class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                  <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:'d M, Y' }}</time>
+                  <p>
+                    {{comment.content}}
+                  </p>
+                </div>
+              </div>
+            </div><!-- End comment #1 -->
+            {% endfor %}
 
+          </div>
+        </section>
         <!-- /Blog Comments Section -->
 
     </div>
