@@ -95,7 +95,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p,
+label {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
@@ -785,7 +787,9 @@ section,
   position: relative;
 }
 
-.section-title h2 {
+.section-title h2,
+p,
+label {
   font-size: 28px;
   font-weight: 500;
   margin-bottom: 15px;
@@ -850,7 +854,9 @@ section,
   z-index: 3;
 }
 
-.hero h2 {
+.hero h2,
+p,
+label {
   margin-bottom: 30px;
   font-size: 48px;
   font-weight: 700;
@@ -858,7 +864,10 @@ section,
 }
 
 @media (max-width: 768px) {
-  .hero h2 {
+
+  .hero h2,
+  p,
+  label {
     font-size: 30px;
   }
 }
@@ -870,7 +879,8 @@ section,
 @media (min-width: 1024px) {
 
   .hero h2,
-  .hero p {
+  .hero p,
+  .hero label {
     max-width: 60%;
   }
 }
@@ -961,8 +971,13 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
-.services .section-title h2 {
+.services .section-title h2,
+p {
   color: var(--accent-color);
+  font-size: 20px;
+}
+
+label {
   font-size: 20px;
 }
 
@@ -1097,7 +1112,8 @@ section,
   text-align: left;
 }
 
-.services-2 .section-title h2 {
+.services-2 .section-title h2,
+p {
   color: color-mix(in srgb, var(--contrast-color), transparent 50%);
   text-transform: uppercase;
   font-size: 20px;

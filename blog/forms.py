@@ -11,10 +11,7 @@ class PostForm(forms.ModelForm):
             'subtitle': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Subtitle'}),
             'relevant_text': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 2, 'placeholder': 'Relevant Text'}),
             'introduction': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 6, 'placeholder': 'Post Introduction'}),
-            'body_text': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 6, 'placeholder': 'Body Text'}),
-            'conclusion': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 6, 'placeholder': 'Conclusion'}),
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3'}),            
-
+            'body_text': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 10, 'placeholder': 'Body Text'}),
+            'conclusion': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 8, 'placeholder': 'Conclusion'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3'})
         }
-
-

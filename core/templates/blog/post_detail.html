@@ -23,7 +23,7 @@
                   <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">
                       {{ user.first_name }} {{ user.last_name }}</a></li>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time
-                        datetime="2020-01-01">{{ post.published_at|date:"M j, Y" }}</time></a></li>
+                        datetime="2020-01-01">{{ post.updated_at|date:"M j, Y" }}</time></a></li>
                   {% comment %} este li corresponde a la cantidad de comentarios de un post {% endcomment %}
                   {% comment %} <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
                       href="blog-details.html">12 Comments</a></li>  {% endcomment %}

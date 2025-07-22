@@ -36,7 +36,7 @@ class Post(models.Model):
             html_parts.append(f'<blockquote><p>{self.relevant_text}</p></blockquote>')
 
         if self.subtitle:
-            html_parts.append(f'<h3 style="text-align:left"></h3>')
+            html_parts.append(f'<h3 style="text-align:left">{self.subtitle}</h3>')
         
         if self.body_text:
             body_paragraphs = re.split(r'\n+', self.body_text.strip())

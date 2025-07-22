@@ -14,11 +14,19 @@
               <div class="post-img">
                 <img src="{{ post.image.url }}" alt="" class="img-fluid">
               </div>
+
+              <h2 class="title" contenteditable="true">{{ post.title }}</h2>
+
+              {% comment %} <div class="meta-top">
+                <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a>{{ user.first_name }} {{ user.last_name }}</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a><time datetime="2020-01-01">{{  post.published_at|date:"M j, Y" }}</time></a></li>
+                </ul>
+              </div><!-- End meta top --> {% endcomment %}
               
-              <h2 class="title">{{ form.title }}</h2>
-              
-              
-              <!-- End post content -->
+              <div class="content" contenteditable="true">
+                {% comment %} {{ post.formatted_content|safe }}     {% endcomment %}
+              </div><!-- End post content -->
 
               <div class="meta-bottom">
                 <i class="bi bi-folder"></i>
