@@ -17,14 +17,14 @@
                         <label>Title</label>
                         <h2 class="title">{{ form.title }}</h2>
                         <hr>
-                        <label>Introduction</label>
-                        <p class="introduction">{{ form.introduction }}</p>
-                        <hr>
-                        <label>Relevant text</label>
-                        <blockquote class="relevant_text"><p>{{ form.relevant_text }}</p></blockquote>
-                        <hr>
                         <label>Subtitle</label>
                         <h3 style="text-align:left">{{ form.subtitle }}</h3>
+                        <hr>
+                        <label>Relevant text</label>
+                        <blockquote class="relevant_text"><p>{{ form.relevant_text }}</p></blockquote>                        
+                        <hr>
+                        <label>Introduction</label>
+                        <p class="introduction">{{ form.introduction }}</p>                        
                         <hr>
                         <label>Body Text</label>
                         <p>{{ form.body_text}}</p>
@@ -33,8 +33,7 @@
                         <p>{{ form.conclusion}}</p>
                         <hr>
                         <label>Image</label>
-                        {{ form.image }}
-                        <hr>
+                        {{ form.image }}                        
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Publish</button>
                     <button type="cancel" class="btn btn-danger mt-3">Cancel</button>

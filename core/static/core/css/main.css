@@ -95,9 +95,7 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p,
-label {
+h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
@@ -539,8 +537,15 @@ label {
   font-family: var(--heading-font);
 }
 
+.footer p {
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: var(--default-font);
+  /* O el que prefieras */
+}
+
 .footer h4 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   position: relative;
   padding-bottom: 12px;
@@ -787,9 +792,7 @@ section,
   position: relative;
 }
 
-.section-title h2,
-p,
-label {
+.section-title h2 {
   font-size: 28px;
   font-weight: 500;
   margin-bottom: 15px;
@@ -854,9 +857,7 @@ label {
   z-index: 3;
 }
 
-.hero h2,
-p,
-label {
+.hero h2 {
   margin-bottom: 30px;
   font-size: 48px;
   font-weight: 700;
@@ -864,10 +865,7 @@ label {
 }
 
 @media (max-width: 768px) {
-
-  .hero h2,
-  p,
-  label {
+  .hero h2 {
     font-size: 30px;
   }
 }
@@ -879,8 +877,7 @@ label {
 @media (min-width: 1024px) {
 
   .hero h2,
-  .hero p,
-  .hero label {
+  .hero p {
     max-width: 60%;
   }
 }
@@ -971,13 +968,8 @@ label {
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
-.services .section-title h2,
-p {
+.services .section-title h2 {
   color: var(--accent-color);
-  font-size: 20px;
-}
-
-label {
   font-size: 20px;
 }
 
@@ -1112,8 +1104,7 @@ label {
   text-align: left;
 }
 
-.services-2 .section-title h2,
-p {
+.services-2 .section-title h2 {
   color: color-mix(in srgb, var(--contrast-color), transparent 50%);
   text-transform: uppercase;
   font-size: 20px;
@@ -2295,15 +2286,4 @@ p {
   padding-left: 5px;
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
-}
-
-h3 {
-  text-align: center
-}
-
-#blog-posts-3 .post-img img {
-  border-radius: 8px;
-  object-fit: cover;
-  max-height: 400px;
-
 }
