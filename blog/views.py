@@ -81,7 +81,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostUpdateView(UpdateView):
     
     model = Post
-    # fields = ['title', 'subtitle', 'content', 'relevant_text', 'image']
     form_class = PostForm
     template_name = 'blog/post_update_form.html'
     def get_success_url(self):

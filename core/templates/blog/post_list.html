@@ -16,12 +16,12 @@
                                 <img src="{{ post.image.url }}" class="img-fluid" alt="">                            
                             </div>
             
-                            <div class="meta d-flex align-items-end">
+                            {% comment %} <div class="meta d-flex align-items-end">
                                 <span class="post-date"><span>{{ post.published_at|date:"d" }}</span>{{ post.published_at|date:"F" }}</span>
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-person"></i> <span class="ps-2">{{ post.author.first_name }} {{ post.author.last_name }}</span>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
             
                             <div class="post-content d-flex flex-column">
                                 <h3 class="post-title">{{ post.title }}</h3>
