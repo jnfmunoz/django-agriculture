@@ -1,7 +1,9 @@
+from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import Post
 from .forms import PostForm
@@ -46,7 +48,7 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
 
     model = Post
-    template_name = "blog/post_create_form.html"
+    # template_name = "blog/post_create_form.html"
     form_class = PostForm
 
     def form_valid(self, form):
@@ -55,7 +57,7 @@ class PostCreateView(CreateView):
 
     def form_invalid(self, form):
         print("❌ Formulario inválido. Errores:", form.errors)
-        return self.render_to_response(self.get_context_data(form=form))
+        return redirect(self.get_success_url())
     
     def get_success_url(self):
         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
@@ -78,10 +80,35 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return redirect('post-list')
     '''
 
-class PostUpdateView(UpdateView):
+# class PostUpdateView(UpdateView):
     
+#     model = Post
+#     form_class = PostForm
+#     # template_name = 'blog/post_update_form.html'
+#     def get_success_url(self):
+#         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
+
+
+class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/post_update_form.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        # Renderizar solo el formulario como fragmento
+        return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        if form.is_valid():
+            form.save()
+            return redirect(self.get_success_url())
+        else:
+            return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
+
     def get_success_url(self):
-        return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
+        return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})

@@ -188,3 +188,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+
+document.querySelectorAll('.open-update-form-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const url = button.getAttribute('data-url');
+
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                // Insertar el HTML del form en el modal
+                document.getElementById('update-form-container').innerHTML = html;
+
+                // Mostrar modal
+                document.getElementById('update-form-overlay').style.display = 'display';
+
+                // Agregar funcionalidad para cerrar el modal
+                document.getElementById('close-update-form-btn').onclick = () => {
+                    document.getElementById('update-form-overlay').style.display = 'none';
+                };
+
+                // También puedes agregar aquí el cancel button del form si tienes
+            });
+    });
+});
+

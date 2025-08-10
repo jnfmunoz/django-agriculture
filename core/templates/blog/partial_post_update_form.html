@@ -1,0 +1,15 @@
+<form method="POST" enctype="multipart/form-data" action="{% url 'blog:post_update' post.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="mt-3 d-flex flex-column gap-2">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="button" class="btn btn-danger" id="cancel-update-btn">Cancel</button>
+    </div>
+</form>
+
+<script>
+    // Cerrar modal al click cancel
+    document.getElementById('cancel-update-btn').onclick = function() {
+        document.getElementById('update-form-overlay').style.display = 'none';
+    };
+</script>
