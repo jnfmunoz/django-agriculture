@@ -1,65 +1,49 @@
-{% extends 'partials/base.html' %}
+<!-- {% extends 'partials/base.html' %} -->
 {% block title %}Blog - New Post{{ post.title }}{% endblock %}
 {% load static %}
 
 {% block content %}
 {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="New Post" %}
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8">
 
-      <section id="blog-details" class="blog-details section">
-        <div class="container">
-          <article class="article">
-            <div class="content">
-                <form method="POST" enctype="multipart/form-data" id="post-create-form">
-                    {% csrf_token %}             
-                    <div class="mb-3">
-                        {{ form.image.label_tag }}
-                        {{ form.image }}
-                        <hr>
-                    </div>
-                    <label>Title</label>
-                    <h2 class="title">{{ form.title }}</h2>
-                    <hr>
-                    <label>Subtitle</label>
-                    <h3 style="text-align:left">{{ form.subtitle }}</h3>
-                    <hr>
-                    <label>Relevant text</label>
-                    <blockquote class="relevant_text"><p>{{ form.relevant_text }}</p></blockquote>                         
-                    <hr>
-                    <label>Introduction</label>
-                    <p class="introduction">{{ form.introduction }}</p>                        
-                    <hr>
-                    <label>Body Text</label>
-                    <p>{{ form.body_text}}</p>
-                    <hr>
-                    <label>Conclusion</label>
-                    <p>{{ form.conclusion}}</p>                    
-                </form>
-            </div>
-          </article>
-        </div>
-      </section>
-    </div>
+<!-- Botón para abrir el formulario -->
+<div class="container my-3">
+  <button class="btn btn-primary" id="open-form-btn">New Post</button>
+</div>
 
-    <!-- SIDEBAR -->
-    <div class="col-lg-4 sidebar">
-      <div class="widgets-container">
-        <!-- Blog Author Widget -->
-        <div class="blog-author-widget widget-item">
-          <div class="d-flex flex-column align-items-center">
-            <div class="d-flex align-items-center w-100">            
-            <div class="mt-3 w-100 d-flex justify-content-between flex-wrap gap-2">
-              <button type="submit" form="post-create-form" class="btn btn-success w-100">Publish</button>
-              <button type="reset" form="post-create-form" class="btn btn-secondary w-100">Reset</button>              
-              <a href="{% url 'registration:profile_detail' request.user.username %}" class="btn btn-danger w-100">Cancel</a>
-            </div>
-          </div>
-        </div>
-        <!-- /Blog Author Widget -->
+<!-- Capa overlay -->
+<div class="form-overlay" id="form-overlay">
+  <div class="form-container">
+    <span class="close-btn" id="close-form-btn">&times;</span>
+    <form method="POST" enctype="multipart/form-data" id="post-create-form">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+        <hr>
       </div>
-    </div>
+      <label>Title</label>
+      <h2 class="title">{{ form.title }}</h2>
+      <hr>
+      <label>Subtitle</label>
+      <h3 style="text-align:left">{{ form.subtitle }}</h3>
+      <hr>
+      <label>Relevant text</label>
+      <blockquote class="relevant_text"><p>{{ form.relevant_text }}</p></blockquote>                         
+      <hr>
+      <label>Introduction</label>
+      <p class="introduction">{{ form.introduction }}</p>                        
+      <hr>
+      <label>Body Text</label>
+      <p>{{ form.body_text}}</p>
+      <hr>
+      <label>Conclusion</label>
+      <p>{{ form.conclusion}}</p>
+      <div class="mt-3 d-flex flex-column gap-2">
+        <button type="submit" class="btn btn-success">Publish</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>              
+        <a href="{% url 'registration:profile_detail' request.user.username %}" class="btn btn-danger">Cancel</a>
+      </div>
+    </form>
   </div>
 </div>
 {% endblock %}

@@ -93,12 +93,20 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h5 class="mb-0">Last Posts</h5>
                             {% if is_owner %}
-                                <a href="{% url 'blog:post_create' %}" class="btn btn-sm" style="background-color: #0d6efd; border-color: #0d6efd; color: white;">
+                                <!-- <a href="{% url 'blog:post_create' %}" class="btn btn-sm" style="background-color: #0d6efd; border-color: #0d6efd; color: white;">
                                     New Post
                                     <i class="bi bi-pencil-square"></i>
-                                </a>
+                                </a> -->
+
+                                <!-- <div class="container my-3">
+                                    <button class="btn btn-primary" id="open-form-btn">New Post</button>
+                                </div> -->
+                                <button type="button" class="btn btn-sm btn-primary" id="open-form-btn">
+                                    New Post
+                                </button>
                             {% endif %}
-                        </div>
+                        </div>                       
+
                         {% for post in user_posts %}
                             <div class="col-12 mb-4">
                                 <article class="d-flex border rounded shadow-sm overflow-hidden">
@@ -140,6 +148,45 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal overlay para crear post -->
+    <div class="form-overlay" id="form-overlay" style="display:none;">
+    <div class="form-container">
+        <span class="close-btn" id="close-form-btn">&times;</span>
+        <form method="POST" enctype="multipart/form-data" id="post-create-form" action="{% url 'blog:post_create' %}">
+        {% csrf_token %}
+        <br>
+        <h1>New Post</h1>
+        <div class="mb-3">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            <hr>
+        </div>
+        <label>Title</label>
+        <h2 class="title">{{ form.title }}</h2>
+        <hr>
+        <label>Subtitle</label>
+        <h3 style="text-align:left">{{ form.subtitle }}</h3>
+        <hr>
+        <label>Relevant text</label>
+        <blockquote class="relevant_text"><p>{{ form.relevant_text }}</p></blockquote>                         
+        <hr>
+        <label>Introduction</label>
+        <p class="introduction">{{ form.introduction }}</p>                        
+        <hr>
+        <label>Body Text</label>
+        <p>{{ form.body_text}}</p>
+        <hr>
+        <label>Conclusion</label>
+        <p>{{ form.conclusion}}</p>
+        <div class="mt-3 d-flex flex-column gap-2">
+            <button type="submit" class="btn btn-success">Publish</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>              
+            <button type="button" class="btn btn-danger" id="cancel-form-btn">Cancel</button>
+        </div>
+        </form>
+    </div>
+    </div>
 
     {% include 'sections/services-info.html' %}
 {% endblock %}

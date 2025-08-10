@@ -10,6 +10,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from blog.forms import PostForm
 
 # Create your views here.
 class SignUpView(CreateView):
@@ -46,6 +47,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_owner'] = self.request.user == self.object.user
+        context['form'] = PostForm()
         return context
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

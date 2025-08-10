@@ -2287,3 +2287,40 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+
+.form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(33, 37, 41, 0.8);
+  display: none; /* Oculto por defecto */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+      padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.form-container {
+    position: relative;
+    top: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+}
+

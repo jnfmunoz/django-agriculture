@@ -165,3 +165,26 @@
   });
 
 })();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const openBtn = document.getElementById("open-form-btn");
+  const closeBtn = document.getElementById("close-form-btn");
+  const overlay = document.getElementById("form-overlay");
+
+  openBtn.addEventListener("click", () => {
+    overlay.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Bloquea scroll
+  });
+
+  closeBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+    document.body.style.overflow = ""; // Restaura scroll
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
+});
