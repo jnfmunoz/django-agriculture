@@ -189,26 +189,44 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-document.querySelectorAll('.open-update-form-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const url = button.getAttribute('data-url');
+// document.querySelectorAll('.open-update-form-btn').forEach(button => {
+//     button.addEventListener('click', () => {
+//         const url = button.getAttribute('data-url');
 
+//         fetch(url)
+//             .then(response => response.text())
+//             .then(html => {
+//                 // Insertar el HTML del form en el modal
+//                 document.getElementById('update-form-container').innerHTML = html;
+
+//                 // Mostrar modal
+//                 document.getElementById('update-form-overlay').style.display = 'display';
+
+//                 // Agregar funcionalidad para cerrar el modal
+//                 document.getElementById('close-update-form-btn').onclick = () => {
+//                     document.getElementById('update-form-overlay').style.display = 'none';
+//                 };
+
+//                 // También puedes agregar aquí el cancel button del form si tienes
+//             });
+//     });
+// });
+
+document.addEventListener("click", function(e) {
+    // Abrir update modal
+    if (e.target.closest(".open-update-form-btn")) {
+        let url = e.target.closest(".open-update-form-btn").dataset.url;
         fetch(url)
-            .then(response => response.text())
+            .then(res => res.text())
             .then(html => {
-                // Insertar el HTML del form en el modal
-                document.getElementById('update-form-container').innerHTML = html;
-
-                // Mostrar modal
-                document.getElementById('update-form-overlay').style.display = 'display';
-
-                // Agregar funcionalidad para cerrar el modal
-                document.getElementById('close-update-form-btn').onclick = () => {
-                    document.getElementById('update-form-overlay').style.display = 'none';
-                };
-
-                // También puedes agregar aquí el cancel button del form si tienes
+                document.getElementById("update-form-container").innerHTML = html;
+                document.getElementById("update-form-overlay").style.display = "block";
             });
-    });
+    }
+
+    // Cancelar update
+    if (e.target.closest(".cancel-update-btn") || e.target.id === "close-update-form-btn") {
+        document.getElementById("update-form-overlay").style.display = "none";
+    }
 });
 

@@ -1,3 +1,4 @@
+{% comment %} {% load static %}
 <form method="POST" enctype="multipart/form-data" action="{% url 'blog:post_update' post.pk %}">
     {% csrf_token %}
     {{ form.as_p }}
@@ -13,3 +14,21 @@
         document.getElementById('update-form-overlay').style.display = 'none';
     };
 </script>
+
+<script src="{% static 'core/js/main.js' %}"></script> {% endcomment %}
+
+<div class="form-overlay" id="update-form-overlay" style="display:none;">
+  <div class="form-container">
+    <span class="close-btn" id="close-update-form-btn">&times;</span>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'blog:post_update' post.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-3 d-flex flex-column gap-2">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <button type="button" class="btn btn-danger cancel-update-btn">Cancel</button>
+        </div>
+    </form>
+  </div>
+</div>
+

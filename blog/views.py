@@ -89,26 +89,34 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
 
 
+# class PostUpdateView(UpdateView):
+#     model = Post
+#     form_class = PostForm
+
+#     def get(self, request, *args, **kwargs):
+#         self.object = self.get_object()
+#         form = self.get_form()
+
+#         # Renderizar solo el formulario como fragmento
+#         return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
+
+#     def post(self, request, *args, **kwargs):
+#         self.object = self.get_object()
+#         form = self.get_form()
+
+#         if form.is_valid():
+#             form.save()
+#             return redirect(self.get_success_url())
+#         else:
+#             return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
+
+#     def get_success_url(self):
+#         return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})
+
 class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-
-        # Renderizar solo el formulario como fragmento
-        return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-
-        if form.is_valid():
-            form.save()
-            return redirect(self.get_success_url())
-        else:
-            return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
+    template_name = "blog/partial_post_update_form.html"
 
     def get_success_url(self):
         return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})
