@@ -189,44 +189,154 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// document.querySelectorAll('.open-update-form-btn').forEach(button => {
-//     button.addEventListener('click', () => {
-//         const url = button.getAttribute('data-url');
+/*
+document.addEventListener("DOMContentLoaded", function() {
+  const openUpdateBtns = document.querySelectorAll(".open-update-form-btn");
+  const closeUpdateBtn = document.getElementById("close-update-form-btn");
+  const updateOverlay = document.getElementById("update-form-overlay");
 
-//         fetch(url)
-//             .then(response => response.text())
-//             .then(html => {
-//                 // Insertar el HTML del form en el modal
-//                 document.getElementById('update-form-container').innerHTML = html;
+  openUpdateBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      updateOverlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  });
 
-//                 // Mostrar modal
-//                 document.getElementById('update-form-overlay').style.display = 'display';
+  closeUpdateBtn.addEventListener("click", () => {
+    updateOverlay.style.display = "none";
+    document.body.style.overflow = "";
+  });
 
-//                 // Agregar funcionalidad para cerrar el modal
-//                 document.getElementById('close-update-form-btn').onclick = () => {
-//                     document.getElementById('update-form-overlay').style.display = 'none';
-//                 };
+  updateOverlay.addEventListener("click", (e) => {
+    if (e.target === updateOverlay) {
+      updateOverlay.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
+});
+*/
 
-//                 // También puedes agregar aquí el cancel button del form si tienes
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const updateOverlay = document.getElementById("update-form-overlay");
+//   const updateContent = document.getElementById("update-form-content");
+//   const closeUpdateBtn = document.getElementById("close-update-form-btn");
+
+//   // Abrir modal y cargar el form
+//   document.querySelectorAll(".open-update-form-btn").forEach(btn => {
+//     btn.addEventListener("click", () => {
+//       const url = btn.getAttribute("data-url");
+//       fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+//         .then(res => res.text())
+//         .then(html => {
+//           updateContent.innerHTML = html;
+//           updateOverlay.style.display = "flex";
+//           document.body.style.overflow = "hidden";
+
+//           // Cerrar con el botón "Cancel" dentro del form
+//           const cancelBtn = document.getElementById("cancel-update-btn");
+//           if (cancelBtn) {
+//             cancelBtn.addEventListener("click", () => {
+//               updateOverlay.style.display = "none";
+//               document.body.style.overflow = "";
 //             });
+//           }
+//         });
 //     });
+//   });
+
+//   // Cerrar con la X del modal
+//   closeUpdateBtn.addEventListener("click", () => {
+//     updateOverlay.style.display = "none";
+//     document.body.style.overflow = "";
+//   });
+
+//   // Cerrar haciendo click fuera del form
+//   updateOverlay.addEventListener("click", e => {
+//     if (e.target === updateOverlay) {
+//       updateOverlay.style.display = "none";
+//       document.body.style.overflow = "";
+//     }
+//   });
 // });
 
-document.addEventListener("click", function(e) {
-    // Abrir update modal
-    if (e.target.closest(".open-update-form-btn")) {
-        let url = e.target.closest(".open-update-form-btn").dataset.url;
-        fetch(url)
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById("update-form-container").innerHTML = html;
-                document.getElementById("update-form-overlay").style.display = "block";
-            });
-    }
 
-    // Cancelar update
-    if (e.target.closest(".cancel-update-btn") || e.target.id === "close-update-form-btn") {
-        document.getElementById("update-form-overlay").style.display = "none";
-    }
+
+document.addEventListener("DOMContentLoaded", function() {
+  // ------- CREATE overlay (por si no lo tienes con null-checks) -------
+  const openCreateBtn = document.getElementById("open-form-btn");
+  const createOverlay = document.getElementById("form-overlay");
+  const closeCreateBtn = document.getElementById("close-form-btn");
+
+  if (openCreateBtn && createOverlay) {
+    openCreateBtn.addEventListener("click", () => {
+      createOverlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  }
+  if (closeCreateBtn && createOverlay) {
+    closeCreateBtn.addEventListener("click", () => {
+      createOverlay.style.display = "none";
+      document.body.style.overflow = "";
+    });
+    createOverlay.addEventListener("click", (e) => {
+      if (e.target === createOverlay) {
+        createOverlay.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+  }
+
+  // ------- UPDATE overlay (AJAX) -------
+  const updateOverlay = document.getElementById("update-form-overlay");
+  const updateContent = document.getElementById("update-form-content");
+  const closeUpdateBtn = document.getElementById("close-update-form-btn");
+
+  // Abrir modal y cargar el form por AJAX
+  document.querySelectorAll(".open-update-form-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const url = btn.getAttribute("data-url");
+      if (!updateOverlay || !updateContent || !url) return;
+
+      fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+        .then(res => res.text())
+        .then(html => {
+          updateContent.innerHTML = html;
+          updateOverlay.style.display = "flex";
+          document.body.style.overflow = "hidden";
+
+          // Cerrar con el botón "Cancel" dentro del formulario inyectado
+          const cancelBtn = updateContent.querySelector("#cancel-update-btn");
+          if (cancelBtn) {
+            cancelBtn.addEventListener("click", () => {
+              updateOverlay.style.display = "none";
+              document.body.style.overflow = "";
+            });
+          }
+        })
+        .catch(err => {
+          console.error("Error cargando el formulario de update:", err);
+        });
+    });
+  });
+
+  // Cerrar con la X del modal
+  if (closeUpdateBtn && updateOverlay) {
+    closeUpdateBtn.addEventListener("click", () => {
+      updateOverlay.style.display = "none";
+      document.body.style.overflow = "";
+    });
+  }
+
+  // Cerrar haciendo click fuera del contenido
+  if (updateOverlay) {
+    updateOverlay.addEventListener("click", e => {
+      if (e.target === updateOverlay) {
+        updateOverlay.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+  }
 });
 

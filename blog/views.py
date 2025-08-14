@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -62,6 +63,14 @@ class PostCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
 
+# class PostUpdateView(UpdateView):
+    
+#     model = Post
+#     form_class = PostForm
+#     # template_name = 'blog/post_update_form.html'
+#     def get_success_url(self):
+#         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
+
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     model = Post    
@@ -80,43 +89,59 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return redirect('post-list')
     '''
 
-# class PostUpdateView(UpdateView):
-    
-#     model = Post
-#     form_class = PostForm
-#     # template_name = 'blog/post_update_form.html'
-#     def get_success_url(self):
-#         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
+'''
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = "blog/partials/post_update_form.html"  # Solo el form
 
+    def get(self, request, *args, **kwargs):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            self.object = self.get_object()
+            return render(request, self.template_name, {'form': self.get_form(), 'post': self.object})
+        return super().get(request, *args, **kwargs)
 
-# class PostUpdateView(UpdateView):
-#     model = Post
-#     form_class = PostForm
+    def form_valid(self, form):
+        post = form.save()
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': True})
+        return super().form_valid(form)
 
-#     def get(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         form = self.get_form()
-
-#         # Renderizar solo el formulario como fragmento
-#         return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
-
-#     def post(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         form = self.get_form()
-
-#         if form.is_valid():
-#             form.save()
-#             return redirect(self.get_success_url())
-#         else:
-#             return render(request, 'blog/partial_post_update_form.html', {'form': form, 'post': self.object})
-
-#     def get_success_url(self):
-#         return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})
+    def form_invalid(self, form):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+        return super().form_invalid(form)
+'''
 
 class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
-    template_name = "blog/partial_post_update_form.html"
+    template_name = "blog/partials/post_update_form.html"  # solo el form
 
+    # Definir la URL de éxito para POST normal
     def get_success_url(self):
-        return reverse_lazy('registration:profile_detail', kwargs={'username': self.request.user.username})
+        return reverse_lazy(
+            'registration:profile_detail',
+            kwargs={'username': self.request.user.username}
+        )
+
+    # GET AJAX: devuelve solo el form renderizado
+    def get(self, request, *args, **kwargs):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            self.object = self.get_object()
+            context = {'form': self.get_form(), 'post': self.object}
+            return render(request, self.template_name, context)
+        return super().get(request, *args, **kwargs)
+
+    # POST AJAX: si es válido, devolver JSON; si no, devolver errores
+    def form_valid(self, form):
+        response = super().form_valid(form)  # guarda el form
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': True})
+        return response
+
+    def form_invalid(self, form):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+        return super().form_invalid(form)
+
