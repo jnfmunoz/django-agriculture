@@ -264,7 +264,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  // ------- CREATE overlay (por si no lo tienes con null-checks) -------
   const openCreateBtn = document.getElementById("open-form-btn");
   const createOverlay = document.getElementById("form-overlay");
   const closeCreateBtn = document.getElementById("close-form-btn");
@@ -288,7 +287,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // ------- UPDATE overlay (AJAX) -------
   const updateOverlay = document.getElementById("update-form-overlay");
   const updateContent = document.getElementById("update-form-content");
   const closeUpdateBtn = document.getElementById("close-update-form-btn");

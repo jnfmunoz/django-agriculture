@@ -63,14 +63,6 @@ class PostCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
 
-# class PostUpdateView(UpdateView):
-    
-#     model = Post
-#     form_class = PostForm
-#     # template_name = 'blog/post_update_form.html'
-#     def get_success_url(self):
-#         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
-
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     model = Post    
@@ -82,36 +74,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         
         post = self.get_object()
         return self.request.user == post.author
-
-    '''
-    def handle_no_permission(self):        
-        messages.error(self.request, "No estás autorizado para eliminar este Post.")
-        return redirect('post-list')
-    '''
-
-'''
-class PostUpdateView(UpdateView):
-    model = Post
-    form_class = PostForm
-    template_name = "blog/partials/post_update_form.html"  # Solo el form
-
-    def get(self, request, *args, **kwargs):
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            self.object = self.get_object()
-            return render(request, self.template_name, {'form': self.get_form(), 'post': self.object})
-        return super().get(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        post = form.save()
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': True})
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
-        return super().form_invalid(form)
-'''
 
 class PostUpdateView(UpdateView):
     model = Post
