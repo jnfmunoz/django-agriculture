@@ -19,8 +19,8 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {  
-  /* --background-color: #ffffff; */
-  --background-color: #c7c5c5;
+  --background-color: #ffffff;
+  /* --background-color: #c7c5c5; */
   /* Background color for the entire website, including individual sections */
   --default-color: #212529;
   /* Default color used for the majority of the text content across the entire website */
@@ -2325,6 +2325,14 @@ section,
   cursor: pointer;
 }
 
-body section div{
-  background-color: #ffffff;
+/* body section > div */
+#profile-container,
+#post-list-container,
+#post-list-title-container
+{
+  padding-top: 30px; 
+  padding-bottom: 30px; 
+  background-color: #e6e3e3;
+  border: 1px solid #c7c5c5;
+  border-radius: 12px;  
 }

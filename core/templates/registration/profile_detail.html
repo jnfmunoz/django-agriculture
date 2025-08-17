@@ -6,11 +6,10 @@
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
     
     <section id="profile" class="profile-section">
-        <div class="container">
+        <div class="container" class="profile" id="profile-container">
         <div class="row mt-3">
             <div class="col-md-9 mx-auto mb-5">
-                <br>
-                <br>
+                {% comment %} <br>             {% endcomment %}
                 <!-- Contenedor principal del perfil -->
                 <div class="row align-items-center">
                     <!-- Columna para la imagen -->
@@ -60,7 +59,7 @@
                             <!-- Contenedor para los botones "Update User" y "Update Profile" -->
                             <div class="d-flex flex-column">
                                 {% if is_owner %}
-                                    <!-- Botón de actualización de usuario -->
+                                    {% comment %} <!-- Botón de actualización de usuario -->
                                     <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-info btn-sm mb-2" style="background-color: #6c757d; border-color: #6c757d; color:white;">
                                         Update User
                                     </a>
@@ -68,7 +67,11 @@
                                     <!-- Botón de actualización de perfil -->
                                     <a href="{% url 'registration:profile_update' request.user.username %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652;">
                                         Update Profile
-                                    </a>
+                                    </a> {% endcomment %}
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-secondary" style="background: #059652; border-color: #059652;">Update User</a>
+                                        <a href="" class="btn btn-secondary" >Update Profile</a>
+                                    </div>
                                 {% endif %}
                             </div>
                         </div>
@@ -87,21 +90,27 @@
         </div>
         </div>
     </section>
-        
+            
+    <div class="container" id="post-list-title-container">              
+        {% comment %} <br> {% endcomment %}
+        <h1 class="mb-0">Last Posts</h1>    
+        <hr>
+        <div class="d-flex justify-content-between align-items-center mb-3">              
+        {% comment %} <div class="d-grid gap-2 d-md-flex justify-content-md-end"> {% endcomment %}
+            {% if is_owner %}
+                <button type="button" class="btn btn-primary" id="open-form-btn">
+                    New Post
+                </button>
+            {% endif %}
+        </div>                    
+    </div> 
+
     <section id="blog-posts-3" class="blog-posts-3 section">
-        <div class="container">
+        <div class="container" id="post-list-container">
             <div class="row justify-content-center">
                 <div class="col-md-9">
-                    <div class="row gy-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">Last Posts</h5>
-                            {% if is_owner %}
-                                <button type="button" class="btn btn-sm btn-primary" id="open-form-btn">
-                                    New Post
-                                </button>
-                            {% endif %}
-                        </div>                       
-
+                    <br>
+                    <div class="row gy-4">        
                         {% for post in user_posts %}
                             <div class="col-12 mb-4">
                                 <article class="d-flex border rounded shadow-sm overflow-hidden">
