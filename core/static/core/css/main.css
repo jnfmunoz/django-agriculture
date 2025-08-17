@@ -18,7 +18,7 @@
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root {  
+:root {
   --background-color: #ffffff;
   /* --background-color: #c7c5c5; */
   /* Background color for the entire website, including individual sections */
@@ -2293,7 +2293,8 @@ section,
   position: fixed;
   inset: 0;
   background: rgba(33, 37, 41, 0.8);
-  display: none; /* Oculto por defecto */
+  display: none;
+  /* Oculto por defecto */
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -2308,13 +2309,13 @@ section,
   width: 90%;
   max-width: 600px;
   position: relative;
-      padding-top: 0 !important;
-    margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .form-container {
-    position: relative;
-    top: 0;
+  position: relative;
+  top: 0;
 }
 
 .close-btn {
@@ -2327,12 +2328,24 @@ section,
 
 /* body section > div */
 #profile-container,
-#post-list-container,
-#post-list-title-container
-{
-  padding-top: 30px; 
-  padding-bottom: 30px; 
+#post-list-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
   background-color: #e6e3e3;
   border: 1px solid #c7c5c5;
-  border-radius: 12px;  
+  border-radius: 12px;
+}
+
+#post-list-title-container {
+  padding-top: 30px;
+  padding-bottom: 10px;
+  background-color: #e6e3e3;
+  border: 1px solid #c7c5c5;
+  border-radius: 12px;
+}
+
+#post-list-item {
+  padding: 50px;
+  background-color: #ffffff;
+  border-radius: 12px;
 }

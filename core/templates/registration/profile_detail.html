@@ -91,12 +91,8 @@
         </div>
     </section>
             
-    <div class="container" id="post-list-title-container">              
-        {% comment %} <br> {% endcomment %}
-        <h1 class="mb-0">Last Posts</h1>    
-        <hr>
+    <div class="container" id="post-list-title-container">                      
         <div class="d-flex justify-content-between align-items-center mb-3">              
-        {% comment %} <div class="d-grid gap-2 d-md-flex justify-content-md-end"> {% endcomment %}
             {% if is_owner %}
                 <button type="button" class="btn btn-primary" id="open-form-btn">
                     New Post
@@ -104,16 +100,31 @@
             {% endif %}
         </div>                    
     </div> 
+    <br>
+    <div class="container" id="post-list-title-container">              
+        {% comment %} <br> {% endcomment %}
+        <h1 class="mb-0">Last Posts</h1>    
+        <hr>
+        <!--
+        <div class="d-flex justify-content-between align-items-center mb-3">                      
+            {% if is_owner %}
+                <button type="button" class="btn btn-primary" id="open-form-btn">
+                    New Post
+                </button>
+            {% endif %}
+        </div>                    
+        -->
+    </div> 
 
     <section id="blog-posts-3" class="blog-posts-3 section">
         <div class="container" id="post-list-container">
             <div class="row justify-content-center">
-                <div class="col-md-9">
-                    <br>
+                <div class="col-md-9">                    
                     <div class="row gy-4">        
                         {% for post in user_posts %}
-                            <div class="col-12 mb-4">
-                                <article class="d-flex border rounded shadow-sm overflow-hidden">
+                            <div class="col-12 mb-4" id="post-list-item">
+                                {% comment %} <article class="d-flex rounded shadow-sm overflow-hidden">                                 {% endcomment %}
+                                <article class="d-flex border-0 shadow-sm overflow-hidden">                                
                                     <!-- Imagen pequeña a la izquierda -->
                                     <div class="flex-shrink-0">
                                         <img src="{{ post.image.url }}" alt="" class="img-fluid" style="width: 180px; height: 120px; object-fit: cover;">
