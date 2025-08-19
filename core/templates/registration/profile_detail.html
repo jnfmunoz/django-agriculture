@@ -144,17 +144,20 @@
                                                 type="button" 
                                                 class="btn btn-sm btn-warning open-update-form-btn"     
                                                 data-url="{% url 'blog:post_update' post.pk %}">
-                                                Update <i class="bi bi-pencil-square"></i>
+                                                Update 
+                                                {% comment %} <i class="bi bi-pencil-square"></i> {% endcomment %}
                                             </button>
 
                                             <form method="POST" action="{% url 'blog:post_delete' post.pk %}">
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn btn-sm" style="background-color: #dc3545; border-color: #dc3545; color: white;">
-                                                    Delete <i class="bi bi-trash"></i>
+                                                    Delete 
+                                                    {% comment %} <i class="bi bi-trash"></i> {% endcomment %}
                                                 </button>
                                             </form>
                                             <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-sm" style="background: #059652; border-color: #059652; color: white;">
-                                                Read More <i class="bi bi-arrow-right"></i>
+                                                Read More 
+                                                {% comment %} <i class="bi bi-arrow-right"></i> {% endcomment %}
                                             </a>
                                         </div>
                                         
