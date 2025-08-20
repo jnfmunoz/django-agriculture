@@ -6,125 +6,105 @@
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
     
     <section id="profile" class="profile-section">
-        <div class="container" class="profile" id="profile-container">
-        <div class="row mt-3">
-            <div class="col-md-9 mx-auto mb-5">
-                {% comment %} <br>             {% endcomment %}
-                <!-- Contenedor principal del perfil -->
-                <div class="row align-items-center">
-                    <!-- Columna para la imagen -->
-                    <div class="col-md-3 text-center">
-                        {% if profile.profile_photo %}
-                            <img src="{{ profile.profile_photo.url }}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
-                        {% else %}                            
-                            <img src="{% static 'core/img/registration/no-avatar.jpg' %}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
-                        {% endif %}
-                    </div>
-                    <!-- Columna para la información del perfil -->
-                    <div class="col-md-9">
-                        <h4>{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
-                        {% if profile.occupation %}
-                            <h6>{{ profile.occupation }}</h6>
-                        {% endif %}                            
-                        <h6>{{ profile.user.email }}</h6>
+        <div class="container" id="profile-container">
+            <div class="row mt-3">
+                <div class="col-md-9 mx-auto mb-5">
+                    <!-- Contenedor principal del perfil -->
+                    <div class="row align-items-center">
+                        <!-- Columna para la imagen -->
+                        <div class="col-md-3 text-center">
+                            {% if profile.profile_photo %}
+                                <img src="{{ profile.profile_photo.url }}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
+                            {% else %}                            
+                                <img src="{% static 'core/img/registration/no-avatar.jpg' %}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
+                            {% endif %}
+                        </div>
+                        <!-- Columna para la información del perfil -->
+                        <div class="col-md-9">
+                            <h4>{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
+                            {% if profile.occupation %}
+                                <h6>{{ profile.occupation }}</h6>
+                            {% endif %}                            
+                            <h6>{{ profile.user.email }}</h6>
 
-                        <div class="d-flex align-items-center justify-content-between mt-3">
-                            <!-- Redes sociales -->
-                            <div class="social-links">
-                                {% if profile.facebook %}
-                                    <a href="{{profile.facebook}}" class="btn btn-sm me-2" style="background-color: #1877F2; color: white;">
-                                        <i class="bi bi-facebook"></i>
-                                    </a>
-                                {% endif %}
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <!-- Redes sociales -->
+                                <div class="social-links">
+                                    {% if profile.facebook %}
+                                        <a href="{{profile.facebook}}" class="btn btn-sm me-2" style="background-color: #1877F2; color: white;">
+                                            <i class="bi bi-facebook"></i>
+                                        </a>
+                                    {% endif %}
 
-                                {% if profile.instagram %}
-                                    <a href="{{profile.instagram}}" class="btn btn-sm me-2" style="background-color: #E4405F; color: white;">
-                                        <i class="bi bi-instagram"></i>
-                                    </a>
-                                {% endif %}
+                                    {% if profile.instagram %}
+                                        <a href="{{profile.instagram}}" class="btn btn-sm me-2" style="background-color: #E4405F; color: white;">
+                                            <i class="bi bi-instagram"></i>
+                                        </a>
+                                    {% endif %}
 
-                                {% if profile.linkedin %}                                
-                                    <a href="{{profile.linkedin}}" class="btn btn-outline-info btn-sm me-2">
-                                        <i class="bi bi-linkedin"></i>
-                                    </a>
-                                {% endif %}
-                                
-                                {% if profile.twitter %}                                
-                                    <a href="{{profile.twitter}}" class="btn btn-outline-primary btn-sm me-2">
-                                        <i class="bi bi-twitter-x"></i>
-                                    </a>
-                                {% endif %}
-                            </div>
-
-                            <!-- Contenedor para los botones "Update User" y "Update Profile" -->
-                            <div class="d-flex flex-column">
-                                {% if is_owner %}
-                                    {% comment %} <!-- Botón de actualización de usuario -->
-                                    <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-info btn-sm mb-2" style="background-color: #6c757d; border-color: #6c757d; color:white;">
-                                        Update User
-                                    </a>
+                                    {% if profile.linkedin %}                                
+                                        <a href="{{profile.linkedin}}" class="btn btn-outline-info btn-sm me-2">
+                                            <i class="bi bi-linkedin"></i>
+                                        </a>
+                                    {% endif %}
                                     
-                                    <!-- Botón de actualización de perfil -->
-                                    <a href="{% url 'registration:profile_update' request.user.username %}" class="btn btn-primary btn-sm" style="background: #059652; border-color: #059652;">
-                                        Update Profile
-                                    </a> {% endcomment %}
+                                    {% if profile.twitter %}                                
+                                        <a href="{{profile.twitter}}" class="btn btn-outline-primary btn-sm me-2">
+                                            <i class="bi bi-twitter-x"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Botones de actualización -->
+                                {% if is_owner %}
                                     <div class="d-flex gap-2">
-                                        <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-secondary" style="background: #059652; border-color: #059652;">Update User</a>
-                                        <a href="" class="btn btn-secondary" >Update Profile</a>
+                                        <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-success">
+                                            Update User
+                                        </a>
+                                        <a href="{% url 'registration:profile_update' request.user.username %}" class="btn btn-secondary">
+                                            Update Profile
+                                        </a>
                                     </div>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
-                </div>
-                <hr>
+                    <hr>
 
-                <!-- Espacio adicional para más información -->
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <h5>Biography</h5>
-                        <p>{{profile.bio}}</p>
+                    <!-- Biografía -->
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h5>Biography</h5>
+                            <p>{{ profile.bio }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </section>
             
-    <div class="container" id="post-list-title-container">                      
-        <div class="d-flex justify-content-between align-items-center mb-3">              
-            {% if is_owner %}
-                <button type="button" class="btn btn-primary" id="open-form-btn">
-                    New Post
-                </button>
-            {% endif %}
-        </div>                    
-    </div> 
-    <br>
-    <div class="container" id="post-list-title-container">              
-        {% comment %} <br> {% endcomment %}
-        <h1 class="mb-0">Last Posts</h1>    
-        <hr>
-        <!--
-        <div class="d-flex justify-content-between align-items-center mb-3">                      
-            {% if is_owner %}
-                <button type="button" class="btn btn-primary" id="open-form-btn">
-                    New Post
-                </button>
-            {% endif %}
-        </div>                    
-        -->
-    </div> 
-
+    <!-- Sección de posts -->
     <section id="blog-posts-3" class="blog-posts-3 section">
         <div class="container" id="post-list-container">
             <div class="row justify-content-center">
-                <div class="col-md-9">                    
+                <div class="col-md-9">
+
+                    <!-- Cabecera de la sección (alineada con los posts) -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h1 class="mb-0">Last Posts</h1>
+                        {% if is_owner %}
+                            <button type="button" class="btn btn-primary" id="open-form-btn">
+                                <i class="bi bi-plus-lg"></i> New Post
+                            </button>
+                        {% endif %}
+                    </div>
+                    <hr class="mb-4">
+
+                    <!-- Listado de posts -->
                     <div class="row gy-4">        
                         {% for post in user_posts %}
                             <div class="col-12 mb-4" id="post-list-item">
-                                {% comment %} <article class="d-flex rounded shadow-sm overflow-hidden">                                 {% endcomment %}
-                                <article class="d-flex border-0 shadow-sm overflow-hidden">                                
+                                <article class="d-flex border-0 shadow-sm overflow-hidden rounded">
                                     <!-- Imagen pequeña a la izquierda -->
                                     <div class="flex-shrink-0">
                                         <img src="{{ post.image.url }}" alt="" class="img-fluid" style="width: 180px; height: 120px; object-fit: cover;">
@@ -136,55 +116,60 @@
                                             <h5 class="mb-1">{{ post.title }}</h5>
                                             <div class="text-muted small mb-2">
                                                 <i class="bi bi-calendar-event me-1"></i>                                                
-                                                {{ post.created_at|date:"d F Y" }} &nbsp;
+                                                {{ post.created_at|date:"d F Y" }}
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-end gap-2">
+
+                                        <!-- Botones uniformes -->
+                                        <div class="d-flex flex-wrap gap-2 mt-2">
                                             <button 
                                                 type="button" 
-                                                class="btn btn-sm btn-warning open-update-form-btn"     
+                                                class="btn btn-warning btn-sm flex-fill open-update-form-btn"     
                                                 data-url="{% url 'blog:post_update' post.pk %}">
                                                 Update 
-                                                {% comment %} <i class="bi bi-pencil-square"></i> {% endcomment %}
                                             </button>
 
-                                            <form method="POST" action="{% url 'blog:post_delete' post.pk %}">
+                                            <form method="POST" action="{% url 'blog:post_delete' post.pk %}" class="flex-fill">
                                                 {% csrf_token %}
-                                                <button type="submit" class="btn btn-sm" style="background-color: #dc3545; border-color: #dc3545; color: white;">
+                                                <button 
+                                                    type="submit" 
+                                                    class="btn btn-danger btn-sm w-100">
                                                     Delete 
-                                                    {% comment %} <i class="bi bi-trash"></i> {% endcomment %}
                                                 </button>
                                             </form>
-                                            <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-sm" style="background: #059652; border-color: #059652; color: white;">
+
+                                            <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-success btn-sm flex-fill">
                                                 Read More 
-                                                {% comment %} <i class="bi bi-arrow-right"></i> {% endcomment %}
                                             </a>
                                         </div>
-                                        
                                     </div>
                                 </article>
                             </div>
+                        {% empty %}
+                            <p class="text-center text-muted">No posts available.</p>
                         {% endfor %}
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- Modal overlay para crear post -->
     <div class="form-overlay" id="form-overlay" style="display:none;">
-    <div class="form-container">
-        <span class="close-btn" id="close-form-btn">&times;</span>
-        {% include '../blog/partials/post_create_form.html' %}
-    </div>
+        <div class="form-container">
+            <span class="close-btn" id="close-form-btn">&times;</span>
+            {% include '../blog/partials/post_create_form.html' %}
+        </div>
     </div> <!-- End modal overlay para crear post -->
     
     <!-- Modal overlay para actualizar post -->
     <div class="form-overlay" id="update-form-overlay" style="display:none;">
-    <div class="form-container">
-        <span class="close-btn" id="close-update-form-btn">&times;</span>
-        <div id="update-form-content"></div>
-    </div>
+        <div class="form-container">
+            <span class="close-btn" id="close-update-form-btn">&times;</span>
+            <div id="update-form-content"></div>
+        </div>
     </div> <!-- End modal overlay para actualizar post -->
 
     {% include 'sections/services-info.html' %}

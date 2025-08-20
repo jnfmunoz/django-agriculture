@@ -2349,3 +2349,7 @@ section,
   background-color: #ffffff;
   border-radius: 12px;
 }
+
+.section {
+  margin-top: 20px;
+}
