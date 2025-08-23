@@ -6,14 +6,15 @@
 {% block content %}
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Update" %}
 
-    <section id="profile" class="profile section">
-        <div class="container">
-            <div class="row mt-3">
-                <div class="col-md-9 mx-auto mb-5">
-                {% comment %} <div class="container"> {% endcomment %}
-                    <form action="" method="post" enctype="multipart/form-data" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <section id="update-profile" class="update profile section"> 
+        <div class="container" id="login-container">
+            <div class="row justify-content-center mt-3">
+                {% comment %} <div class="col-md-6 col-lg-5 mb-5"> {% endcomment %}
+                <div class="col-md-9 mx-auto mb-5">                    
+                    <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <h3 class="mb-4" style="text-align:center">Profile</h3>
+                        <h1 class="mb-4 text-center">Update Profile</h1>
+                        <hr class="mb-4">
                         <div class="row">
                             <!-- Previa del profile -->
                             <div class="col-md-3">
@@ -74,11 +75,12 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </section>
+
+
     {% include 'sections/services-info.html' %}
 
 {% endblock %}
