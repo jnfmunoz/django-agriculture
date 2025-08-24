@@ -5,7 +5,7 @@
 {% block content %}
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
     
-    <section id="profile" class="profile-section">
+    <section>
         <div class="container" id="profile-container">
             <div class="row mt-3">
                 <div class="col-md-9 mx-auto mb-5">
@@ -84,7 +84,7 @@
     </section>
             
     <!-- Sección de posts -->
-    {% comment %} <section id="blog-posts-3" class="blog-posts-3 section"> {% endcomment %}
+    <section id="blog-posts-3" class="blog-posts-3 section">
         <div class="container" id="post-list-container">
             <div class="row justify-content-center">
                 <div class="col-md-9">
@@ -156,8 +156,9 @@
                 </div>
             </div>
         </div>
-    {% comment %} </section> {% endcomment %}
+    </section>
 
+    {% include 'sections/services-info.html' %}
 
     <!-- Modal overlay para crear post -->
     <div class="form-overlay" id="form-overlay" style="display:none;">
@@ -174,6 +175,4 @@
             <div id="update-form-content"></div>
         </div>
     </div> <!-- End modal overlay para actualizar post -->
-
-    {% include 'sections/services-info.html' %}
 {% endblock %}

@@ -12,13 +12,13 @@
         .errorlist{color:red}
     </style>
     
-    <section id="signup" class="signup section"> 
+    <section> 
         <div class="container" id="login-container">
             <div class="row justify-content-center mt-3">
                 <div class="col-md-6 col-lg-5 mb-5">
                     <form method="post">
                         {% csrf_token %}
-                        <h1 class="mb-4 text-center">Login</h1>
+                        <h1 class="mb-4 text-center">Your credentials here:</h1>
                         <hr class="mb-4">
                         <div class="form-group">
                             <label for="{{ form.username.id_for_label }}" class="mt-3" style="display: block; color: black;">Username</label>
@@ -44,5 +44,4 @@
     </section>
 
     {% include 'sections/services-info.html' %}
-
 {% endblock %}

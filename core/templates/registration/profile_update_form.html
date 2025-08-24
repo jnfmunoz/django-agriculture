@@ -6,8 +6,8 @@
 {% block content %}
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Update" %}
 
-    <section id="update-profile" class="update profile section"> 
-        <div class="container" id="login-container">
+    <section> 
+        <div class="container" id="profile-container">
             <div class="row justify-content-center mt-3">
                 {% comment %} <div class="col-md-6 col-lg-5 mb-5"> {% endcomment %}
                 <div class="col-md-9 mx-auto mb-5">                    
@@ -80,7 +80,5 @@
         </div>
     </section>
 
-
     {% include 'sections/services-info.html' %}
-
 {% endblock %}

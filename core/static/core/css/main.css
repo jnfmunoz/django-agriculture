@@ -2326,9 +2326,9 @@ section,
   cursor: pointer;
 }
 
+#login-container,
 #profile-container,
-#post-list-container,
-#login-container{
+#post-list-container {
   padding-top: 50px;
   padding-bottom: 50px;
   /* background-color: #e6e3e3; */
