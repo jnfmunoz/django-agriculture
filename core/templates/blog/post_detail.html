@@ -3,15 +3,13 @@
 {% load static %}
 
 {% block content %}
-{% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Post" %}
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8">
-      {% comment %} <section id="post-detail" class="post-detail section"> {% endcomment %}
+  {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Post" %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
         <section id="blog-details" class="blog-details section">
           <div class="container">
             <article class="article">
-
               <div class="post-img">
                 <img src="{{ post.image.url }}" alt="" class="img-fluid">
               </div>
@@ -47,153 +45,107 @@
                   <li><a href="#">Marketing</a></li>
                 </ul>
               </div><!-- End meta bottom -->
-
             </article>
           </div>
-        </section><!-- /Blog Details Section -->
+        </section>
 
-                  <!-- Blog Comments Section -->
-          <section id="blog-comments" class="blog-comments section">
+        <!-- Blog Comments Section -->
+        <section id="blog-comments" class="blog-comments section">
+          <div class="container">
 
-            <div class="container">
+            <h4 class="comments-count">8 Comments</h4>
 
-              <h4 class="comments-count">8 Comments</h4>
+            <div id="comment-1" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+                <div>
+                  <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                  <time datetime="2020-01-01">01 Jan,2022</time>
+                  <p>
+                    Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.
+                    Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
+                  </p>
+                </div>
+              </div>
+            </div><!-- End comment #1 -->
 
-              <div id="comment-1" class="comment">
+            <div id="comment-2" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="assets/img/blog/comments-2.jpg" alt=""></div>
+                <div>
+                  <h5><a href="">Aron Alvarado</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                  <time datetime="2020-01-01">01 Jan,2022</time>
+                  <p>
+                    Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe. Officiis illo ut beatae.
+                  </p>
+                </div>
+              </div>
+
+              <div id="comment-reply-1" class="comment comment-reply">
                 <div class="d-flex">
-                  <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+                  <div class="comment-img"><img src="assets/img/blog/comments-3.jpg" alt=""></div>
                   <div>
-                    <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                    <h5><a href="">Lynda Small</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
                     <time datetime="2020-01-01">01 Jan,2022</time>
                     <p>
-                      Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.
-                      Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
+                      Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam aspernatur ut vitae quia mollitia id non. Qui ad quas nostrum rerum sed necessitatibus aut est. Eum officiis sed repellat maxime vero nisi natus. Amet nesciunt nesciunt qui illum omnis est et dolor recusandae.
+
+                      Recusandae sit ad aut impedit et. Ipsa labore dolor impedit et natus in porro aut. Magnam qui cum. Illo similique occaecati nihil modi eligendi. Pariatur distinctio labore omnis incidunt et illum. Expedita et dignissimos distinctio laborum minima fugiat.
+
+                      Libero corporis qui. Nam illo odio beatae enim ducimus. Harum reiciendis error dolorum non autem quisquam vero rerum neque.
                     </p>
                   </div>
                 </div>
-              </div><!-- End comment #1 -->
 
-              <div id="comment-2" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="assets/img/blog/comments-2.jpg" alt=""></div>
-                  <div>
-                    <h5><a href="">Aron Alvarado</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">01 Jan,2022</time>
-                    <p>
-                      Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe. Officiis illo ut beatae.
-                    </p>
-                  </div>
-                </div>
-
-                <div id="comment-reply-1" class="comment comment-reply">
+                <div id="comment-reply-2" class="comment comment-reply">
                   <div class="d-flex">
-                    <div class="comment-img"><img src="assets/img/blog/comments-3.jpg" alt=""></div>
+                    <div class="comment-img"><img src="assets/img/blog/comments-4.jpg" alt=""></div>
                     <div>
-                      <h5><a href="">Lynda Small</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                      <h5><a href="">Sianna Ramsay</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
                       <time datetime="2020-01-01">01 Jan,2022</time>
                       <p>
-                        Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam aspernatur ut vitae quia mollitia id non. Qui ad quas nostrum rerum sed necessitatibus aut est. Eum officiis sed repellat maxime vero nisi natus. Amet nesciunt nesciunt qui illum omnis est et dolor recusandae.
-
-                        Recusandae sit ad aut impedit et. Ipsa labore dolor impedit et natus in porro aut. Magnam qui cum. Illo similique occaecati nihil modi eligendi. Pariatur distinctio labore omnis incidunt et illum. Expedita et dignissimos distinctio laborum minima fugiat.
-
-                        Libero corporis qui. Nam illo odio beatae enim ducimus. Harum reiciendis error dolorum non autem quisquam vero rerum neque.
+                        Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia dolores cupiditate et. Ut unde qui eligendi sapiente omnis ullam. Placeat porro est commodi est officiis voluptas repellat quisquam possimus. Perferendis id consectetur necessitatibus.
                       </p>
                     </div>
                   </div>
 
-                  <div id="comment-reply-2" class="comment comment-reply">
-                    <div class="d-flex">
-                      <div class="comment-img"><img src="assets/img/blog/comments-4.jpg" alt=""></div>
-                      <div>
-                        <h5><a href="">Sianna Ramsay</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                        <time datetime="2020-01-01">01 Jan,2022</time>
-                        <p>
-                          Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia dolores cupiditate et. Ut unde qui eligendi sapiente omnis ullam. Placeat porro est commodi est officiis voluptas repellat quisquam possimus. Perferendis id consectetur necessitatibus.
-                        </p>
-                      </div>
-                    </div>
+                </div><!-- End comment reply #2-->
 
-                  </div><!-- End comment reply #2-->
+              </div><!-- End comment reply #1-->
 
-                </div><!-- End comment reply #1-->
+            </div><!-- End comment #2-->
 
-              </div><!-- End comment #2-->
-
-              <div id="comment-3" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="assets/img/blog/comments-5.jpg" alt=""></div>
-                  <div>
-                    <h5><a href="">Nolan Davidson</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">01 Jan,2022</time>
-                    <p>
-                      Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem aspernatur aut quam ut. Voluptatem est accusamus iste at.
-                      Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea est consequuntur officia beatae ea aut eos soluta. Non qui dolorum voluptatibus et optio veniam. Quam officia sit nostrum dolorem.
-                    </p>
-                  </div>
+            <div id="comment-3" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="assets/img/blog/comments-5.jpg" alt=""></div>
+                <div>
+                  <h5><a href="">Nolan Davidson</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                  <time datetime="2020-01-01">01 Jan,2022</time>
+                  <p>
+                    Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem aspernatur aut quam ut. Voluptatem est accusamus iste at.
+                    Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea est consequuntur officia beatae ea aut eos soluta. Non qui dolorum voluptatibus et optio veniam. Quam officia sit nostrum dolorem.
+                  </p>
                 </div>
-
-              </div><!-- End comment #3 -->
-
-              <div id="comment-4" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="assets/img/blog/comments-6.jpg" alt=""></div>
-                  <div>
-                    <h5><a href="">Kay Duggan</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">01 Jan,2022</time>
-                    <p>
-                      Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in fugiat.
-                    </p>
-                  </div>
-                </div>
-
-              </div><!-- End comment #4 -->
-
-            </div>
-
-          </section><!-- /Blog Comments Section -->
-
-    </div>
-
-    <div class="col-lg-4 sidebar">
-      <div class="widgets-container">
-
-        <!-- Blog Author Widget -->
-        <div class="blog-author-widget widget-item">
-
-          <div class="d-flex flex-column align-items-center">
-            <div class="d-flex align-items-center w-100">
-              <img src="{{ post.author.profile.profile_photo.url }}" class="rounded-circle flex-shrink-0" alt="">
-              <div>
-                <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-                <div class="social-links">
-                  <h6>{{ post.author.profile.occupation }}</h6>
-                  <h6>{{ post.author.email }}</h6>
-                  {% if post.author.profile.facebook %}
-                  <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
-                  {% endif %}
-                  {% if post.author.profile.instagram %}
-                  <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                  {% endif %}
-                  {% if post.author.profile.linkedin %}
-                  <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                  {% endif %}
-                  {% if post.author.profile.twitter %}
-                  <a href="https://instagram.com/#"><i class="biu bi-linkedin"></i></a>
-                  {% endif %}
-                </div>
-
               </div>
-            </div>
-            <p>
-              {{ post.author.profile.bio }}
-            </p>
+
+            </div><!-- End comment #3 -->
+
+            <div id="comment-4" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="assets/img/blog/comments-6.jpg" alt=""></div>
+                <div>
+                  <h5><a href="">Kay Duggan</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                  <time datetime="2020-01-01">01 Jan,2022</time>
+                  <p>
+                    Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in fugiat.
+                  </p>
+                </div>
+              </div>
+
+            </div><!-- End comment #4 -->
+
           </div>
 
-        </div><!--/Blog Author Widget -->
-
-      </div>
-    </div>
-  </div>
-</div>
-
+        </section>
+  {% include 'sections/services-info.html' %} 
 {% endblock %}
