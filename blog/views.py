@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import Post
+from comments.models import Comment
 from .forms import PostForm
 
 # Create your views here.
@@ -25,7 +26,8 @@ class PostListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        # Lista de comentarios del post
+        context['comments'] = Comment.objects.filter(post=self.object).order_by('-created_at')
         return context
 
 class PostDetailView(DetailView):
@@ -33,6 +35,12 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "blog/post_detail.html"
     context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=self.object).order_by('-created')
+        return context
+
 
     def get_queryset(self):
         queryset = super().get_queryset()

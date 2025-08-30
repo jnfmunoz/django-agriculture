@@ -70,134 +70,37 @@
         <!-- /Blog Details Section -->
 
         <!-- Blog Comments Section -->
-        <section id="blog-comments" class="blog-comments section">
-          <h4 class="comments-count">8 Comments</h4>
+        <section id="blog-comments" class="blog-comments section">          
+          <h4 class="comments-count">
+              {{ comments.count }} 
+              {% if comments.count == 1 %}
+                  Comment
+              {% else %}
+                  Comments
+              {% endif %}
+          </h4>
 
-          <!-- Comment #1 -->
-          <div id="comment-1" class="comment">
+          {% for comment in comments %}
+          <div id="comment-{{ forloop.counter }}" class="comment">
             <div class="d-flex">
               <div class="comment-img">
-                <img src="{% static 'assets/img/blog/comments-1.jpg' %}" alt="">
+                <img src="{{ comment.author.profile.profile_photo.url }}" alt="">
               </div>
               <div>
                 <h5>
-                  <a href="">Georgia Reader</a>
+                  <a href="">{{ comment.author.get_full_name|default:comment.author.username }}</a>
                   <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
                 </h5>
-                <time datetime="2020-01-01">01 Jan, 2022</time>
-                <p>
-                  Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.
-                  Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-                </p>
+                <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:"M j, Y" }}</time>
+                <p>{{ comment.content }}</p>
               </div>
             </div>
           </div>
-          <!-- End comment #1 -->
-
-          <!-- Comment #2 with replies -->
-          <div id="comment-2" class="comment">
-            <div class="d-flex">
-              <div class="comment-img">
-                <img src="{% static 'assets/img/blog/comments-2.jpg' %}" alt="">
-              </div>
-              <div>
-                <h5>
-                  <a href="">Aron Alvarado</a>
-                  <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-                </h5>
-                <time datetime="2020-01-01">01 Jan, 2022</time>
-                <p>
-                  Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe. Officiis illo ut beatae.
-                </p>
-              </div>
-            </div>
-
-            <!-- Reply #1 -->
-            <div id="comment-reply-1" class="comment comment-reply">
-              <div class="d-flex">
-                <div class="comment-img">
-                  <img src="{% static 'assets/img/blog/comments-3.jpg' %}" alt="">
-                </div>
-                <div>
-                  <h5>
-                    <a href="">Lynda Small</a>
-                    <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-                  </h5>
-                  <time datetime="2020-01-01">01 Jan, 2022</time>
-                  <p>
-                    Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam aspernatur ut vitae quia mollitia id non.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Reply #2 -->
-              <div id="comment-reply-2" class="comment comment-reply">
-                <div class="d-flex">
-                  <div class="comment-img">
-                    <img src="{% static 'assets/img/blog/comments-4.jpg' %}" alt="">
-                  </div>
-                  <div>
-                    <h5>
-                      <a href="">Sianna Ramsay</a>
-                      <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-                    </h5>
-                    <time datetime="2020-01-01">01 Jan, 2022</time>
-                    <p>
-                      Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia dolores cupiditate et.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- End reply #2 -->
-
-            </div>
-            <!-- End reply #1 -->
-          </div>
-          <!-- End comment #2 -->
-
-          <!-- Comment #3 -->
-          <div id="comment-3" class="comment">
-            <div class="d-flex">
-              <div class="comment-img">
-                <img src="{% static 'assets/img/blog/comments-5.jpg' %}" alt="">
-              </div>
-              <div>
-                <h5>
-                  <a href="">Nolan Davidson</a>
-                  <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-                </h5>
-                <time datetime="2020-01-01">01 Jan, 2022</time>
-                <p>
-                  Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia nihil ut accusantium tempore.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End comment #3 -->
-
-          <!-- Comment #4 -->
-          <div id="comment-4" class="comment">
-            <div class="d-flex">
-              <div class="comment-img">
-                <img src="{% static 'assets/img/blog/comments-6.jpg' %}" alt="">
-              </div>
-              <div>
-                <h5>
-                  <a href="">Kay Duggan</a>
-                  <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-                </h5>
-                <time datetime="2020-01-01">01 Jan, 2022</time>
-                <p>
-                  Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit tempore.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End comment #4 -->
-
+          {% empty %}
+            <p>No comments yet.</p>
+          {% endfor %}
         </section>
-        <!-- /Blog Comments Section -->
-
+          <!-- End comment #1 -->
       </div>
       <!-- End col-lg-8 -->
 
