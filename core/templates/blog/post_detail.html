@@ -70,37 +70,42 @@
         <!-- /Blog Details Section -->
 
         <!-- Blog Comments Section -->
-        <section id="blog-comments" class="blog-comments section">          
-          <h4 class="comments-count">
-              {{ comments.count }} 
-              {% if comments.count == 1 %}
-                  Comment
-              {% else %}
-                  Comments
-              {% endif %}
-          </h4>
+        <section id="blog-comments" class="blog-comments section">
 
-          {% for comment in comments %}
-          <div id="comment-{{ forloop.counter }}" class="comment">
-            <div class="d-flex">
-              <div class="comment-img">
-                <img src="{{ comment.author.profile.profile_photo.url }}" alt="">
+            <div class="container">
+
+              <h4 class="comments-count">
+                {{ comments.count }} 
+                {% if comments.count == 1 %}
+                    Comment
+                {% else %}
+                    Comments
+                {% endif %}
+              </h4>
+              
+              {% for comment in comments %}
+              <div id="comment-1" class="comment">
+                <div class="d-flex">
+                  <div class="comment-img">
+                    <img src="{{ comment.author.profile.profile_photo.url }}" alt=""> 
+                  </div>
+                  <div>
+                    <h5><a href="">{{ comment.author.get_full_name|default:comment.author.username }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                    <time datetime="2020-01-01">{{ comment.created|date:"M j, Y" }}</time>
+                    <p>
+                      {{ comment.content }}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h5>
-                  <a href="">{{ comment.author.get_full_name|default:comment.author.username }}</a>
-                  <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-                </h5>
-                <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:"M j, Y" }}</time>
-                <p>{{ comment.content }}</p>
-              </div>
-            </div>
-          </div>
-          {% empty %}
-            <p>No comments yet.</p>
-          {% endfor %}
+              {% endfor %}
+
+
+              {% comment %} agregar caja de comentarios y respuestas {% endcomment %}
+              {% comment %} considerar testimonials como recopilacion de una entrevista o en presencial o quizas crear una vista {% endcomment %}
+
         </section>
-          <!-- End comment #1 -->
+          
       </div>
       <!-- End col-lg-8 -->
 

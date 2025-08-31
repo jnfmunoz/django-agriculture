@@ -19,26 +19,36 @@ class PostListView(ListView):
     ordering = ["created_at"]
     paginate_by = 6
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        # print(queryset)  
-        return queryset
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     # print(queryset)  
+    #     return queryset
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Lista de comentarios del post
-        context['comments'] = Comment.objects.filter(post=self.object).order_by('-created_at')
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # Lista de comentarios del post
+    #     context['comments'] = Comment.objects.filter(post=self.object).order_by('-created_at')
+    #     return context
+
+# class PostDetailView(DetailView):
+    
+#     model = Post
+#     template_name = "blog/post_detail.html"
+#     context_object_name = 'post'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['comments'] = Comment.objects.filter(post=self.object).order_by('-created')
+#         return context
 
 class PostDetailView(DetailView):
-    
     model = Post
     template_name = "blog/post_detail.html"
-    context_object_name = 'post'
+    context_object_name = "post"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(post=self.object).order_by('-created')
+        context['comments'] = Comment.objects.filter(post=self.object).order_by('-created_at')
         return context
 
 
