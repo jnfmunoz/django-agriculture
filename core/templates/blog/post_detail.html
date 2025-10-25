@@ -4,74 +4,69 @@
 
 {% block content %}
   {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Post" %}
+  
+  <section>
+    <div class="container" id="post-detail-container">
+      <div class="row mt-3">
 
-  <div class="container">
-    <div class="row">
-      
-      <!-- Blog Content Column -->
-      <div class="col-lg-8">
-        
-        <!-- Blog Details Section -->
-        <section id="blog-details" class="blog-details section">
-          <article class="article">
+        <!-- Blog Content Column -->
+        <div class="col-lg-8">
+          
+          <!-- Blog Details Section -->
+          <section id="blog-details" class="blog-details section">
+            <article class="article">
 
-            <!-- Post Image -->
-            <div class="post-img">
-              <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
-            </div>
+              <!-- Post Image -->
+              <div class="post-img">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+              </div>
 
-            <!-- Post Title -->
-            <h2 class="title">{{ post.title }}</h2>
+              <!-- Post Title -->
+              <h2 class="title">{{ post.title }}</h2>
 
-            <!-- Post Meta -->
-            <div class="meta-top">
-              <ul>
-                <li class="d-flex align-items-center">
-                  <i class="bi bi-person"></i>
-                  <a href="#">{{ user.first_name }} {{ user.last_name }}</a>
-                </li>
-                <li class="d-flex align-items-center">
-                  <i class="bi bi-clock"></i>
-                  <a href="#">
-                    <time datetime="{{ post.updated_at|date:'Y-m-d' }}">
-                      {{ post.updated_at|date:"M j, Y" }}
-                    </time>
-                  </a>
-                </li>
-                {# <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i><a href="#">12 Comments</a></li> #}
-              </ul>
-            </div>
-            <!-- End meta top -->
+              <!-- Post Meta -->
+              <div class="meta-top">
+                <ul>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-person"></i>
+                    <a href="#">{{ user.first_name }} {{ user.last_name }}</a>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-clock"></i>
+                    <a href="#">
+                      <time datetime="{{ post.updated_at|date:'Y-m-d' }}">
+                        {{ post.updated_at|date:"M j, Y" }}
+                      </time>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            <!-- Post Content -->
-            <div class="content">
-              {{ post.formatted_content|safe }}
-            </div>
-            <!-- End post content -->
+              <!-- Post Content -->
+              <div class="content">
+                {{ post.formatted_content|safe }}
+              </div>
 
-            <!-- Post Categories and Tags -->
-            <div class="meta-bottom">
-              <i class="bi bi-folder"></i>
-              <ul class="cats">
-                <li><a href="#">Business</a></li>
-              </ul>
+              <!-- Post Categories and Tags -->
+              <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a href="#">Business</a></li>
+                </ul>
 
-              <i class="bi bi-tags"></i>
-              <ul class="tags">
-                <li><a href="#">Creative</a></li>
-                <li><a href="#">Tips</a></li>
-                <li><a href="#">Marketing</a></li>
-              </ul>
-            </div>
-            <!-- End meta bottom -->
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li><a href="#">Creative</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li>
+                </ul>
+              </div>
 
-          </article>
-        </section>
-        <!-- /Blog Details Section -->
+            </article>
+          </section>
 
-        <!-- Blog Comments Section -->
-        <section id="blog-comments" class="blog-comments section">
-
+          <!-- Blog Comments Section -->
+          <section id="blog-comments" class="blog-comments section mt-5">
             <div class="container">
 
               <h4 class="comments-count">
@@ -84,71 +79,92 @@
               </h4>
               
               {% for comment in comments %}
-              <div id="comment-1" class="comment">
+              <div class="comment mb-4">
                 <div class="d-flex">
                   <div class="comment-img">
                     <img src="{{ comment.author.profile.profile_photo.url }}" alt=""> 
                   </div>
                   <div>
-                    <h5><a href="">{{ comment.author.get_full_name|default:comment.author.username }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">{{ comment.created|date:"M j, Y" }}</time>
-                    <p>
-                      {{ comment.content }}
-                    </p>
+                    <h5>
+                      <a href="#">{{ comment.author.get_full_name|default:comment.author.username }}</a>
+                    </h5>
+                    <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:"M j, Y" }}</time>
+                    <p>{{ comment.content }}</p>
                   </div>
                 </div>
               </div>
+              {% empty %}
+                <p>No comments yet. Be the first to comment!</p>
               {% endfor %}
 
-
-              {% comment %} agregar caja de comentarios y respuestas {% endcomment %}
-              {% comment %} considerar testimonials como recopilacion de una entrevista o en presencial o quizas crear una vista {% endcomment %}
-
-        </section>
-          
-      </div>
-      <!-- End col-lg-8 -->
-
-      <!-- Sidebar Column -->
-      <div class="col-lg-4 sidebar">
-        <div class="widgets-container">
-
-          <!-- Blog Author Widget -->
-          <div class="blog-author-widget widget-item">
-            <div class="d-flex flex-column align-items-center">
-              <div class="d-flex align-items-center w-100">
-                <img src="{{ post.author.profile.profile_photo.url }}" class="rounded-circle flex-shrink-0" alt="">
-                <div>
-                  <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-                  <div class="social-links">
-                    <h6>{{ post.author.profile.occupation }}</h6>
-                    <h6>{{ post.author.email }}</h6>
-                    {% if post.author.profile.facebook %}
-                    <a href="{{ post.author.profile.facebook }}"><i class="bi bi-facebook"></i></a>
-                    {% endif %}
-                    {% if post.author.profile.instagram %}
-                    <a href="{{ post.author.profile.instagram }}"><i class="bi bi-instagram"></i></a>
-                    {% endif %}
-                    {% if post.author.profile.linkedin %}
-                    <a href="{{ post.author.profile.linkedin }}"><i class="bi bi-linkedin"></i></a>
-                    {% endif %}
-                    {% if post.author.profile.twitter %}
-                    <a href="{{ post.author.profile.twitter }}"><i class="bi bi-twitter-x"></i></a>
-                    {% endif %}
+              <!-- Comment Form -->
+              {% if user.is_authenticated %}
+              <div class="comment-form mt-5">
+                <h4>Leave a Comment</h4>
+                {% if error %}
+                <p class="text-danger">{{ error }}</p>
+                {% endif %}
+                <form method="post">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <textarea name="content" class="form-control" rows="4" placeholder="Write your comment"></textarea>
                   </div>
-                </div>
+                  <button type="submit" class="btn btn-primary" style="background:#116530; border-color:#116530;">Post Comment</button>
+                  <button  class="btn btn-secondary">Reset</button>
+                </form>
               </div>
-              <p>{{ post.author.profile.bio }}</p>
+              {% else %}
+              <p class="mt-4">You must <a href="{% url 'login' %}">log in</a> to leave a comment.</p>
+              {% endif %}
+              <!-- Comment Form -->
+
             </div>
-          </div>
-          <!-- /Blog Author Widget -->
+          </section>
 
         </div>
-      </div>
-      <!-- End Sidebar -->
+        <!-- End col-lg-8 -->
 
+        <!-- Sidebar Column -->
+        <div class="col-lg-4 sidebar">
+          <div class="widgets-container">
+
+            <!-- Blog Author Widget -->
+            <div class="blog-author-widget widget-item">
+              <div class="d-flex flex-column align-items-center">
+                <div class="d-flex align-items-center w-100">
+                  <img src="{{ post.author.profile.profile_photo.url }}" class="rounded-circle flex-shrink-0" alt="">
+                  <div>
+                    <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
+                    <div class="social-links">
+                      <h6>{{ post.author.profile.occupation }}</h6>
+                      <h6>{{ post.author.email }}</h6>
+                      {% if post.author.profile.facebook %}
+                      <a href="{{ post.author.profile.facebook }}"><i class="bi bi-facebook"></i></a>
+                      {% endif %}
+                      {% if post.author.profile.instagram %}
+                      <a href="{{ post.author.profile.instagram }}"><i class="bi bi-instagram"></i></a>
+                      {% endif %}
+                      {% if post.author.profile.linkedin %}
+                      <a href="{{ post.author.profile.linkedin }}"><i class="bi bi-linkedin"></i></a>
+                      {% endif %}
+                      {% if post.author.profile.twitter %}
+                      <a href="{{ post.author.profile.twitter }}"><i class="bi bi-twitter-x"></i></a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <p>{{ post.author.profile.bio }}</p>
+              </div>
+            </div>
+            <!-- /Blog Author Widget -->
+
+          </div>
+        </div>
+        <!-- End Sidebar -->
+
+      </div>
     </div>
-  </div>
+  </section>
 
   {% include 'sections/services-info.html' %}
 

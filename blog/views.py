@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from .models import Post
 from comments.models import Comment
 from .forms import PostForm
+from comments.forms import CommentForm
 
 # Create your views here.
 class PostListView(ListView):
@@ -49,8 +50,22 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(post=self.object).order_by('-created_at')
+        context['form'] = CommentForm()  # <-- ESTA LÍNEA ES LA CLAVE
         return context
 
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = self.object
+            comment.author = request.user
+            comment.save()
+            return redirect("blog:post_detail", pk=self.object.pk)
+        context = self.get_context_data()
+        context["form"] = form
+        return self.render_to_response(context)
 
     def get_queryset(self):
         queryset = super().get_queryset()
