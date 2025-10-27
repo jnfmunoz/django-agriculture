@@ -65,60 +65,89 @@
             </article>
           </section>
 
-<!-- Blog Comments Section -->
-<section id="blog-comments" class="blog-comments section">
-  <div class="container">
+          <!-- Blog Comments Section -->
+          <section id="blog-comments" class="blog-comments section mt-5">
+            <div class="container">
 
-    <h4 class="comments-count">
-      {{ comments.count }} 
-      {% if comments.count == 1 %}Comment{% else %}Comments{% endif %}
-    </h4>
+              <h4 class="comments-count">
+                {{ comments.count }} 
+                {% if comments.count == 1 %}
+                    Comment
+                {% else %}
+                    Comments
+                {% endif %}
+              </h4>
+              
+              {% for comment in comments %}
+              <div class="comment mb-4">
+                <div class="d-flex">
+                  <div class="comment-img">
+                    <img src="{{ comment.author.profile.profile_photo.url }}" alt=""> 
+                  </div>
+                  <div>
+                    <h5>
+                      <a href="#">{{ comment.author.get_full_name|default:comment.author.username }}</a>
+                    </h5>
+                    <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:"M j, Y" }}</time>
+                    <p>{{ comment.content }}</p>
+                  </div>
+                </div>
+              </div>
+              {% empty %}
+                <p>No comments yet. Be the first to comment!</p>
+              {% endfor %}
 
-    <!-- Contenedor de comentarios -->
-    <div id="comments-section">
-      {% for comment in comments %}
-      <div class="comment mb-4">
-        <div class="d-flex">
-          <div class="comment-img">
-            <img src="{{ comment.author.profile.profile_photo.url }}" alt=""> 
-          </div>
-          <div>
-            <h5>
-              <a href="#">{{ comment.author.get_full_name|default:comment.author.username }}</a>
-              <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-            </h5>
-            <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:"M j, Y" }}</time>
-            <p>{{ comment.content }}</p>
-          </div>
-        </div>
-      </div>
-      {% empty %}
-        <p>No comments yet. Be the first to comment!</p>
-      {% endfor %}
-    </div>
+              <!-- Caja de comentarios -->
+              {% if user.is_authenticated %}
+              <div class="comment-form mt-5">
+                <h3>Leave a Comment</h3>
 
-    <!-- Caja de comentarios -->
-    {% if user.is_authenticated %}
-    <div class="comment-form mt-5">
-      <h4>Leave a Comment</h4>
-      <form id="commentForm" method="post" action="">
-        {% csrf_token %}
-        <div class="mb-3">
-          <textarea name="content" rows="4" class="form-control" placeholder="Write your comment..." required></textarea>
-        </div>
-        <div class="d-flex gap-2">
-          <button type="submit" class="btn comment-btn">Post Comment</button>
-          <button type="reset" class="btn btn-secondary">Reset</button>
-        </div>
-      </form>
-    </div>
-    {% else %}
-    {% comment %} <p class="mt-4">You must <a href="{% url 'login' %}">log in</a> to leave a comment.</p> {% endcomment %}
-    <p class="mt-4">
-      You must <a href="{% url 'login' %}" class="login-link">log in</a> to leave a comment.
-    </p>
-    {% endif %}
+                <form method="post">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <textarea 
+                      name="content" 
+                      class="form-control" 
+                      rows="4" 
+                      placeholder="Write your comment..."
+                      required></textarea>
+                  </div>
+
+                  <div class="d-flex gap-2">
+                    <button type="submit" class="btn comment-btn">Post Comment</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                  </div>
+                </form>
+              </div>
+              {% else %}
+              <p class="mt-4">You must <a href="{% url 'login' %}">log in</a> to leave a comment.</p>
+              {% endif %}
               <!-- /Caja de comentarios -->
+
+              <!-- Estilos personalizados -->
+              <style>
+                .comment-btn {
+                  background-color: #116530;
+                  border-color: #116530;
+                  color: #fff;
+                  font-weight: normal;
+                  padding: 0.5rem 1.25rem;
+                  transition: all 0.2s ease-in-out;
+                }
+
+                .comment-btn:hover {
+                  background-color: #0d4a23;
+                  border-color: #0d4a23;
+                }
+
+                .comment-btn:focus {
+                  box-shadow: 0 0 0 0.25rem rgba(17, 101, 48, 0.4);
+                }
+
+                .btn-secondary {
+                  color: #fff;
+                }
+              </style>
             </div>
           </section>
 
@@ -169,62 +198,4 @@
 
   {% include 'sections/services-info.html' %}
 
-
-              <!-- Estilos personalizados -->
-              <style>
-                .comment-btn {
-                  background-color: #116530;
-                  border-color: #116530;
-                  color: #fff;
-                  font-weight: normal;
-                  padding: 0.5rem 1.25rem;
-                  transition: all 0.2s ease-in-out;
-                }
-
-                .comment-btn:hover {
-                  background-color: #0d4a23;
-                  border-color: #0d4a23;
-                }
-
-                .comment-btn:focus {
-                  box-shadow: 0 0 0 0.25rem rgba(17, 101, 48, 0.4);
-                }
-
-                .btn-secondary {
-                  color: #fff;
-                }
-              </style>
-
-<!-- Script AJAX -->
-<script>
-  document.getElementById("commentForm")?.addEventListener("submit", async function(e){
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    const response = await fetch("", {
-      method: "POST",
-      headers: { "X-Requested-With": "XMLHttpRequest" },
-      body: formData
-    });
-
-    if(response.ok){
-      const parser = new DOMParser();
-      const html = await response.text();
-      const doc = parser.parseFromString(html, "text/html");
-      
-      // Tomamos solo el comentario recién agregado (último en la lista)
-      const newComment = doc.querySelector("#comments-section .comment:first-child");
-      document.getElementById("comments-section").insertAdjacentHTML("afterbegin", newComment.outerHTML);
-
-      // Limpiamos el formulario
-      this.reset();
-
-      // Actualizamos el contador
-      const countElem = document.querySelector(".comments-count");
-      const currentCount = parseInt(countElem.textContent) || 0;
-      countElem.textContent = (currentCount + 1) + " Comments";
-    }
-  });
-</script>
 {% endblock content %}
