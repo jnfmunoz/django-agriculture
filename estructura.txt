@@ -1,0 +1,397 @@
+Listado de rutas de carpetas para el volumen SSD
+El n£mero de serie del volumen es 165E-657E
+C:.
+³   db.sqlite3
+³   db_antigua.sqlite3
+³   db_respaldo.sqlite3
+³   estructura.txt
+³   manage.py
+³   requirements.txt
+³   to-do-django-agriculture.txt
+³   
+ÃÄÄÄ.vscode
+³       settings.json
+³       
+ÃÄÄÄblog
+³   ³   admin.py
+³   ³   apps.py
+³   ³   context_processors.py
+³   ³   forms.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-311.pyc
+³   ³           __init__.cpython-311.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-311.pyc
+³           apps.cpython-311.pyc
+³           context_processors.cpython-311.pyc
+³           forms.cpython-311.pyc
+³           models.cpython-311.pyc
+³           urls.cpython-311.pyc
+³           views.cpython-311.pyc
+³           __init__.cpython-311.pyc
+³           
+ÃÄÄÄcomments
+³   ³   admin.py
+³   ³   apps.py
+³   ³   context_processors.py
+³   ³   forms.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-311.pyc
+³   ³           __init__.cpython-311.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-311.pyc
+³           apps.cpython-311.pyc
+³           forms.cpython-311.pyc
+³           models.cpython-311.pyc
+³           __init__.cpython-311.pyc
+³           
+ÃÄÄÄcore
+³   ³   asgi.py
+³   ³   settings.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   wsgi.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄstatic
+³   ³   ÀÄÄÄcore
+³   ³       ÃÄÄÄcss
+³   ³       ³       main.css
+³   ³       ³       
+³   ³       ÃÄÄÄimg
+³   ³       ³   ³   apple-touch-icon.png
+³   ³       ³   ³   favicon.png
+³   ³       ³   ³   hero_1.jpg
+³   ³       ³   ³   hero_2.jpg
+³   ³       ³   ³   hero_3.jpg
+³   ³       ³   ³   hero_4.jpg
+³   ³       ³   ³   hero_5.jpg
+³   ³       ³   ³   img_long_5.jpg
+³   ³       ³   ³   img_sq_1.jpg
+³   ³       ³   ³   img_sq_3.jpg
+³   ³       ³   ³   img_sq_4.jpg
+³   ³       ³   ³   img_sq_5.jpg
+³   ³       ³   ³   img_sq_6.jpg
+³   ³       ³   ³   img_sq_8.jpg
+³   ³       ³   ³   logo.png
+³   ³       ³   ³   page-title-bg.webp
+³   ³       ³   ³   
+³   ³       ³   ÃÄÄÄblog
+³   ³       ³   ³       blog-1.jpg
+³   ³       ³   ³       blog-2.jpg
+³   ³       ³   ³       blog-3.jpg
+³   ³       ³   ³       blog-4.jpg
+³   ³       ³   ³       blog-5.jpg
+³   ³       ³   ³       blog-6.jpg
+³   ³       ³   ³       blog-author.jpg
+³   ³       ³   ³       blog-inside-post.jpg
+³   ³       ³   ³       blog-recent-1.jpg
+³   ³       ³   ³       blog-recent-2.jpg
+³   ³       ³   ³       blog-recent-3.jpg
+³   ³       ³   ³       blog-recent-4.jpg
+³   ³       ³   ³       blog-recent-5.jpg
+³   ³       ³   ³       comments-1.jpg
+³   ³       ³   ³       comments-2.jpg
+³   ³       ³   ³       comments-3.jpg
+³   ³       ³   ³       comments-4.jpg
+³   ³       ³   ³       comments-5.jpg
+³   ³       ³   ³       comments-6.jpg
+³   ³       ³   ³       
+³   ³       ³   ÃÄÄÄpost
+³   ³       ³   ³       no-post-img.png
+³   ³       ³   ³       
+³   ³       ³   ÃÄÄÄregistration
+³   ³       ³   ³       no-avatar.jpg
+³   ³       ³   ³       
+³   ³       ³   ÃÄÄÄteam
+³   ³       ³   ³       team-1.jpg
+³   ³       ³   ³       team-2.jpg
+³   ³       ³   ³       team-3.jpg
+³   ³       ³   ³       team-4.jpg
+³   ³       ³   ³       
+³   ³       ³   ÀÄÄÄtestimonials
+³   ³       ³           testimonials-1.jpg
+³   ³       ³           testimonials-2.jpg
+³   ³       ³           testimonials-3.jpg
+³   ³       ³           testimonials-4.jpg
+³   ³       ³           
+³   ³       ÃÄÄÄjs
+³   ³       ³       alerts.js
+³   ³       ³       main.js
+³   ³       ³       
+³   ³       ÀÄÄÄvendor
+³   ³           ÃÄÄÄaos
+³   ³           ³       aos.cjs.js
+³   ³           ³       aos.css
+³   ³           ³       aos.esm.js
+³   ³           ³       aos.js
+³   ³           ³       aos.js.map
+³   ³           ³       
+³   ³           ÃÄÄÄbootstrap
+³   ³           ³   ÃÄÄÄcss
+³   ³           ³   ³       bootstrap-grid.css
+³   ³           ³   ³       bootstrap-grid.css.map
+³   ³           ³   ³       bootstrap-grid.min.css
+³   ³           ³   ³       bootstrap-grid.min.css.map
+³   ³           ³   ³       bootstrap-grid.rtl.css
+³   ³           ³   ³       bootstrap-grid.rtl.css.map
+³   ³           ³   ³       bootstrap-grid.rtl.min.css
+³   ³           ³   ³       bootstrap-grid.rtl.min.css.map
+³   ³           ³   ³       bootstrap-reboot.css
+³   ³           ³   ³       bootstrap-reboot.css.map
+³   ³           ³   ³       bootstrap-reboot.min.css
+³   ³           ³   ³       bootstrap-reboot.min.css.map
+³   ³           ³   ³       bootstrap-reboot.rtl.css
+³   ³           ³   ³       bootstrap-reboot.rtl.css.map
+³   ³           ³   ³       bootstrap-reboot.rtl.min.css
+³   ³           ³   ³       bootstrap-reboot.rtl.min.css.map
+³   ³           ³   ³       bootstrap-utilities.css
+³   ³           ³   ³       bootstrap-utilities.css.map
+³   ³           ³   ³       bootstrap-utilities.min.css
+³   ³           ³   ³       bootstrap-utilities.min.css.map
+³   ³           ³   ³       bootstrap-utilities.rtl.css
+³   ³           ³   ³       bootstrap-utilities.rtl.css.map
+³   ³           ³   ³       bootstrap-utilities.rtl.min.css
+³   ³           ³   ³       bootstrap-utilities.rtl.min.css.map
+³   ³           ³   ³       bootstrap.css
+³   ³           ³   ³       bootstrap.css.map
+³   ³           ³   ³       bootstrap.min.css
+³   ³           ³   ³       bootstrap.min.css.map
+³   ³           ³   ³       bootstrap.rtl.css
+³   ³           ³   ³       bootstrap.rtl.css.map
+³   ³           ³   ³       bootstrap.rtl.min.css
+³   ³           ³   ³       bootstrap.rtl.min.css.map
+³   ³           ³   ³       prb.txt
+³   ³           ³   ³       
+³   ³           ³   ÀÄÄÄjs
+³   ³           ³           bootstrap.bundle.js
+³   ³           ³           bootstrap.bundle.js.map
+³   ³           ³           bootstrap.bundle.min.js
+³   ³           ³           bootstrap.bundle.min.js.map
+³   ³           ³           bootstrap.esm.js
+³   ³           ³           bootstrap.esm.js.map
+³   ³           ³           bootstrap.esm.min.js
+³   ³           ³           bootstrap.esm.min.js.map
+³   ³           ³           bootstrap.js
+³   ³           ³           bootstrap.js.map
+³   ³           ³           bootstrap.min.js
+³   ³           ³           bootstrap.min.js.map
+³   ³           ³           
+³   ³           ÃÄÄÄbootstrap-icons
+³   ³           ³   ³   bootstrap-icons.css
+³   ³           ³   ³   bootstrap-icons.json
+³   ³           ³   ³   bootstrap-icons.min.css
+³   ³           ³   ³   bootstrap-icons.scss
+³   ³           ³   ³   
+³   ³           ³   ÀÄÄÄfonts
+³   ³           ³           bootstrap-icons.woff
+³   ³           ³           bootstrap-icons.woff2
+³   ³           ³           
+³   ³           ÃÄÄÄglightbox
+³   ³           ³   ÃÄÄÄcss
+³   ³           ³   ³       glightbox.css
+³   ³           ³   ³       glightbox.min.css
+³   ³           ³   ³       
+³   ³           ³   ÀÄÄÄjs
+³   ³           ³           glightbox.js
+³   ³           ³           glightbox.min.js
+³   ³           ³           
+³   ³           ÃÄÄÄphp-email-form
+³   ³           ³       validate.js
+³   ³           ³       
+³   ³           ÀÄÄÄswiper
+³   ³                   swiper-bundle.min.css
+³   ³                   swiper-bundle.min.js
+³   ³                   swiper-bundle.min.js.map
+³   ³                   
+³   ÃÄÄÄtemplates
+³   ³   ÃÄÄÄblog
+³   ³   ³   ³   post_detail copy.html
+³   ³   ³   ³   post_detail.html
+³   ³   ³   ³   post_list.html
+³   ³   ³   ³   
+³   ³   ³   ÀÄÄÄpartials
+³   ³   ³           post_create_form.html
+³   ³   ³           post_response_form.html
+³   ³   ³           post_update_form.html
+³   ³   ³           
+³   ³   ÃÄÄÄpages
+³   ³   ³       about.html
+³   ³   ³       contact.html
+³   ³   ³       index.html
+³   ³   ³       services.html
+³   ³   ³       testimonials.html
+³   ³   ³       
+³   ³   ÃÄÄÄpartials
+³   ³   ³       base.html
+³   ³   ³       
+³   ³   ÃÄÄÄregistration
+³   ³   ³       login.html
+³   ³   ³       password_change_done.html
+³   ³   ³       password_change_form.html
+³   ³   ³       password_reset_complete.html
+³   ³   ³       password_reset_confirm.html
+³   ³   ³       password_reset_done.html
+³   ³   ³       password_reset_form.html
+³   ³   ³       profile_detail.html
+³   ³   ³       profile_update_form.html
+³   ³   ³       signup.html
+³   ³   ³       user_update_form.html
+³   ³   ³       
+³   ³   ÀÄÄÄsections
+³   ³           about.html
+³   ³           page-title.html
+³   ³           posts-2.html
+³   ³           posts.html
+³   ³           services-gallery.html
+³   ³           services-info.html
+³   ³           team.html
+³   ³           testimonials.html
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           settings.cpython-311.pyc
+³           urls.cpython-311.pyc
+³           views.cpython-311.pyc
+³           wsgi.cpython-311.pyc
+³           __init__.cpython-311.pyc
+³           
+ÃÄÄÄmedia
+³   ÃÄÄÄposts
+³   ³       1751391517283.jpg
+³   ³       1751391517283_xtqliLv.jpg
+³   ³       1754049794947.jpg
+³   ³       1754049794947_51WbSSk.jpg
+³   ³       250042780.jpg
+³   ³       250042780_0LIeuOy.jpg
+³   ³       250042780_9TllJKH.jpg
+³   ³       28810141_1668571463185808_491577833_o_2.jpg
+³   ³       8d99f06f-7fee-421a-a1d0-aa591e0f4f88.png
+³   ³       blog-1.jpg
+³   ³       blog-1_2UVFERC.jpg
+³   ³       blog-1_aOaEKbN.jpg
+³   ³       blog-1_NAvenSM.jpg
+³   ³       blog-1_UI04nrn.jpg
+³   ³       blog-2.jpg
+³   ³       blog-2_LeUIEEr.jpg
+³   ³       blog-2_LeUIEEr_lS03BR2.jpg
+³   ³       blog-3.jpg
+³   ³       blog-3_Hs9ZQRD.jpg
+³   ³       blog-3_OCkMxlu.jpg
+³   ³       blog-4.jpg
+³   ³       blog-4_eaHnPfd.jpg
+³   ³       ChatGPT_Image_20_jul_2025_11_48_46_p.m..png
+³   ³       ChatGPT_Image_21_jul_2025_12_01_41_a.m..png
+³   ³       Cowboy_Bebop_Poster_Original.webp
+³   ³       FU.png
+³   ³       IMG-20250720-WA0023.jpg
+³   ³       IMG_20221215_210225_2_2.jpg
+³   ³       IMG_20221215_210225_2_2_cm1hPk9.jpg
+³   ³       IMG_20221215_210225_2_2_EKBeqAS.jpg
+³   ³       IMG_20221215_210225_2_2_EKBeqAS_fBO1jzh.jpg
+³   ³       IMG_20221215_210225_2_2_MZEVLOr.jpg
+³   ³       IMG_20221215_210225_2_2_omFxTR6.jpg
+³   ³       jmg_psg.png
+³   ³       jmg_psg_zX50Ytl.png
+³   ³       mazo_defensor.PNG
+³   ³       mazo_defensor_5MRXslv.PNG
+³   ³       mazo_defensor_bonb38i.PNG
+³   ³       mazo_defensor_oGeoCj5.PNG
+³   ³       sacerdote_-1.jpg
+³   ³       sacerdote_-1_qanANrC.jpg
+³   ³       sacerdote_-1_QNpabFQ.jpg
+³   ³       sacerdote_-1_XdaZ7qB.jpg
+³   ³       sacerdote_-2.jpg
+³   ³       sacerdote_-2_CgAwP2L.jpg
+³   ³       sacerdote_-2_CWKHPpX.jpg
+³   ³       sacerdote_-2_EzJt6x9.jpg
+³   ³       sacerdote_-2_NyBrSz2.jpg
+³   ³       sacerdote_-2_V5dNOzw.jpg
+³   ³       Shot00039.jpg
+³   ³       Shot00039_QhPKnKz.jpg
+³   ³       solicitud_monto_cae.PNG
+³   ³       
+³   ÀÄÄÄprofiles
+³           250042780_0LIeuOy.jpg
+³           28810141_1668571463185808_491577833_o_2.jpg
+³           aralvarado.jpg
+³           greader.jpg
+³           IMG_20221215_210225_2_2.jpg
+³           IMG_20221215_210225_2_2_1td2cqx.jpg
+³           IMG_20221215_210225_2_2_AwhJhAU.jpg
+³           IMG_20221215_210225_2_2_AwhJhAU_yitYxQh.jpg
+³           IMG_20221215_210225_2_2_Cg4oFrj.jpg
+³           IMG_20221215_210225_2_2_meUPkhj.jpg
+³           IMG_20221215_210225_2_2_MZEVLOr.jpg
+³           IMG_20221215_210225_2_2_NZKGsum.jpg
+³           IMG_20221215_210225_2_2_S3k3gAz.jpg
+³           IMG_20221215_210225_2_2_XxHSnhF.jpg
+³           IMG_20221215_210225_2_2_ZAbQjf8.jpg
+³           jmg-fsd-3.png
+³           manzana-fuji-01_original-min.jpg
+³           repository-open-graph-template.png
+³           repository-open-graph-template_klCT9nz.png
+³           
+ÃÄÄÄregistration
+³   ³   admin.py
+³   ³   apps.py
+³   ³   forms.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-311.pyc
+³   ³           __init__.cpython-311.pyc
+³   ³           
+³   ÃÄÄÄstatic
+³   ÃÄÄÄtemplatetags
+³   ³   ³   form_tags.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           form_tags.cpython-311.pyc
+³   ³           __init__.cpython-311.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-311.pyc
+³           apps.cpython-311.pyc
+³           forms.cpython-311.pyc
+³           models.cpython-311.pyc
+³           urls.cpython-311.pyc
+³           views.cpython-311.pyc
+³           __init__.cpython-311.pyc
+³           
+ÀÄÄÄsent_emails
+        20250214-234340-2510866343504.log
+        20250214-235348-2510869614160.log
+        20250823-174728-2106253392848.log
+        20250823-175114-2106255322320.log
+        

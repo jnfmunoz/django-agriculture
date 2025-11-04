@@ -1,0 +1,21 @@
+.comment-btn {
+    background-color: #116530;
+    border-color: #116530;
+    color: #fff;
+    font-weight: normal;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.comment-btn:hover {
+    background-color: #0d4a23;
+    border-color: #0d4a23;
+}
+
+.comment-btn:focus {
+    box-shadow: 0 0 0 0.25rem rgba(17, 101, 48, 0.4);
+}
+
+.btn-secondary {
+    color: #fff;
+}

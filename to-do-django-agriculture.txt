@@ -1,0 +1,5 @@
+TO-DO:
+1.- http://127.0.0.1:8000/accounts/profile/admin/update/ -> realizar formulario responsive
+2.- http://127.0.0.1:8000/blog/post/1/ -> al postear un comentario que a través de ajax elimine la frase que no hay
+3.- comments -> CommentDeleteView 
+4.- modularizar proyecto 

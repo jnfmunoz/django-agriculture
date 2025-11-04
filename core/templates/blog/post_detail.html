@@ -1,6 +1,14 @@
 {% extends 'partials/base.html' %}
-{% block title %}{{ post.title }}{% endblock title %}
 {% load static %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'blog/css/post_detail.css' %}">
+{% endblock extra_css %}
+{% block extra_js_head %}
+  <script src="{% static 'blog/js/post_detail.js' %}" defer></script>
+{% endblock extra_js_head %}
 
 {% block content %}
   {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Post" %}
@@ -168,63 +176,4 @@
   </section>
 
   {% include 'sections/services-info.html' %}
-
-
-              <!-- Estilos personalizados -->
-              <style>
-                .comment-btn {
-                  background-color: #116530;
-                  border-color: #116530;
-                  color: #fff;
-                  font-weight: normal;
-                  padding: 0.5rem 1.25rem;
-                  transition: all 0.2s ease-in-out;
-                }
-
-                .comment-btn:hover {
-                  background-color: #0d4a23;
-                  border-color: #0d4a23;
-                }
-
-                .comment-btn:focus {
-                  box-shadow: 0 0 0 0.25rem rgba(17, 101, 48, 0.4);
-                }
-
-                .btn-secondary {
-                  color: #fff;
-                }
-              </style>
-
-<!-- Script AJAX -->
-<script>
-  document.getElementById("commentForm")?.addEventListener("submit", async function(e){
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    const response = await fetch("", {
-      method: "POST",
-      headers: { "X-Requested-With": "XMLHttpRequest" },
-      body: formData
-    });
-
-    if(response.ok){
-      const parser = new DOMParser();
-      const html = await response.text();
-      const doc = parser.parseFromString(html, "text/html");
-      
-      // Tomamos solo el comentario recién agregado (último en la lista)
-      const newComment = doc.querySelector("#comments-section .comment:first-child");
-      document.getElementById("comments-section").insertAdjacentHTML("afterbegin", newComment.outerHTML);
-
-      // Limpiamos el formulario
-      this.reset();
-
-      // Actualizamos el contador
-      const countElem = document.querySelector(".comments-count");
-      const currentCount = parseInt(countElem.textContent) || 0;
-      countElem.textContent = (currentCount + 1) + " Comments";
-    }
-  });
-</script>
 {% endblock content %}

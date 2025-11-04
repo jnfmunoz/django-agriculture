@@ -1,8 +1,14 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <!-- =======================================================
+  * Template Name: AgriCulture
+  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>{% block title %}{% endblock title %}</title>
@@ -28,14 +34,11 @@
   <!-- Main CSS File -->
   <link href="{% static 'core/css/main.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: AgriCulture
-  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- Extra CSS and JS Files -->
+  {% block extra_css %}{% endblock extra_css %}
+  {% block extra_js_head %}{% endblock extra_js_head %}
 </head>
+
 <body class="index-page">
   <header id="header" class="header d-flex align-items-center position-relative">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
@@ -182,5 +185,7 @@
   <!-- Main JS File -->
   <script src="{% static 'core/js/main.js' %}"></script>
 
+  <!-- Extra JS File -->
+  {% block extra_js_body %}{% endblock extra_js_body %}
 </body>
 </html>
