@@ -1,0 +1,69 @@
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'blog/css/partials/comment_item.css' %}">
+{% endblock extra_css %}
+
+<div class="comment mb-4" id="comment-{{ comment.id }}">
+  <div class="d-flex align-items-start gap-3">
+
+    <!-- Avatar -->
+    <div class="comment-img">
+      <img src="{{ comment.author.profile.profile_photo.url }}"
+           alt="{{ comment.author.username }}">
+    </div>
+
+    <!-- Cuerpo del comentario -->
+    <div class="comment-body w-100">
+
+      <!-- Header: autor + acciones -->
+      <div class="comment-header mb-1">
+        <h5 class="mb-0">
+          <a href="#">
+            {{ comment.author.get_full_name|default:comment.author.username }}
+          </a>
+        </h5>
+
+        <div class="comment-actions">
+          <!-- Reply -->
+          <a href="#"
+             class="reply"
+             data-comment-id="{{ comment.id }}">
+            <i class="bi bi-reply-fill"></i> Reply
+          </a>
+
+          <!-- Delete -->
+          {% if user.is_authenticated and user == comment.author %}
+            <a href="{% url 'comments:comment_delete' comment.id %}"
+               class="delete-comment text-danger"
+               data-comment-id="{{ comment.id }}">
+              <i class="bi bi-trash"></i> Delete
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Fecha -->
+      <time datetime="{{ comment.created|date:'Y-m-d' }}"
+            class="text-muted small d-block mb-2">
+        {{ comment.created|date:"M j, Y" }}
+      </time>
+
+      <!-- Contenido -->
+      <p class="mb-2">{{ comment.content }}</p>
+
+      <!-- Formulario de respuesta -->
+      {% include 'blog/partials/response_create_form.html' with parent_id=comment.id %}
+
+      <!-- Respuestas anidadas -->
+      {% if comment.replies.all %}
+        <div class="replies ms-5 mt-3 ps-3">
+          {% for reply in comment.replies.all %}
+            {% include 'blog/partials/comment_item.html' with comment=reply %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>

@@ -1,5 +1,14 @@
 TO-DO:
-1.- http://127.0.0.1:8000/accounts/profile/admin/update/ -> realizar formulario responsive
+1.- http://127.0.0.1:8000/accounts/profile/admin/update/ -> realizar formulario responsive ✅
 2.- http://127.0.0.1:8000/blog/post/1/ -> al postear un comentario que a través de ajax elimine la frase que no hay
-3.- comments -> CommentDeleteView 
-4.- modularizar proyecto 
+3.- comments -> CommentDeleteView, renderizar template ✅
+4.- modularizar proyecto, partials¿ ❓❓❓
+5.- http://127.0.0.1:8000/accounts/profile/admin/ -> revisar css de profile detail | botones responsive ✅  
+6.- agregar efecto de carga al postear comentario 
+7.- formularios de new y update post, bloquear la parte exterior del formulario
+8.- arreglar routing de update password ✅
+9.- http://localhost:8000/blog/ -> si no existen post -> mensaje de que no hay post y que invite a crear uno
+10.- about us -> crear perfiles del team
+11.- corregir cuadro de respuestas para que se aniden correctamente
+12.- crear vista de perfiles públicos 
+13.- revisar vista de comment delete 

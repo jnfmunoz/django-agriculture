@@ -88,3 +88,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 @login_required
 def redirect_to_profile(request):
     return redirect('registration:profile_detail', username=request.user.username)
+
+class PublicProfileDetailView(DetailView):
+    model = Profile
+    
+

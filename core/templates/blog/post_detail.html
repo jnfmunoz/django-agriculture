@@ -37,7 +37,7 @@
                 <ul>
                   <li class="d-flex align-items-center">
                     <i class="bi bi-person"></i>
-                    <a href="#">{{ user.first_name }} {{ user.last_name }}</a>
+                    <a href="#">{{ post.author.first_name }} {{ post.author.last_name }}</a>
                   </li>
                   <li class="d-flex align-items-center">
                     <i class="bi bi-clock"></i>
@@ -85,95 +85,36 @@
     <!-- Contenedor de comentarios -->
     <div id="comments-section">
       {% for comment in comments %}
-      <div class="comment mb-4">
-        <div class="d-flex">
-          <div class="comment-img">
-            <img src="{{ comment.author.profile.profile_photo.url }}" alt=""> 
-          </div>
-          <div>
-            <h5>
-              <a href="#">{{ comment.author.get_full_name|default:comment.author.username }}</a>
-              <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
-            </h5>
-            <time datetime="{{ comment.created|date:'Y-m-d' }}">{{ comment.created|date:"M j, Y" }}</time>
-            <p>{{ comment.content }}</p>
-          </div>
-        </div>
-      </div>
+        {% if comment.is_parent %}
+          {% include "blog/partials/comment_item.html" with comment=comment %}
+        {% endif %}
       {% empty %}
         <p>No comments yet. Be the first to comment!</p>
       {% endfor %}
     </div>
 
-    <!-- Caja de comentarios -->
+    <!-- Caja de nuevo comentario -->
     {% if user.is_authenticated %}
-    <div class="comment-form mt-5">
-      <h4>Leave a Comment</h4>
-      <form id="commentForm" method="post" action="">
-        {% csrf_token %}
-        <div class="mb-3">
-          <textarea name="content" rows="4" class="form-control" placeholder="Write your comment..." required></textarea>
-        </div>
-        <div class="d-flex gap-2">
-          <button type="submit" class="btn comment-btn">Post Comment</button>
-          <button type="reset" class="btn btn-secondary">Reset</button>
-        </div>
-      </form>
-    </div>
-    {% else %}
-    {% comment %} <p class="mt-4">You must <a href="{% url 'login' %}">log in</a> to leave a comment.</p> {% endcomment %}
-    <p class="mt-4">
-      You must <a href="{% url 'login' %}" class="login-link">log in</a> to leave a comment.
-    </p>
-    {% endif %}
-              <!-- /Caja de comentarios -->
-            </div>
-          </section>
-
-        </div>
-        <!-- End col-lg-8 -->
-
-        <!-- Sidebar Column -->
-        <div class="col-lg-4 sidebar">
-          <div class="widgets-container">
-
-            <!-- Blog Author Widget -->
-            <div class="blog-author-widget widget-item">
-              <div class="d-flex flex-column align-items-center">
-                <div class="d-flex align-items-center w-100">
-                  <img src="{{ post.author.profile.profile_photo.url }}" class="rounded-circle flex-shrink-0" alt="">
-                  <div>
-                    <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-                    <div class="social-links">
-                      <h6>{{ post.author.profile.occupation }}</h6>
-                      <h6>{{ post.author.email }}</h6>
-                      {% if post.author.profile.facebook %}
-                      <a href="{{ post.author.profile.facebook }}"><i class="bi bi-facebook"></i></a>
-                      {% endif %}
-                      {% if post.author.profile.instagram %}
-                      <a href="{{ post.author.profile.instagram }}"><i class="bi bi-instagram"></i></a>
-                      {% endif %}
-                      {% if post.author.profile.linkedin %}
-                      <a href="{{ post.author.profile.linkedin }}"><i class="bi bi-linkedin"></i></a>
-                      {% endif %}
-                      {% if post.author.profile.twitter %}
-                      <a href="{{ post.author.profile.twitter }}"><i class="bi bi-twitter-x"></i></a>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                <p>{{ post.author.profile.bio }}</p>
-              </div>
-            </div>
-            <!-- /Blog Author Widget -->
-
+      <div class="comment-form mt-5">
+        <h4>Leave a Comment</h4>
+        <form id="commentForm" method="post" action="">
+          {% csrf_token %}
+          <div class="mb-3">
+            <textarea name="content" rows="4" class="form-control" placeholder="Write your comment..." required></textarea>
           </div>
-        </div>
-        <!-- End Sidebar -->
-
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn comment-btn">Post Comment</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </div>
+        </form>
       </div>
-    </div>
-  </section>
+    {% else %}
+      <p class="mt-4">
+        You must <a href="{% url 'login' %}" class="login-link">log in</a> to leave a comment.
+      </p>
+    {% endif %}
+  </div>
+</section>
 
   {% include 'sections/services-info.html' %}
 {% endblock content %}

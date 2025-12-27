@@ -1,5 +1,10 @@
-<div class="reply-form mt-3 ms-5" id="reply-form-{{ comment.id }}" style="display: none;">
-  <form method="post" class="ajax-reply-form" data-parent-id="{{ comment.id }}">
+<div class="reply-form mt-3 ms-5" id="reply-form-{{ parent_id }}" style="display: none;">
+  <form 
+    method="post"
+    class="ajax-reply-form"
+    data-parent-id="{{ parent_id }}"
+    action="{% url 'comments:comment_create' comment.post.id %}"
+  >
     {% csrf_token %}
     <div class="mb-2">
       <textarea name="content" rows="2" class="form-control small-textarea" placeholder="Write a reply..." required></textarea>

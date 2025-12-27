@@ -20,6 +20,7 @@ from django.conf import settings
 from .views import (HomePageView, AboutUsPageView, ServicesPageView,
                     TestimonialsPageView, ContactPageView)
 from blog.urls import blog_patterns
+from comments.urls import comment_patterns
 from registration.urls import registration_patterns
 
 urlpatterns = [
@@ -30,6 +31,7 @@ urlpatterns = [
     path('contact/', ContactPageView.as_view(), name="contact"),
        
     path('blog/', include(blog_patterns)),     
+    path('comments/', include(comment_patterns), name="comments"),     
     
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),

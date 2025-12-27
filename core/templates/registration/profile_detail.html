@@ -5,63 +5,78 @@
 {% block content %}
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
     
+    <!-- PERFIL -->
     <section>
         <div class="container" id="profile-container">
             <div class="row mt-3">
                 <div class="col-md-9 mx-auto mb-5">
-                    <!-- Contenedor principal del perfil -->
+
                     <div class="row align-items-center">
-                        <!-- Columna para la imagen -->
+                        <!-- Imagen -->
                         <div class="col-md-3 text-center">
                             {% if profile.profile_photo %}
-                                <img src="{{ profile.profile_photo.url }}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
-                            {% else %}                            
-                                <img src="{% static 'core/img/registration/no-avatar.jpg' %}" class="img-fluid img-thumbnail" style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;" alt="Profile Photo">
+                                <img src="{{ profile.profile_photo.url }}"
+                                     class="img-fluid img-thumbnail"
+                                     style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;"
+                                     alt="Profile Photo">
+                            {% else %}
+                                <img src="{% static 'core/img/registration/no-avatar.jpg' %}"
+                                     class="img-fluid img-thumbnail"
+                                     style="width: 100%; max-width: 150px; height: 150px; object-fit: cover;"
+                                     alt="Profile Photo">
                             {% endif %}
                         </div>
-                        <!-- Columna para la información del perfil -->
+
+                        <!-- Info -->
                         <div class="col-md-9">
                             <h4>{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
+
                             {% if profile.occupation %}
                                 <h6>{{ profile.occupation }}</h6>
-                            {% endif %}                            
+                            {% endif %}
+
                             <h6>{{ profile.user.email }}</h6>
 
-                            <div class="d-flex align-items-center justify-content-between mt-3">
-                                <!-- Redes sociales -->
+                            <div class="d-flex align-items-center justify-content-between mt-3 flex-wrap gap-3">
+
+                                <!-- Redes -->
                                 <div class="social-links">
                                     {% if profile.facebook %}
-                                        <a href="{{profile.facebook}}" class="btn btn-sm me-2" style="background-color: #1877F2; color: white;">
+                                        <a href="{{ profile.facebook }}" class="btn btn-sm me-2"
+                                           style="background-color:#1877F2;color:white;">
                                             <i class="bi bi-facebook"></i>
                                         </a>
                                     {% endif %}
 
                                     {% if profile.instagram %}
-                                        <a href="{{profile.instagram}}" class="btn btn-sm me-2" style="background-color: #E4405F; color: white;">
+                                        <a href="{{ profile.instagram }}" class="btn btn-sm me-2"
+                                           style="background-color:#E4405F;color:white;">
                                             <i class="bi bi-instagram"></i>
                                         </a>
                                     {% endif %}
 
-                                    {% if profile.linkedin %}                                
-                                        <a href="{{profile.linkedin}}" class="btn btn-outline-info btn-sm me-2">
+                                    {% if profile.linkedin %}
+                                        <a href="{{ profile.linkedin }}" class="btn btn-outline-info btn-sm me-2">
                                             <i class="bi bi-linkedin"></i>
                                         </a>
                                     {% endif %}
-                                    
-                                    {% if profile.twitter %}                                
-                                        <a href="{{profile.twitter}}" class="btn btn-outline-primary btn-sm me-2">
+
+                                    {% if profile.twitter %}
+                                        <a href="{{ profile.twitter }}" class="btn btn-outline-primary btn-sm me-2">
                                             <i class="bi bi-twitter-x"></i>
                                         </a>
                                     {% endif %}
                                 </div>
 
-                                <!-- Botones de actualización -->
+                                <!-- Botones perfil -->
                                 {% if is_owner %}
                                     <div class="d-flex gap-2">
-                                        <a href="{% url 'registration:user_update' request.user.username %}" class="btn btn-success">
+                                        <a href="{% url 'registration:user_update' request.user.username %}"
+                                           class="btn btn-success btn-sm">
                                             Update User
                                         </a>
-                                        <a href="{% url 'registration:profile_update' request.user.username %}" class="btn btn-secondary">
+                                        <a href="{% url 'registration:profile_update' request.user.username %}"
+                                           class="btn btn-secondary btn-sm">
                                             Update Profile
                                         </a>
                                     </div>
@@ -69,28 +84,30 @@
                             </div>
                         </div>
                     </div>
+
                     <hr>
 
-                    <!-- Biografía -->
+                    <!-- Bio -->
                     <div class="row mt-5">
                         <div class="col-12">
                             <h5>Biography</h5>
                             <p>{{ profile.bio }}</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
-            
-    <!-- Sección de posts -->
+
+    <!-- POSTS -->
     <section id="blog-posts-3" class="blog-posts-3 section">
         <div class="container" id="post-list-container">
             <div class="row justify-content-center">
                 <div class="col-md-9">
 
-                    <!-- Cabecera de la sección (alineada con los posts) -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                         <h1 class="mb-0">Last Posts</h1>
                         {% if is_owner %}
                             <button type="button" class="btn btn-primary" id="open-form-btn">
@@ -100,51 +117,60 @@
                     </div>
                     <hr class="mb-4">
 
-                    <!-- Listado de posts -->
-                    <div class="row gy-4">        
+                    <!-- List -->
+                    <div class="row gy-4">
                         {% for post in user_posts %}
-                            <div class="col-12 mb-4" id="post-list-item">
-                                <article class="d-flex border-0 shadow-sm overflow-hidden rounded">
-                                    <!-- Imagen pequeña a la izquierda -->
-                                    <div class="flex-shrink-0">
-                                        <img src="{{ post.image.url }}" alt="" class="img-fluid" style="width: 180px; height: 120px; object-fit: cover;">
+                            <div class="col-12 mb-4">
+                                <article class="d-flex flex-column flex-md-row border-0 shadow-sm overflow-hidden rounded">
+
+                                    <!-- Imagen -->                                    
+                                    <div class="flex-shrink-0 d-flex justify-content-center align-items-center p-2">
+                                        <img src="{{ post.image.url }}"
+                                             alt=""
+                                             class="img-fluid"
+                                             style="width:180px;height:120px;object-fit:cover;">
                                     </div>
 
-                                    <!-- Contenido del post a la derecha -->
+                                    <!-- Contenido -->
                                     <div class="p-3 d-flex flex-column justify-content-between w-100">
+
                                         <div>
                                             <h5 class="mb-1">{{ post.title }}</h5>
                                             <div class="text-muted small mb-2">
                                                 <i class="bi bi-calendar-event me-1"></i>
-                                                Created at                                                
-                                                {{ post.created_at|date:"d F Y" }}
+                                                Created at {{ post.created_at|date:"d F Y" }}
                                             </div>
                                         </div>
 
-                                        <!-- Botones uniformes -->
-                                        <div class="d-flex flex-wrap gap-2 mt-2">
-                                            <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-success btn-sm flex-fill">
-                                                Read More 
-                                                <i class="bi bi-arrow-right"></i> 
+                                        <!-- BOTONES RESPONSIVE -->
+                                        <div class="d-grid gap-2 d-md-flex mt-2">
+
+                                            <a href="{% url 'blog:post_detail' post.id %}"
+                                               class="btn btn-success btn-sm d-flex align-items-center justify-content-center">
+                                                Read More
+                                                <i class="bi bi-arrow-right ms-1"></i>
                                             </a>
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-secondary btn-sm flex-fill open-update-form-btn"     
-                                                data-url="{% url 'blog:post_update' post.pk %}">
+
+                                            <button type="button"
+                                                    class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center open-update-form-btn"
+                                                    data-url="{% url 'blog:post_update' post.pk %}">
                                                 Update
-                                                <i class="bi bi-pencil-square"></i> 
+                                                <i class="bi bi-pencil-square ms-1"></i>
                                             </button>
 
-                                            <form method="POST" action="{% url 'blog:post_delete' post.pk %}" class="flex-fill">
+                                            <form method="POST"
+                                                  action="{% url 'blog:post_delete' post.pk %}"
+                                                  class="m-0">
                                                 {% csrf_token %}
-                                                <button 
-                                                    type="submit" 
-                                                    class="btn btn-danger btn-sm w-100">
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm w-100 d-flex align-items-center justify-content-center">
                                                     Delete
-                                                    <i class="bi bi-trash"></i>
+                                                    <i class="bi bi-trash ms-1"></i>
                                                 </button>
                                             </form>
+
                                         </div>
+
                                     </div>
                                 </article>
                             </div>
@@ -152,7 +178,6 @@
                             <p class="text-center text-muted">No posts available.</p>
                         {% endfor %}
                     </div>
-
                 </div>
             </div>
         </div>
@@ -160,19 +185,19 @@
 
     {% include 'sections/services-info.html' %}
 
-    <!-- Modal overlay para crear post -->
+    <!-- MODAL CREATE -->
     <div class="form-overlay" id="form-overlay" style="display:none;">
         <div class="form-container">
             <span class="close-btn" id="close-form-btn">&times;</span>
             {% include '../blog/partials/post_create_form.html' %}
         </div>
-    </div> <!-- End modal overlay para crear post -->
-    
-    <!-- Modal overlay para actualizar post -->
+    </div>
+
+    <!-- MODAL UPDATE -->
     <div class="form-overlay" id="update-form-overlay" style="display:none;">
         <div class="form-container">
             <span class="close-btn" id="close-update-form-btn">&times;</span>
             <div id="update-form-content"></div>
         </div>
-    </div> <!-- End modal overlay para actualizar post -->
+    </div>
 {% endblock %}
