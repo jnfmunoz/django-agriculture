@@ -12,6 +12,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from blog.forms import PostForm
 
+User = get_user_model();
+
 # Create your views here.
 class SignUpView(CreateView):
     
@@ -37,7 +39,7 @@ class SignUpView(CreateView):
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     
     model = Profile
-    template_name ='registration/profile_detail.html'
+    template_name ='registration/profile_private_detail.html'
     context_object_name = 'profile'
 
     def get_object(self):
@@ -91,5 +93,19 @@ def redirect_to_profile(request):
 
 class PublicProfileDetailView(DetailView):
     model = Profile
-    
+    template_name = 'registration/profile_public_detail.html'
+    context_object_name = 'profile'
 
+    def get_object(self):
+        username = self.kwargs.get('username')
+        user = get_object_or_404(User, username=username)
+        profile, created = Profile.objects.get_or_create(user=user)
+        return profile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_owner'] = (self.request.user.is_authenticated 
+                               and self.request.user == self.object.user)
+        context['form'] = PostForm()
+
+        return context
