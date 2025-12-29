@@ -1,3 +1,4 @@
+/** CRUD Comentarios */
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- helper: get cookie CSRF (si lo necesitas) ---------- */
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- 1) submit del form principal de comentarios ---------- */
-  const commentForm = document.getElementById("commentForm");
+  const commentForm = document.getElementById("commentForm"); 
   if (commentForm) {
     commentForm.addEventListener("submit", async function (e) {
       e.preventDefault();

@@ -12,3 +12,4 @@ TO-DO:
 11.- corregir cuadro de respuestas para que se aniden correctamente
 12.- crear vista de perfiles públicos 
 13.- revisar vista de comment delete 
+14.- modularizar proyecto -> post.js comments.js 
