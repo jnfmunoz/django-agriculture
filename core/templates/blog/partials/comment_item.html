@@ -9,7 +9,7 @@
 
     <!-- Avatar -->
     <div class="comment-img">
-      <img src="{{ comment.author.profile.profile_photo.url }}"
+      <img src="{{ comment.author.profile.get_profile_photo_url }}"
            alt="{{ comment.author.username }}">
     </div>
 
@@ -19,7 +19,7 @@
       <!-- Header: autor + acciones -->
       <div class="comment-header mb-1">
         <h5 class="mb-0">
-          <a href="#">
+          <a href="{% url 'registration:profile_detail' post.author.username %}">
             {{ comment.author.get_full_name|default:comment.author.username }}
           </a>
         </h5>

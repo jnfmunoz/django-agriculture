@@ -150,24 +150,25 @@
                                                 Read More
                                                 <i class="bi bi-arrow-right ms-1"></i>
                                             </a>
-
-                                            <button type="button"
-                                                    class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center open-update-form-btn"
-                                                    data-url="{% url 'blog:post_update' post.pk %}">
-                                                Update
-                                                <i class="bi bi-pencil-square ms-1"></i>
-                                            </button>
-
-                                            <form method="POST"
-                                                  action="{% url 'blog:post_delete' post.pk %}"
-                                                  class="m-0">
-                                                {% csrf_token %}
-                                                <button type="submit"
-                                                        class="btn btn-danger btn-sm w-100 d-flex align-items-center justify-content-center">
-                                                    Delete
-                                                    <i class="bi bi-trash ms-1"></i>
+                                            {% if is_owner %}
+                                                <button type="button"
+                                                        class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center open-update-form-btn"
+                                                        data-url="{% url 'blog:post_update' post.pk %}">
+                                                    Update
+                                                    <i class="bi bi-pencil-square ms-1"></i>
                                                 </button>
-                                            </form>
+
+                                                <form method="POST"
+                                                    action="{% url 'blog:post_delete' post.pk %}"
+                                                    class="m-0">
+                                                    {% csrf_token %}
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-sm w-100 d-flex align-items-center justify-content-center">
+                                                        Delete
+                                                        <i class="bi bi-trash ms-1"></i>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
 
                                         </div>
 
@@ -189,7 +190,7 @@
     <div class="form-overlay" id="form-overlay" style="display:none;">
         <div class="form-container">
             <span class="close-btn" id="close-form-btn">&times;</span>
-            {% include '../blog/partials/post_create_form.html' %}
+            {% include '../blog/post_form.html' %}
         </div>
     </div>
 

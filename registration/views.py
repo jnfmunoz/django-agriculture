@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from blog.forms import PostForm
+from blog.models import Post
 
 User = get_user_model();
 
@@ -37,19 +38,44 @@ class SignUpView(CreateView):
         return form
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
-    
-    model = Profile
-    template_name ='registration/profile_private_detail.html'
+    model = Profile 
+    template_name = 'registration/profile_detail.html'
     context_object_name = 'profile'
 
     def get_object(self):
-        profile, created = Profile.objects.get_or_create(user=self.request.user)    
-        return profile
+        username = self.kwargs.get('username')
 
+        # Public profile
+        if username:
+            user = get_object_or_404(User, username=username)
+            profile, _ = Profile.objects.get_or_create(user=user)
+
+            return profile
+        
+        # Private profile
+        user = self.request.user
+        profile, _ = Profile.objects.get_or_create(user = user)
+        return profile
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_owner'] = self.request.user == self.object.user
-        context['form'] = PostForm()
+        
+        profile_user = self.object.user
+        request_user = self.request.user
+
+        context["is_owner"] = (
+            request_user.is_authenticated and request_user == profile_user
+        )
+
+        context["user_posts"] = (
+            Post.objects
+                .filter(author=profile_user)
+                .order_by("-created_at")
+        )
+
+        if context["is_owner"]:
+            context["form"] = PostForm
+
         return context
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
@@ -104,8 +130,19 @@ class PublicProfileDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        profile_user = self.object.user
+
         context['is_owner'] = (self.request.user.is_authenticated 
-                               and self.request.user == self.object.user)
+                               and self.request.user == profile_user)
+        
+        context['user_posts'] = (
+            Post.objects
+                .filter(author=profile_user)
+                .order_by('-created_at')
+        )
+        
         context['form'] = PostForm()
 
         return context
+    

@@ -1,0 +1,125 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'blog/css/post_detail.css' %}">
+{% endblock extra_css %}
+{% block extra_js_head %}
+  <script src="{% static 'blog/js/post_detail.js' %}" defer></script>
+{% endblock extra_js_head %}
+
+{% block content %}
+  {% include 'sections/page-title.html' with page_title="Blog" page_subtitle="Post" %}
+  
+  <section>
+    <div class="container" id="post-detail-container">
+      <div class="row mt-3">
+
+        <!-- Blog Content Column -->
+        <div class="col-lg-8">
+          
+          <!-- Blog Details Section -->
+          <section id="blog-details" class="blog-details section">
+            <article class="article">
+
+              <!-- Post Image -->
+              <div class="post-img">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+              </div>
+
+              <!-- Post Title -->
+              <h2 class="title">{{ post.title }}</h2>
+
+              <!-- Post Meta -->
+              <div class="meta-top">
+                <ul>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-person"></i>
+                    <a href="{% url 'registration:profile_detail' post.author.username %}">
+                      {{ post.author.first_name }} {{ post.author.last_name }}
+                    </a>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <i class="bi bi-clock"></i>
+                    <a href="#">
+                      <time datetime="{{ post.updated_at|date:'Y-m-d' }}">
+                        {{ post.updated_at|date:"M j, Y" }}
+                      </time>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Post Content -->
+              <div class="content">
+                {{ post.formatted_content|safe }}
+              </div>
+
+              <!-- Post Categories and Tags -->
+              <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a href="#">Business</a></li>
+                </ul>
+
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li><a href="#">Creative</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li>
+                </ul>
+              </div>
+
+            </article>
+  </section>  
+
+  <!-- Blog Comments Section -->
+  <section id="blog-comments" class="blog-comments section">
+    <div class="container">
+
+      <h4 class="comments-count">
+        {{ comments.count }} 
+        {% if comments.count == 1 %}Comment{% else %}Comments{% endif %}
+      </h4>
+
+      <!-- Contenedor de comentarios -->
+      <div id="comments-section">
+        {% for comment in comments %}
+          {% if comment.is_parent %}
+            {% include "blog/partials/comment_item.html" with comment=comment %}
+          {% endif %}
+        {% empty %}
+          <p>No comments yet. Be the first to comment!</p>
+        {% endfor %}
+      </div>
+
+      <!-- Caja de nuevo comentario -->
+      {% if user.is_authenticated %}
+        <div class="comment-form mt-5">
+          <h4>Leave a Comment</h4>
+          <form id="commentForm" method="post" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+              <textarea name="content" rows="4" class="form-control" placeholder="Write your comment..." required></textarea>
+            </div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn comment-btn">Post Comment</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form>
+        </div>
+      {% else %}
+        <p class="mt-4">
+          You must <a href="{% url 'login' %}" class="login-link">log in</a> to leave a comment.
+        </p>
+      {% endif %}
+    </div>
+  </section>
+
+  
+
+
+  {% include 'sections/services-info.html' %}
+{% endblock content %}

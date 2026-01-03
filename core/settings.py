@@ -133,7 +133,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Auth redirects
-LOGIN_REDIRECT_URL = 'registration:profile'
+LOGIN_REDIRECT_URL = 'registration:profile_redirect'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Emails - SMTP test para restauración de contraseñas

@@ -124,7 +124,6 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
 
     model = Post
-    # template_name = "blog/post_create_form.html"
     form_class = PostForm
 
     def form_valid(self, form):
@@ -133,8 +132,15 @@ class PostCreateView(CreateView):
 
     def form_invalid(self, form):
         print("❌ Formulario inválido. Errores:", form.errors)
-        return redirect(self.get_success_url())
-    
+        return super().form_invalid(form)
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_update"] = False
+        context["form_action"] = reverse_lazy("blog:post_create")
+        context["post"] = None
+        return context
+
     def get_success_url(self):
         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
 
@@ -153,32 +159,40 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
-    template_name = "blog/partials/post_update_form.html"  # solo el form
+    template_name = "blog/post_form.html"
 
-    # Definir la URL de éxito para POST normal
     def get_success_url(self):
         return reverse_lazy(
-            'registration:profile_detail',
-            kwargs={'username': self.request.user.username}
+            "registration:profile_detail",
+            kwargs={"username": self.request.user.username}
         )
 
-    # GET AJAX: devuelve solo el form renderizado
-    def get(self, request, *args, **kwargs):
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            self.object = self.get_object()
-            context = {'form': self.get_form(), 'post': self.object}
-            return render(request, self.template_name, context)
-        return super().get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_update"] = True
+        context["post"] = self.object
+        context["form_action"] = reverse_lazy(
+            "blog:post_update",
+            kwargs={"pk": self.object.pk}
+        )
+        return context
 
-    # POST AJAX: si es válido, devolver JSON; si no, devolver errores
+    # POST válido
     def form_valid(self, form):
-        response = super().form_valid(form)  # guarda el form
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': True})
-        return response
+        self.object = form.save()
 
+        if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse({"success": True})
+
+        return super().form_valid(form)
+
+    # POST inválido
     def form_invalid(self, form):
-        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+        if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse(
+                {"success": False, "errors": form.errors},
+                status=400
+            )
         return super().form_invalid(form)
+
 
