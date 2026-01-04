@@ -39,7 +39,7 @@ class SignUpView(CreateView):
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile 
-    template_name = 'registration/profile_detail.html'
+    template_name = 'registration/profile/profile_detail.html'
     context_object_name = 'profile'
 
     def get_object(self):
@@ -119,7 +119,7 @@ def redirect_to_profile(request):
 
 class PublicProfileDetailView(DetailView):
     model = Profile
-    template_name = 'registration/profile_public_detail.html'
+    template_name = 'registration/profile/profile_public_detail.html'
     context_object_name = 'profile'
 
     def get_object(self):

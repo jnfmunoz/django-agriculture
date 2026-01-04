@@ -4,22 +4,11 @@
 
   <div class="d-flex flex-column align-items-center">
     <div class="d-flex align-items-center w-100">
-      
-      {% comment %} {% if post.author.profile.profile_photo.url %}
-        <img src="{{ post.author.profile.get_profile_photo_url }}"
-           class="rounded-circle flex-shrink-0"
-           alt="{{ post.author.get_full_name }}">
-      {% else %}
-        <img src="{% static 'core/img/registration/no-avatar.jpg' %}"
-             class="rounded-circle flex-shrink-0"
-             alt="default profile photo">
-      {% endif %} {% endcomment %}
-
       <img src="{{ post.author.profile.get_profile_photo_url }}" class="rounded-circle flex-shrink-0" alt="">
 
       <div class="ms-3">
         <h4><a href="{% url 'registration:profile_detail' post.author.username %}">{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-        <h6>{{ post.author.profile.occupation }}</h6>
+        <h6>{{ post.author.profile.occupation|default_if_none:"" }}</h6>
         <h6>{{ post.author.email }}</h6>
 
         <div class="social-links mt-2">
