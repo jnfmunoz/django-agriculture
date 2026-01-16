@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (SignUpView, ProfileUpdateView, ProfileDetailView, 
-                    UserUpdateView, redirect_to_profile, PublicProfileDetailView)
+                    UserUpdateView, redirect_to_profile)
 
 registration_patterns = ([
     path('signup/', SignUpView.as_view(), name='signup'),

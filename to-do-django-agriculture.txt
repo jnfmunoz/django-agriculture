@@ -1,20 +1,38 @@
 TO-DO:
 1.- http://127.0.0.1:8000/accounts/profile/admin/update/ -> realizar formulario responsive ✅
-2.- http://127.0.0.1:8000/blog/post/1/ -> al postear un comentario que a través de ajax elimine la frase que no hay
 3.- comments -> CommentDeleteView, renderizar template ✅
-4.- modularizar proyecto, partials¿ ❓❓❓
 5.- http://127.0.0.1:8000/accounts/profile/admin/ -> revisar css de profile detail | botones responsive ✅  
+8.- arreglar routing de update password ✅
+12.- crear vista de perfiles públicos ✅
+15.- refactorizar profile_private_detail profile_public_detail (fusionar) ✅
+17.- update user - no está renderizando el template ✅
+19.- profile detail -> arreglar template cuando usuario no tiene foto de perfil porque figuran 2 etiquetas con "None" ✅
+
+---------------------------------------------------------------------------------------
+MODULARIZACIÓN
+4.- modularizar proyecto, partials (desglosar por apps y registrar acá lo faltante)¿ ❓❓❓
+14.- modularizar proyecto: blog -> post.js comments.js 
+
+---------------------------------------------------------------------------------------
+JavaScript y AJAX
+2.- http://127.0.0.1:8000/blog/post/1/ -> al postear un comentario que a través de ajax elimine la frase que no hay 
 6.- agregar efecto de carga al postear comentario 
 7.- formularios de new y update post, bloquear la parte exterior del formulario 
-8.- arreglar routing de update password ✅
 9.- http://localhost:8000/blog/ -> si no existen post -> mensaje de que no hay post y que invite a crear uno
+
+---------------------------------------------------------------------------------------
+Django Apps
 10.- about us -> crear perfiles del team
+
+---------------------------------------------------------------------------------------
+Estilos
 11.- corregir cuadro de respuestas para que se aniden correctamente
-12.- crear vista de perfiles públicos ✅
-13.- revisar vista de comment delete 
-14.- modularizar proyecto -> post.js comments.js 
-15.- refactorizar profile_private_detail profile_public_detail (fusionar) ✅
-16.- decoradores blog - CRUD de posts
-17.- update user - no está renderizando el template ✅
+
+---------------------------------------------------------------------------------------
+Funcionalidad
+13.- revisar vista de comment delete -> TemplateDoesNotExist at /comments/post/108/delete/comments/comment_confirm_delete.html
 18.- http://127.0.0.1:8000/accounts/profile/admin/update/ -> links de rrss si no está el https:// antes del link que se agregue automáticamente
-19.- profile detail -> arreglar template cuando usuario no tiene foto de perfil porque figuran 2 etiquetas con "None"
+
+---------------------------------------------------------------------------------------
+Seguridad
+16.- decoradores blog - CRUD de posts

@@ -82,7 +82,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     form_class = ProfileForm
     success_url = reverse_lazy('profile_detail')
-    template_name = 'registration/profile_update_form.html'
+    template_name = 'registration/profile/profile_update_form.html'
 
     def get_object(self, *args, **kwargs):
         
@@ -101,7 +101,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     form_class = UserForm
     success_url = reverse_lazy('profile_detail')
-    template_name = 'registration/user_update_form.html'
+    template_name = 'registration/user/user_update_form.html'
 
     def get_object(self, queryset=None,*args, **kwargs):
         return self.request.user
@@ -116,33 +116,3 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 @login_required
 def redirect_to_profile(request):
     return redirect('registration:profile_detail', username=request.user.username)
-
-class PublicProfileDetailView(DetailView):
-    model = Profile
-    template_name = 'registration/profile/profile_public_detail.html'
-    context_object_name = 'profile'
-
-    def get_object(self):
-        username = self.kwargs.get('username')
-        user = get_object_or_404(User, username=username)
-        profile, created = Profile.objects.get_or_create(user=user)
-        return profile
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        profile_user = self.object.user
-
-        context['is_owner'] = (self.request.user.is_authenticated 
-                               and self.request.user == profile_user)
-        
-        context['user_posts'] = (
-            Post.objects
-                .filter(author=profile_user)
-                .order_by('-created_at')
-        )
-        
-        context['form'] = PostForm()
-
-        return context
-    
