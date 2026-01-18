@@ -5,10 +5,11 @@
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'blog/css/post_detail.css' %}">
+  <link rel="stylesheet" href="{% static 'comments/css/comment_item.css' %}">
 {% endblock extra_css %}
 
 {% block extra_js_head %}
-  <script src="{% static 'blog/js/post_detail.js' %}" defer></script>
+  <script src="{% static 'comments/js/comments.js' %}" defer></script>
 {% endblock extra_js_head %}
 
 {% block content %}
@@ -93,10 +94,13 @@
               <div id="comments-section">
                 {% for comment in comments %}
                   {% if comment.is_parent %}
-                    {% include "blog/partials/comment_item.html" with comment=comment %}
+                    {% include "comments/partials/comment_item.html" with comment=comment %}
                   {% endif %}
                 {% empty %}
-                  <p>No comments yet. Be the first to comment!</p>
+                  <p id="no-comments-message">
+                    No comments yet. Be the first to comment!
+                  </p>
+                  {% comment %} <p>No comments yet. Be the first to comment!</p> {% endcomment %}
                 {% endfor %}
               </div>
 

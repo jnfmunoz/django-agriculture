@@ -10,19 +10,20 @@ TO-DO:
 
 ---------------------------------------------------------------------------------------
 MODULARIZACIÓN
-4.- modularizar proyecto, partials (desglosar por apps y registrar acá lo faltante)¿ ❓❓❓
-14.- modularizar proyecto: blog -> post.js comments.js 
+4.- modularizar proyecto, partials (desglosar por apps y registrar acá lo faltante)¿ ❓❓❓ ✅
+14.- modularizar proyecto: blog -> post.js comments.js ✅
 
 ---------------------------------------------------------------------------------------
 JavaScript y AJAX
-2.- http://127.0.0.1:8000/blog/post/1/ -> al postear un comentario que a través de ajax elimine la frase que no hay 
-6.- agregar efecto de carga al postear comentario 
+2.- http://127.0.0.1:8000/blog/post/1/ -> al postear un comentario que a través de ajax elimine la frase que no hay ✅
+6.- agregar efecto de carga al postear comentario (pendiente)
 7.- formularios de new y update post, bloquear la parte exterior del formulario 
-9.- http://localhost:8000/blog/ -> si no existen post -> mensaje de que no hay post y que invite a crear uno
-
+9.- http://localhost:8000/blog/ -> si no existen post -> mensaje de que no hay post y que invite a crear uno 
+19.- http://127.0.0.1:8000/blog/post/7/ -> que el comentario cargue automáticamente ✅
 ---------------------------------------------------------------------------------------
 Django Apps
-10.- about us -> crear perfiles del team
+10.- about us -> crear perfiles del team - facebook, twitter, linkedin, nombre, apellido, foto de perfil, profesion
+20.- comentarios, respuestas -> crear vista de eliminar comentarios/respuestas
 
 ---------------------------------------------------------------------------------------
 Estilos

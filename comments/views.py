@@ -30,7 +30,7 @@ class CommentCreateView(CreateView):
 
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             html = render_to_string(
-                'blog/partials/comment_item.html', 
+                'comments/partials/comment_item.html', 
                 {'comment': self.object, 'user': self.request.user},
                 request=self.request
             )
