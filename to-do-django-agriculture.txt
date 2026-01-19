@@ -37,3 +37,7 @@ Funcionalidad
 ---------------------------------------------------------------------------------------
 Seguridad
 16.- decoradores blog - CRUD de posts
+
+
+
+NOTA: REVISAR EL MODAL DE CREATE POST, EL BLOQUEO DEL EXTERIOR DEL FORMULARIO

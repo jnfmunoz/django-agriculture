@@ -263,78 +263,78 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-  const openCreateBtn = document.getElementById("open-form-btn");
-  const createOverlay = document.getElementById("form-overlay");
-  const closeCreateBtn = document.getElementById("close-form-btn");
+// document.addEventListener("DOMContentLoaded", function() {
+//   const openCreateBtn = document.getElementById("open-form-btn");
+//   const createOverlay = document.getElementById("form-overlay");
+//   const closeCreateBtn = document.getElementById("close-form-btn");
 
-  if (openCreateBtn && createOverlay) {
-    openCreateBtn.addEventListener("click", () => {
-      createOverlay.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    });
-  }
-  if (closeCreateBtn && createOverlay) {
-    closeCreateBtn.addEventListener("click", () => {
-      createOverlay.style.display = "none";
-      document.body.style.overflow = "";
-    });
-    createOverlay.addEventListener("click", (e) => {
-      if (e.target === createOverlay) {
-        createOverlay.style.display = "none";
-        document.body.style.overflow = "";
-      }
-    });
-  }
+//   if (openCreateBtn && createOverlay) {
+//     openCreateBtn.addEventListener("click", () => {
+//       createOverlay.style.display = "flex";
+//       document.body.style.overflow = "hidden";
+//     });
+//   }
+//   if (closeCreateBtn && createOverlay) {
+//     closeCreateBtn.addEventListener("click", () => {
+//       createOverlay.style.display = "none";
+//       document.body.style.overflow = "";
+//     });
+//     createOverlay.addEventListener("click", (e) => {
+//       if (e.target === createOverlay) {
+//         createOverlay.style.display = "none";
+//         document.body.style.overflow = "";
+//       }
+//     });
+//   }
 
-  const updateOverlay = document.getElementById("update-form-overlay");
-  const updateContent = document.getElementById("update-form-content");
-  const closeUpdateBtn = document.getElementById("close-update-form-btn");
+//   const updateOverlay = document.getElementById("update-form-overlay");
+//   const updateContent = document.getElementById("update-form-content");
+//   const closeUpdateBtn = document.getElementById("close-update-form-btn");
 
-  // Abrir modal y cargar el form por AJAX
-  document.querySelectorAll(".open-update-form-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const url = btn.getAttribute("data-url");
-      if (!updateOverlay || !updateContent || !url) return;
+//   // Abrir modal y cargar el form por AJAX
+//   document.querySelectorAll(".open-update-form-btn").forEach(btn => {
+//     btn.addEventListener("click", () => {
+//       const url = btn.getAttribute("data-url");
+//       if (!updateOverlay || !updateContent || !url) return;
 
-      fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
-        .then(res => res.text())
-        .then(html => {
-          updateContent.innerHTML = html;
-          updateOverlay.style.display = "flex";
-          document.body.style.overflow = "hidden";
+//       fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+//         .then(res => res.text())
+//         .then(html => {
+//           updateContent.innerHTML = html;
+//           updateOverlay.style.display = "flex";
+//           document.body.style.overflow = "hidden";
 
-          // Cerrar con el botón "Cancel" dentro del formulario inyectado
-          const cancelBtn = updateContent.querySelector("#cancel-update-btn");
-          if (cancelBtn) {
-            cancelBtn.addEventListener("click", () => {
-              updateOverlay.style.display = "none";
-              document.body.style.overflow = "";
-            });
-          }
-        })
-        .catch(err => {
-          console.error("Error cargando el formulario de update:", err);
-        });
-    });
-  });
+//           // Cerrar con el botón "Cancel" dentro del formulario inyectado
+//           const cancelBtn = updateContent.querySelector("#cancel-update-btn");
+//           if (cancelBtn) {
+//             cancelBtn.addEventListener("click", () => {
+//               updateOverlay.style.display = "none";
+//               document.body.style.overflow = "";
+//             });
+//           }
+//         })
+//         .catch(err => {
+//           console.error("Error cargando el formulario de update:", err);
+//         });
+//     });
+//   });
 
-  // Cerrar con la X del modal
-  if (closeUpdateBtn && updateOverlay) {
-    closeUpdateBtn.addEventListener("click", () => {
-      updateOverlay.style.display = "none";
-      document.body.style.overflow = "";
-    });
-  }
+//   // Cerrar con la X del modal
+//   if (closeUpdateBtn && updateOverlay) {
+//     closeUpdateBtn.addEventListener("click", () => {
+//       updateOverlay.style.display = "none";
+//       document.body.style.overflow = "";
+//     });
+//   }
 
-  // Cerrar haciendo click fuera del contenido
-  if (updateOverlay) {
-    updateOverlay.addEventListener("click", e => {
-      if (e.target === updateOverlay) {
-        updateOverlay.style.display = "none";
-        document.body.style.overflow = "";
-      }
-    });
-  }
-});
+//   // Cerrar haciendo click fuera del contenido
+//   if (updateOverlay) {
+//     updateOverlay.addEventListener("click", e => {
+//       if (e.target === updateOverlay) {
+//         updateOverlay.style.display = "none";
+//         document.body.style.overflow = "";
+//       }
+//     });
+//   }
+// });
 

@@ -6,6 +6,11 @@
   <link rel="stylesheet" href="{% static 'registration/css/registration.css' %}">
 {% endblock extra_css %}
 
+{% block extra_js_head %}
+  <script src="{% static 'blog/js/post_modal.js' %}" defer></script>
+{% endblock extra_js_head %}
+
+
 {% block content %}
     {% include 'sections/page-title.html' with page_title="Profile" page_subtitle="Profile" %}
     
