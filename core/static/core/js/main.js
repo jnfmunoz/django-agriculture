@@ -166,6 +166,7 @@
 
 })();
 
+/*
 document.addEventListener("DOMContentLoaded", function() {
   const openBtn = document.getElementById("open-form-btn");
   const closeBtn = document.getElementById("close-form-btn");
@@ -188,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+*/
 
 /*
 document.addEventListener("DOMContentLoaded", function() {

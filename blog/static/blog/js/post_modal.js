@@ -1,30 +1,64 @@
+console.log("POST MODAL JS LOADED");
+
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =====================================================
-     CREATE POST MODAL
-  ===================================================== */
-  const openCreateBtn = document.getElementById("open-form-btn");
-  const createOverlay = document.getElementById("form-overlay");
-  const closeCreateBtn = document.getElementById("close-form-btn");
-
-  if (openCreateBtn && createOverlay && closeCreateBtn) {
-    openCreateBtn.addEventListener("click", () => {
-      createOverlay.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    });
-
-    closeCreateBtn.addEventListener("click", () => {
-      createOverlay.style.display = "none";
-      document.body.style.overflow = "";
-    });
+  /* ===============================
+     MODAL CORE
+  =============================== */
+  function openModal(overlay) {
+    overlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
   }
 
-  /* =====================================================
-     UPDATE POST MODAL (AJAX)
-  ===================================================== */
+  function closeModal(overlay) {
+    overlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  /* ===============================
+     CREATE MODAL (AJAX BLOQUEADO)
+  =============================== */
+  const openCreateBtn = document.getElementById("open-form-btn");
+  const createOverlay = document.getElementById("form-overlay");
+  const createContainer = createOverlay?.querySelector(".form-container");
+
+  if (openCreateBtn && createOverlay && createContainer) {
+    openCreateBtn.addEventListener("click", () => {
+      const url = openCreateBtn.dataset.url;
+      if (!url) return;
+
+      fetch(url, {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      })
+        .then(res => res.text())
+        .then(html => {
+          createContainer.innerHTML = `
+            <span class="close-btn" id="close-form-btn">&times;</span>
+            ${html}
+          `;
+
+          openModal(createOverlay);
+          bindAjaxForm(createOverlay);
+
+          // Botón X
+          createContainer.querySelector("#close-form-btn")
+            .addEventListener("click", () => closeModal(createOverlay));
+        });
+    });
+
+    // ❌ NO cerrar al hacer click fuera
+    createOverlay.addEventListener("click", e => {
+      e.stopPropagation(); // solo bloquea, no cierra
+    });
+
+    createContainer.addEventListener("click", e => e.stopPropagation());
+  }
+
+  /* ===============================
+     UPDATE MODAL (AJAX BLOQUEADO)
+  =============================== */
   const updateOverlay = document.getElementById("update-form-overlay");
   const updateContent = document.getElementById("update-form-content");
-  const closeUpdateBtn = document.getElementById("close-update-form-btn");
 
   document.querySelectorAll(".open-update-form-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -36,21 +70,99 @@ document.addEventListener("DOMContentLoaded", function () {
       })
         .then(res => res.text())
         .then(html => {
-          updateContent.innerHTML = html;
-          updateOverlay.style.display = "flex";
-          document.body.style.overflow = "hidden";
-        })
-        .catch(err => {
-          console.error("Error cargando formulario update:", err);
+          updateContent.innerHTML = `
+            <span class="close-btn" id="close-update-form-btn">&times;</span>
+            ${html}
+          `;
+
+          openModal(updateOverlay);
+          bindAjaxForm(updateOverlay);
+
+          updateContent.querySelector("#close-update-form-btn")
+            .addEventListener("click", () => closeModal(updateOverlay));
         });
     });
   });
 
-  if (closeUpdateBtn && updateOverlay) {
-    closeUpdateBtn.addEventListener("click", () => {
-      updateOverlay.style.display = "none";
-      document.body.style.overflow = "";
+  // ❌ No cerrar al click fuera
+  updateOverlay?.addEventListener("click", e => e.stopPropagation());
+  updateContent?.addEventListener("click", e => e.stopPropagation());
+
+  /* ===============================
+     AJAX FORM HANDLER
+  =============================== */
+  function bindAjaxForm(overlay) {
+    const form = overlay.querySelector("form");
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const isUpdate = form.dataset.isUpdate === "true";
+
+    Swal.fire({
+      title: isUpdate ? "¿Actualizar post?" : "¿Crear post?",
+      text: isUpdate
+        ? "Se actualizará el contenido del post"
+        : "Se creará un nuevo post",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#198754",
+      cancelButtonColor: "#dc3545",
+      confirmButtonText: isUpdate ? "Sí, actualizar" : "Sí, crear",
+      cancelButtonText: "Cancelar",
+      customClass: {
+        popup: "swal-above-modal"
+      },
+      backdrop: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (!result.isConfirmed) return;
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+          .then(async res => {
+            const data = await res.json();
+            if (!res.ok) throw data;
+            return data;
+          })
+          .then(data => {        
+            Swal.fire({
+              icon: "success",
+              title: "Éxito",
+              text: data.message || "Operación realizada correctamente",
+              confirmButtonColor: "#198754",
+              confirmButtonText: "OK"
+            }).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch(err => {
+            let errorText = "Ocurrió un error";
+
+            if (err.errors) {
+              errorText = Object.values(err.errors)
+                .flat()
+                .join("\n");
+            }
+
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: errorText
+            });
+          });
+      });
+    });
+
+    overlay.querySelectorAll(".cancel-modal-btn").forEach(btn => {
+      btn.addEventListener("click", () => closeModal(overlay));
     });
   }
-
 });

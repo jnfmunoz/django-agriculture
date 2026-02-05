@@ -1,0 +1,47 @@
+/* ===============================
+   MODAL OVERLAY
+=============================== */
+.form-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(33, 37, 41, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* ===============================
+   MODAL CONTAINER
+=============================== */
+.form-container {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    padding-top: 0;
+    margin-top: 0;
+    border-radius: 8px;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+/* ===============================
+   CLOSE BUTTON
+=============================== */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* ===============================
+   SWEETALERT2 (SIEMPRE ARRIBA)
+=============================== */
+.swal2-container {
+    z-index: 20000 !important;
+}

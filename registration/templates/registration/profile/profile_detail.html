@@ -4,10 +4,12 @@
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'registration/css/registration.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/post_modal.css' %}">
 {% endblock extra_css %}
 
 {% block extra_js_head %}
   <script src="{% static 'blog/js/post_modal.js' %}" defer></script>
+  <script src="{% static 'blog/js/sweetalert_delete.js' %}"></script>  
 {% endblock extra_js_head %}
 
 
@@ -114,10 +116,10 @@
     {% include 'sections/services-info.html' %}
 
     <!-- MODAL CREATE -->
-    <div class="form-overlay" id="form-overlay" style="display:none;">
+    <div class="form-overlay" id="form-overlay">
         <div class="form-container">
             <span class="close-btn" id="close-form-btn">&times;</span>
-            {% include 'blog/post_form.html' %}
+            <div id="create-form-content"></div>
         </div>
     </div>
 
@@ -128,4 +130,9 @@
             <div id="update-form-content"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+  {% include "partials/django_messages.html" %}
+  <script src="{% static 'js/sweetalert_messages.js' %}" defer></script>
 {% endblock %}

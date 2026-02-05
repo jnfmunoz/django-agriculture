@@ -1,0 +1,12 @@
+{% if messages %}
+<script>
+  window.DJANGO_MESSAGES = [
+    {% for message in messages %}
+      {
+        tag: "{{ message.tags }}",
+        text: "{{ message|escapejs }}"
+      }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+</script>
+{% endif %}

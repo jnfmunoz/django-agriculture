@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'comments',
     'core',
+    'sweetify',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,7 @@ else:
 # Media Files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# possible options: 'sweetalert', 'sweetalert2' - default is 'sweetalert2'
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+ 
