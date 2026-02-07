@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".delete-post-form").forEach(form => {
 
     form.addEventListener("submit", function (e) {
@@ -16,15 +16,46 @@ document.addEventListener("DOMContentLoaded", function () {
         customClass: {
           popup: "swal-above-modal"
         },
-        backdrop: true,
         allowOutsideClick: false,
         allowEscapeKey: false
       }).then((result) => {
-        if (result.isConfirmed) {
-          form.submit();
-        }
-      });
+        if (!result.isConfirmed) return;
 
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRFToken": form.querySelector("[name=csrfmiddlewaretoken]").value
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (!data.success) throw data;
+
+            Swal.fire({
+              icon: "success",
+              title: "Éxito",
+              text: data.message,
+              confirmButtonColor: "#198754",
+              confirmButtonText: "OK",
+              customClass: {
+                popup: "swal-above-modal"
+              }
+            }).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "No se pudo eliminar el post"
+            });
+          });
+      });
     });
 
   });

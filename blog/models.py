@@ -1,17 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.timezone import now
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
+from django.core.validators import MinLengthValidator
+from .validators import NotOnlyNumbersValidator
 import re
 
 # Create your models here.
 class Post(models.Model):
     
-    title = models.CharField(max_length=200, verbose_name='Title')
-    subtitle = models.CharField(max_length=200, verbose_name='Subtitle')
-    relevant_text = models.CharField(max_length=50, verbose_name='Relevant Text', null=True, blank=True)
-    introduction = models.TextField(verbose_name='Introduction', null=True, blank=True)
-    body_text = models.TextField(verbose_name='Body Text', null=True, blank=True)
-    conclusion = models.TextField(verbose_name='Conclusion', null=True, blank=True)
+    title = models.CharField(validators=[MinLengthValidator(5, message="El título debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El título")], max_length=50, verbose_name='Title')
+    subtitle = models.CharField(validators=[MinLengthValidator(5, message="El subtítulo debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El subtítulo")], max_length=50, verbose_name='Subtitle')
+    relevant_text = models.CharField(validators=[MinLengthValidator(5, message="El texto relevante debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El texto relevante")], max_length=50, verbose_name='Relevant Text', null=True, blank=True)
+    introduction = models.TextField(validators=[MinLengthValidator(5, message="La introducción debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("La introducción")], max_length=500, verbose_name='Introduction', null=True, blank=True)
+    body_text = models.TextField(validators=[MinLengthValidator(5, message="El cuerpo debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El cuerpo")], max_length=1000, verbose_name='Body Text', null=True, blank=True)
+    conclusion = models.TextField(validators=[MinLengthValidator(5, message="La conclusión debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("La conclusión")], max_length=500, verbose_name='Conclusion', null=True, blank=True)
     image = models.ImageField(verbose_name='Image', upload_to='posts', null=False, blank=False)
     author = models.ForeignKey(User, verbose_name='Author', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creation Date')
@@ -24,6 +26,24 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def clean(self):
+        errors = {}
+
+        if not self.image:
+            errors["image"] = "La imagen es obligatoria"
+
+        if self.title and self.subtitle and self.title.strip() == self.subtitle.strip():
+            errors["subtitle"] = "El subtítulo no puede ser igual al título."
+
+        if not any([self.introduction, self.body_text, self.conclusion]):
+            errors[NON_FIELD_ERRORS] = (
+            "El post debe contener al menos una sección de texto "
+            "(introducción, cuerpo o conclusión)."
+        )
+
+        if errors:
+            raise ValidationError(errors)
 
     def formatted_content(self):
         html_parts = []

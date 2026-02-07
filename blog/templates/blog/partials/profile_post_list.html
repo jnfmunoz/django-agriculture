@@ -1,86 +1,96 @@
 <section id="blog-posts-3" class="blog-posts-3 section">
-    <div class="container" id="post-list-container">
-        <div class="row justify-content-center">
-            <div class="col-md-9">
+  <div class="container" id="post-list-container">
+    <div class="row justify-content-center">
+      <div class="col-md-9">
 
-                <!-- Header -->
-                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                    <h1 class="mb-0">Last Posts</h1>
-                    {% if is_owner %}
-                        {% comment %} <button type="button" class="btn btn-primary" id="open-form-btn"> {% endcomment %}
-                        <button type="button"
-                                class="btn btn-primary"
-                                id="open-form-btn"
-                                data-url="{% url 'blog:post_create' %}">
-                            <i class="bi bi-plus-lg"></i> New Post
-                        </button>
-                    {% endif %}
-                </div>
-                <hr class="mb-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <h1 class="mb-0">Last Posts</h1>
 
-                <!-- List -->
-                <div class="row gy-4">
-                    {% for post in user_posts %}
-                        <div class="col-12 mb-4">
-                            <article class="d-flex flex-column flex-md-row border-0 shadow-sm overflow-hidden rounded">
-
-                                <!-- Imagen -->                                    
-                                <div class="flex-shrink-0 d-flex justify-content-center align-items-center p-2">
-                                    <img src="{{ post.image.url }}"
-                                            alt=""
-                                            class="img-fluid"
-                                            style="width:180px;height:120px;object-fit:cover;">
-                                </div>
-
-                                <!-- Contenido -->
-                                <div class="p-3 d-flex flex-column justify-content-between w-100">
-
-                                    <div>
-                                        <h5 class="mb-1">{{ post.title }}</h5>
-                                        <div class="text-muted small mb-2">
-                                            <i class="bi bi-calendar-event me-1"></i>
-                                            Created at {{ post.created_at|date:"d F Y" }}
-                                        </div>
-                                    </div>
-
-                                    <!-- BOTONES RESPONSIVE -->
-                                    <div class="d-grid gap-2 d-md-flex mt-2">
-
-                                        <a href="{% url 'blog:post_detail' post.id %}"
-                                            class="btn btn-success btn-sm d-flex align-items-center justify-content-center">
-                                            Read More
-                                            <i class="bi bi-arrow-right ms-1"></i>
-                                        </a>
-                                        {% if is_owner %}
-                                            <button type="button"
-                                                    class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center open-update-form-btn"
-                                                    data-url="{% url 'blog:post_update' post.pk %}">
-                                                Update
-                                                <i class="bi bi-pencil-square ms-1"></i>
-                                            </button>
-
-                                            <form method="POST"
-                                                action="{% url 'blog:post_delete' post.pk %}"
-                                                class="m-0 delete-post-form">
-                                                {% csrf_token %}
-                                                <button type="submit"
-                                                        class="btn btn-danger btn-sm w-100 d-flex align-items-center justify-content-center">
-                                                    Delete
-                                                    <i class="bi bi-trash ms-1"></i>
-                                                </button>
-                                            </form>
-                                        {% endif %}
-
-                                    </div>
-
-                                </div>
-                            </article>
-                        </div>
-                    {% empty %}
-                        <p class="text-center text-muted">No posts available.</p>
-                    {% endfor %}
-                </div>
-            </div>
+          {% if is_owner %}
+            <button type="button"
+                    class="btn btn-primary btn-lg"
+                    id="open-form-btn"
+                    data-url="{% url 'blog:post_create' %}">
+              <i class="bi bi-plus-lg"></i>
+              <span class="ms-1">New Post</span>
+            </button>
+          {% endif %}
         </div>
+
+        <hr class="mb-4">
+
+        <!-- List -->
+        <div class="row gy-4">
+          {% for post in user_posts %}
+            <div class="col-12">
+              <article class="post-card d-flex flex-column flex-md-row shadow-sm rounded overflow-hidden">
+
+                <!-- Image -->
+                <div class="post-card-image d-flex justify-content-center align-items-center p-2">
+                  <img src="{{ post.image.url }}"
+                       alt="{{ post.title }}"
+                       class="img-fluid post-thumb">
+                </div>
+
+                <!-- Content -->
+                <div class="post-card-body p-3 d-flex flex-column justify-content-between w-100">
+
+                  <!-- Meta -->
+                  <div>
+                    <h5 class="mb-1">{{ post.title }}</h5>                    
+                    <h6 class="mb-1">{{ post.relevant_text }}</h6>                    
+                    <div class="text-muted small mb-2">
+                      <i class="bi bi-calendar-event me-1"></i>
+                      Created at {{ post.created_at|date:"d F Y" }}
+                    </div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="post-action-buttons mt-2">
+
+                    <!-- Read -->
+                    <a href="{% url 'blog:post_detail' post.pk %}"
+                       class="btn btn-success btn-sm d-flex align-items-center justify-content-center">
+                      Read More
+                      <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+
+                    {% if is_owner %}
+                      <!-- Update -->
+                      <button type="button"
+                              class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center open-update-form-btn"
+                              data-url="{% url 'blog:post_update' post.pk %}">
+                        Update
+                        <i class="bi bi-pencil-square ms-1"></i>
+                      </button>
+
+                      <!-- Delete -->
+                      <div class="post-action-item">
+                        <form method="POST"
+                              action="{% url 'blog:post_delete' post.pk %}"
+                              class="delete-post-form h-100">
+                          {% csrf_token %}
+                          <button type="submit"
+                                  class="btn btn-danger btn-sm w-100 h-100 d-flex align-items-center justify-content-center">
+                            Delete
+                            <i class="bi bi-trash ms-1"></i>
+                          </button>
+                        </form>
+                      </div>
+                    {% endif %}
+
+                  </div>
+                </div>
+
+              </article>
+            </div>
+          {% empty %}
+            <p class="text-center text-muted">No posts available.</p>
+          {% endfor %}
+        </div>
+
+      </div>
     </div>
+  </div>
 </section>

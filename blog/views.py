@@ -19,18 +19,7 @@ class PostListView(ListView):
     context_object_name = "posts"
     ordering = ["-created_at"]
     paginate_by = 12
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     # print(queryset)  
-    #     return queryset
     
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # Lista de comentarios del post
-    #     context['comments'] = Comment.objects.filter(post=self.object).order_by('-created_at')
-    #     return context
-
 class PostDetailView(DetailView):
     model = Post
     template_name = "blog/post_detail.html"
@@ -67,30 +56,6 @@ class PostDetailView(DetailView):
         context["comments"] = post.comments.all()
         context["comments_count"] = post.comments.count()     
         return context
-
-# class PostCreateView(CreateView):
-
-#     model = Post
-#     form_class = PostForm
-#     template_name = "blog/post_form.html"
-
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
-#     def form_invalid(self, form):
-#         print("❌ Formulario inválido. Errores:", form.errors)
-#         return super().form_invalid(form)
-        
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["is_update"] = False
-#         context["form_action"] = reverse_lazy("blog:post_create")
-#         context["post"] = None
-#         return context
-
-#     def get_success_url(self):
-#         return reverse_lazy('registration:profile_detail', kwargs={'username':self.request.user.username}) 
 
 class PostCreateView(CreateView):
     model = Post
@@ -130,15 +95,21 @@ class PostCreateView(CreateView):
         return context
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
 
-    model = Post    
-
-    def get_success_url(self):
-        messages.success(self.request, "Post eliminado correctamente")
-
-        return reverse_lazy(
-            'registration:profile_detail', 
-            kwargs={'username':self.request.user.username}
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse({
+                "success": True,
+                "message": "Post eliminado correctamente"
+            })
+        
+        return redirect(
+            "registration:profile_detail",
+            username=request.user.username
         )
 
     def test_func(self):

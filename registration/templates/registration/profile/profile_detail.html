@@ -3,8 +3,9 @@
 {% load static %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'registration/css/registration.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/post_modal.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/css/registration.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/css/post_buttons.css' %}">
 {% endblock extra_css %}
 
 {% block extra_js_head %}
@@ -40,10 +41,10 @@
 
                         <!-- Info -->
                         <div class="col-md-9">
-                            <h4>{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
+                            <h3>{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
 
                             {% if profile.occupation %}
-                                <h6>{{ profile.occupation }}</h6>
+                                <h5>{{ profile.occupation }}</h5>
                             {% endif %}
 
                             <h6>{{ profile.user.email }}</h6>
@@ -83,11 +84,11 @@
                                 {% if is_owner %}
                                     <div class="d-flex gap-2">
                                         <a href="{% url 'registration:user_update' request.user.username %}"
-                                           class="btn btn-success btn-sm">
+                                           class="btn btn-success btn-lg">
                                             Update User
                                         </a>
                                         <a href="{% url 'registration:profile_update' request.user.username %}"
-                                           class="btn btn-secondary btn-sm">
+                                           class="btn btn-secondary btn-lg">
                                             Update Profile
                                         </a>
                                     </div>
@@ -101,7 +102,7 @@
                     <!-- Bio -->
                     <div class="row mt-5">
                         <div class="col-12">
-                            <h5>Biography</h5>
+                            <h4>Biography</h4>
                             <p>{{ profile.bio }}</p>
                         </div>
                     </div>
@@ -130,9 +131,4 @@
             <div id="update-form-content"></div>
         </div>
     </div>
-{% endblock %}
-
-{% block extra_js %}
-  {% include "partials/django_messages.html" %}
-  <script src="{% static 'js/sweetalert_messages.js' %}" defer></script>
 {% endblock %}
