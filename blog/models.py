@@ -8,12 +8,12 @@ import re
 # Create your models here.
 class Post(models.Model):
     
-    title = models.CharField(validators=[MinLengthValidator(5, message="El título debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El título")], max_length=50, verbose_name='Title')
-    subtitle = models.CharField(validators=[MinLengthValidator(5, message="El subtítulo debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El subtítulo")], max_length=50, verbose_name='Subtitle')
-    relevant_text = models.CharField(validators=[MinLengthValidator(5, message="El texto relevante debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El texto relevante")], max_length=50, verbose_name='Relevant Text', null=True, blank=True)
-    introduction = models.TextField(validators=[MinLengthValidator(5, message="La introducción debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("La introducción")], max_length=500, verbose_name='Introduction', null=True, blank=True)
-    body_text = models.TextField(validators=[MinLengthValidator(5, message="El cuerpo debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("El cuerpo")], max_length=1000, verbose_name='Body Text', null=True, blank=True)
-    conclusion = models.TextField(validators=[MinLengthValidator(5, message="La conclusión debe tener al menos 5 caracteres."), NotOnlyNumbersValidator("La conclusión")], max_length=500, verbose_name='Conclusion', null=True, blank=True)
+    title = models.CharField(validators=[MinLengthValidator(5), NotOnlyNumbersValidator("El título")], max_length=50, verbose_name='Title')
+    subtitle = models.CharField(validators=[MinLengthValidator(5), NotOnlyNumbersValidator("El subtítulo")], max_length=50, verbose_name='Subtitle')
+    relevant_text = models.CharField(validators=[MinLengthValidator(5), NotOnlyNumbersValidator("El texto relevante")], max_length=50, verbose_name='Relevant Text', null=True, blank=True)
+    introduction = models.TextField(validators=[MinLengthValidator(5), NotOnlyNumbersValidator("La introducción")], max_length=500, verbose_name='Introduction', null=True, blank=True)
+    body_text = models.TextField(validators=[MinLengthValidator(5), NotOnlyNumbersValidator("El cuerpo")], max_length=1000, verbose_name='Body Text', null=True, blank=True)
+    conclusion = models.TextField(validators=[MinLengthValidator(5), NotOnlyNumbersValidator("La conclusión")], max_length=500, verbose_name='Conclusion', null=True, blank=True)
     image = models.ImageField(verbose_name='Image', upload_to='posts', null=False, blank=False)
     author = models.ForeignKey(User, verbose_name='Author', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creation Date')
