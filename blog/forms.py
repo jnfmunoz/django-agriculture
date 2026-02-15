@@ -65,6 +65,7 @@ class PostForm(forms.ModelForm):
             if len(body_text) > 50:
                 raise ValidationError("El cuerpo no puede superar los 50 caracteres.")
             NotOnlyNumbersValidator("El cuerpo")(body_text)   
+        return body_text
 
     def clean_conclusion(self):
         conclusion = self.cleaned_data.get('conclusion', '').strip()

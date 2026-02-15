@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = overlay.querySelector("form");
     if (!form) return;
 
+    bindRealtimeValidation(form);
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -144,19 +146,16 @@ document.addEventListener("DOMContentLoaded", function () {
             });
           })
           .catch(err => {
-            let errorText = "Ocurrió un error";
-
-            if (err.errors) {
-              errorText = Object.values(err.errors)
-                .flat()
-                .join("\n");
-            }
-
             Swal.fire({
               icon: "error",
-              title: "Error",
-              text: errorText
+              title: "Error al crear post",
+              text: "Revisa los campos marcados en rojo",
+              confirmButtonText: "OK"
             });
+
+            if (err.errors) {
+              renderFormErrors(form, err.errors);
+            }
           });
       });
     });
@@ -166,3 +165,51 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+function clearFormErrors(form) {
+  form.querySelectorAll(".error-container").forEach(container => {
+    container.innerHTML = "";
+  });
+
+  form.querySelectorAll(".is-invalid").forEach(input => {
+    input.classList.remove("is-invalid");
+  });
+}
+
+
+function renderFormErrors(form, errors){
+  clearFormErrors(form);
+
+  Object.entries(errors).forEach(([field, messages]) => {
+    const container = form.querySelector(
+      `.error-container[data-error-for="${field}"]`
+    );
+
+    if (!container) return;
+
+    container.innerHTML = messages.join("<br>");
+    
+    const input = form.querySelector(`[name="${field}"]`);
+    if (input) {
+      input.classList.add("is-invalid");
+    }
+  });
+}
+
+function bindRealtimeValidation(form){
+  form.querySelectorAll("input, textarea, select").forEach(input => {
+    input.addEventListener("input", () => {
+      const fieldName = input.name;
+      if (!fieldName) return;
+
+      const container = form.querySelector(
+        `.error-container[data-error-for="${fieldName}"]`
+      );      
+      if(container) {
+        container.innerHTML = "";
+      }
+
+      input.classList.remove("is-invalid");
+    });
+  });
+}
