@@ -46,12 +46,16 @@
     z-index: 20000 !important;
 }
 
-.error-container {
+ /* .error-container {
     color: #dc3545;
     font-size: 0.85rem;
     margin: 0.25rem 0 0.5rem 0;
-}
+} */
 
+/*
 .error-container:empty {
     display: none;
-}
+} */
+/* 
+
+
