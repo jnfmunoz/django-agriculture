@@ -176,26 +176,6 @@ function clearFormErrors(form) {
   });
 }
 
-
-// function renderFormErrors(form, errors){
-//   clearFormErrors(form);
-
-//   Object.entries(errors).forEach(([field, messages]) => {
-//     const container = form.querySelector(
-//       `.error-container[data-error-for="${field}"]`
-//     );
-
-//     if (!container) return;
-
-//     container.innerHTML = messages.join("<br>");
-    
-//     const input = form.querySelector(`[name="${field}"]`);
-//     if (input) {
-//       input.classList.add("is-invalid");
-//     }
-//   });
-// }
-
 function renderFormErrors(form, errors) {
   clearFormErrors(form);
 
@@ -206,7 +186,7 @@ function renderFormErrors(form, errors) {
     if (!container) return;
 
     container.innerHTML = messages.join("<br>");
-    container.classList.add("text-danger"); // 🔴 AQUÍ
+    container.classList.add("text-danger");
 
     const input = form.querySelector(`[name="${field}"]`);
     if (input) {

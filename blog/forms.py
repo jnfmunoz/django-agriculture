@@ -1,8 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator, MaxLengthValidator
 from .models import Post
-from .validators import NotOnlyNumbersValidator
+from .validators import (NotOnlyNumbersValidator, MinMaxLengthValidator, NotEmptyValidator)
 
 class PostForm(forms.ModelForm):
 
@@ -19,63 +18,71 @@ class PostForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3'})
         }
 
-    def clean_title(self):
-        title = self.cleaned_data.get('title', '').strip()
-        if len(title) < 5:
-            raise ValidationError("El título debe tener al menos 5 caracteres.")
-        if len(title) > 50:
-            raise ValidationError("El título no puede superar los 50 caracteres.")
-        NotOnlyNumbersValidator("El título")(title)
-        return title
-    
+    def _validate_text_field(self, value, field_name, min_length=None, max_length=None, required=False):
+        value = (value or "").strip()
+
+        if required:
+            NotEmptyValidator(field_name)(value)
+        
+        if value:
+            MinMaxLengthValidator(
+                min_length=min_length,
+                max_length=max_length,
+                field_name=field_name,
+            )(value)
+            NotOnlyNumbersValidator(field_name)(value)
+            
+        return value
+
+    def clean_title(self):    
+        return self._validate_text_field(
+            self.cleaned_data.get('title'),
+            field_name="El título",
+            min_length=5,
+            max_length=50,
+            required=True,
+        )    
+
     def clean_subtitle(self):
-        subtitle = self.cleaned_data.get('subtitle', '').strip()
-        if len(subtitle) < 5:
-            raise ValidationError("El subtítulo debe tener al menos 5 caracteres.")
-        if len(subtitle) > 50:
-            raise ValidationError("El subtítulo no puede superar los 50 caracteres.")
-        NotOnlyNumbersValidator("El título")(subtitle)
-        return subtitle    
-    
+        return self._validate_text_field(
+            self.cleaned_data.get('subtitle'),
+            field_name="El subtítulo",
+            min_length=5,
+            max_length=50,
+            required=True,
+        )
+
     def clean_relevant_text(self):
-        relevant_text = self.cleaned_data.get('relevant_text', '').strip()
-        if relevant_text: 
-            if len(relevant_text) < 5:
-                raise ValidationError("El texto relevante debe tener al menos 5 caracteres.")
-            if len(relevant_text) > 50:
-                raise ValidationError("El texto relevante no puede superar los 50 caracteres.")
-            NotOnlyNumbersValidator("El texto relevante")(relevant_text)
-        return relevant_text
+        return self._validate_text_field(
+            self.cleaned_data.get('relevant_text'),
+            field_name="El texto relevante",
+            min_length=5,
+            max_length=50,
+        )
     
     def clean_introduction(self):
-        introduction = self.cleaned_data.get('introduction', '').strip()
-        if introduction:
-            if len(introduction) < 5:
-                raise ValidationError("La introducción debe tener al menos 5 caracteres.")
-            if len(introduction) > 50:
-                raise ValidationError("La introducción no puede superar los 50 caracteres.")
-            NotOnlyNumbersValidator("La introducción")(introduction)        
-        return introduction
+        return self._validate_text_field(
+            self.cleaned_data.get('introduction'),
+            field_name="La introducción",
+            min_length=5,
+            max_length=500,
+        )
     
     def clean_body_text(self):
-        body_text = self.cleaned_data.get('body_text', '').strip()
-        if body_text:
-            if len(body_text) < 5:
-                raise ValidationError("El cuerpo debe tener al menos 5 caracteres.")
-            if len(body_text) > 50:
-                raise ValidationError("El cuerpo no puede superar los 50 caracteres.")
-            NotOnlyNumbersValidator("El cuerpo")(body_text)   
-        return body_text
+         return self._validate_text_field(
+            self.cleaned_data.get('body_text'),
+            field_name="El cuerpo",
+            min_length=5,
+            max_length=1000,
+        )
 
     def clean_conclusion(self):
-        conclusion = self.cleaned_data.get('conclusion', '').strip()
-        if conclusion:
-            if len(conclusion) < 5:
-                raise ValidationError("La conclusión debe tener al menos 5 caracteres.")
-            if len(conclusion) > 500:
-                raise ValidationError("La conclusión no puede superar los 500 caracteres.")
-            NotOnlyNumbersValidator("La conclusión")(conclusion)
-        return conclusion
+         return self._validate_text_field(
+            self.cleaned_data.get('conclusion'),
+            field_name="La conclusión",
+            min_length=5,
+            max_length=500,
+        )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -97,3 +104,5 @@ class PostForm(forms.ModelForm):
 
         if not image:
             self.add_error('image', "La imagen es obligatoria.")
+
+        return cleaned_data
